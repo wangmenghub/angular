@@ -1,0 +1,70 @@
+﻿<div ng-controller="tradeAddCarTeamListCtrl">
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='添加车队' ;navbar.navRightHref='';navbar.navRight=''; navbar.navRightIco=''; 
+            navbar.navLeftHref='tab.tradeCarList';navbar.navRightHref='tab.';">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="row-bootstrap bg-white">                            
+                            <div class="col-xs-10">
+                                <h4 class="input-search">
+                                    <i class="icon ion-search placeholder-icon pull-left"></i>
+                                    <input type="text" placeholder="搜索">
+                                </h4>
+                            </div>
+                            <button class="button button-clear col-xs-2 text-right">取消</button>
+                        </div>
+                        
+                        <div class="row-bootstrap bg-white">
+                            <div ng-repeat="item in carList">
+                              <li class="list-group-item list-group-item-no-border" >
+                                <a ng-click="goDetail(item)">
+                                  <h4 class="pull-left">
+                                    <img class="face4 img-fixed img-circle" src="{{item.url_logo | imgDefault:'company'}}"/>
+                                    &nbsp;{{item.nick_name?item.nick_name:item.full_name}}
+                                    <label ng-if="item.verify_phase == 'SUCCESS'" class="label-v"><strong
+                                      title="已认证企业">v</strong></label>
+                                  </h4>
+                                  <button ng-click="apply(item._id)"
+                                          class="btn btn-partner btn-partner-yellow pull-right gap-15">
+                                    加入车队
+                                  </button>
+                                </a>
+                              </li>
+                              <div class="clearfix"></div>
+                            </div>
+
+                           <!--  <div class="col-sm-3 minHeight"></div>
+                            <div class="col-sm-6 col-xs-12 gap-20">
+                                <button class="btn btn-block btn-yellow md-trigger md-setperspective" data-modal="modal-3" ng-click="addCarTeam()">
+                                    提交
+                                </button>
+                                <div class="gap-50"></div>
+                            </div>
+                            <div class="col-sm-3"></div>
+ -->
+                        </div>
+
+                    </div>
+                </div>
+
+    </div>
+
+    <footer></footer>
+            
+
+        </div>
+    </ion-content>
+</div>
+
+

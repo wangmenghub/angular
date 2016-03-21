@@ -1,0 +1,71 @@
+<div name="companyProHome">
+
+    <ion-content>
+
+        <div class="transitions-content">
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+
+                    <div class="col-sm-3 col-md-3">
+                        
+                        <navpc ng-init="me='active'"></navpc>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12">                        
+                        <div class="row-bootstrap gap-20 title-pro clearfix">
+                            <div class="gap-40">
+                                <h6 class="col-xs-4 text-gray2 gap-40 text-left"><!-- {{vm.company_info.type |subType}} --></h6>
+                                <img class="col-xs-4 img-circle face1 text-center" ng-src="{{vm.company_info.url_logo}}">
+                                <h6 class="col-xs-4 text-gray2 gap-40 text-right"><!-- {{vm.company_info.sub_type |subType}} --></h6>
+                            </div>
+                            <div class="clearfix"></div>
+                            <h4 class="text-center gap-10">
+                                {{vm.company_info.full_name}} <a title="企业已认证"><label ng-if="vm.company_info.verify_phase == 'SUCCESS'"
+                                                                     class="label-v"><strong>v</strong></label></a>
+                            </h4>
+                            <h5 class="text-center gap-10 text-gray1">主要经营:{{vm.company_info.manage}}</h5>
+                            <h5 class="text-center gap-10 text-gray1">地址:{{vm.company_info.province}}{{vm.company_info.city}}{{vm.company_info.district}}{{vm.company_info.addr}}</h5>
+                        </div>
+
+                        <div class="row-bootstrap bg-white gap-5">
+                            <h5 class="col-xs-12 text-center text-gray1"><a href="" class="pull-right"><strong class="glyphicon glyphicon-option-horizontal text-gray1"></strong></a>企业介绍</h5>
+                            <div class="col-xs-12 text-center">
+                                <img src="./img/me/company-img.png" class="img-responsive">
+                            </div>
+                            <div class="col-xs-12 gap-20">
+                                <p>{{vm.company_info.des}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row-bootstrap bg-white gap-15">
+                            <h5 class="col-xs-12 text-center text-gray1"><a href="" class="pull-right"><strong class="glyphicon glyphicon-option-horizontal text-gray1"></strong></a>企业荣誉</h5>
+                            <div class="col-xs-12 text-center">
+                                <img src="./img/me/company-img1.png" class="img-responsive">
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="gap-20"></div>
+                        </div>
+                        
+                        <div class="col-sm-3 minHeight"></div>
+                        <div class="col-sm-6 col-xs-12 gap-20">
+                            <a href="#/tab/myCompanySet">                               
+                            <button type="button" class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder">
+                                企业设置
+                            </button>                                
+                            </a>
+                            <div class="gap-30"></div>
+                        </div>
+                        <div class="col-sm-3"></div>
+
+                    </div>
+
+                    <div class="col-sm-3"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </ion-content>
+</div>
+
+ 

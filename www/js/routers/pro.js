@@ -1,0 +1,1 @@
+/** * Created by ID on 15/12/3. * Author:zhoudd * email:zhoudd@stark.tm */angular.module('rsc.routers.pro', ['ui.router'])    .config(['$stateProvider', function ($stateProvider) {        //$stateProvider.state('158-1', {        //    url: '/158-1',        //    templateUrl: 'template/158/158-bak.html'        //})    }])

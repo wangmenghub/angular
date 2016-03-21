@@ -1,0 +1,169 @@
+﻿<div>
+    <navbar
+            ng-init="navbar.navLeft='返回'; navbar.title='车辆信息' ;navbar.navRightHref='tab.';navbar.navRight='删除车辆'">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content" ng-controller="passRoadLineCtrl">
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="pass='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="row-bootstrap gap-20">
+                            <!-- <div class="list-group bg-white">
+                                <li class="list-group-item list-group-item-border-top">                                    
+                                    <h5>
+                                        车辆类型
+                                        <span class="pull-right">
+                                        大货车
+                                            <span class="ion-chevron-right text-gray2"></span> 
+                                        </span>
+                                    </h5>                                           
+                                </li> 
+                                <li class="list-group-item list-group-item-border-top">                                    
+                                    <h5>
+                                        车牌号码
+                                        <span class="pull-right">
+                                        京P 99999
+                                            <span class="ion-chevron-right text-gray2"></span> 
+                                        </span>
+                                    </h5>                                           
+                                </li>  
+                                <a href="" class="list-item-border"></a>                               
+                            </div> -->
+                            <div class="list bg-white">
+                                <a class="item item-icon-right">
+                                    车辆类型  
+                                    <span class="item-note">
+                                        大货车
+                                    </span>                               
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>  
+                                </a> 
+                                <a class="item item-icon-right">
+                                    车牌号码  
+                                    <span class="item-note">
+                                        京P 99999
+                                    </span>                               
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>  
+                                </a>
+                            </div>
+                            <h6 class="col-xs-12 text-gray1">请填写司机信息</h6>
+                            <div class="clearfix"></div>
+                            <!-- <div class="list-group bg-white">
+                                <li class="list-group-item list-group-item-border-top">                                    
+                                    <h5>
+                                        默认司机
+                                        <span class="pull-right">
+                                        刘家兴 13900000000 <span class="ion-ios-person"></span>                                            
+                                        </span>
+                                    </h5>                                           
+                                </li> 
+                                <a href="" class="list-item-border"></a>
+                            </div> -->
+                            <div class="list">
+                                <a class="item item-icon-right">
+                                    默认司机  
+                                    <span class="item-note">
+                                        刘家兴 13900000000
+                                    </span>                               
+                                    <i class="icon ion-ios-person"></i>  
+                                </a> 
+                            </div>
+                            <h6 class="col-xs-12 text-gray1">请填写车辆信息（选填）</h6>
+                            <div class="clearfix"></div>
+                            <div class="list bg-white">
+                                <a class="item item-icon-right">
+                                    可载重货  
+                                    <span class="item-note">
+                                        40 吨
+                                    </span>                               
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>  
+                                </a>
+                                <a class="item item-icon-right">
+                                    车辆长度  
+                                    <span class="item-note">
+                                        请选择车辆长度
+                                    </span>                               
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>  
+                                </a> 
+                                <a class="item item-icon-right">
+                                    车辆照片  
+                                    <span class="item-note">
+                                        请上传车辆正面照片
+                                    </span>                               
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>  
+                                </a>
+                            </div>
+                            <!-- <div class="list-group bg-white">
+                                <li class="list-group-item list-group-item-border-top">                                    
+                                    <h5>
+                                        可载重货
+                                        <span class="pull-right">
+                                        40 吨
+                                            <span class="ion-chevron-right text-gray2"></span> 
+                                        </span>
+                                    </h5>                                           
+                                </li> 
+                                <li class="list-group-item list-group-item-border-top">                                    
+                                    <h5>
+                                        车辆长度
+                                        <span class="pull-right text-gray2">
+                                        请选择车辆长度
+                                            <span class="ion-chevron-right"></span> 
+                                        </span>
+                                    </h5>                                           
+                                </li> 
+                                <li class="list-group-item list-group-item-border-top">                                    
+                                    <h5>
+                                        车辆照片
+                                        <span class="pull-right text-yellow2">
+                                        请上传车辆正面照片
+                                            <span class="ion-chevron-right text-gray2"></span> 
+                                        </span>
+                                    </h5>                                           
+                                </li> 
+                                <a href="" class="list-item-border"></a>                                
+                            </div> -->
+                            <div class="bg-white text-center">
+                                <div class="clearfix"></div>
+                                <div class="gap-20"></div>
+                                <a href="" class="text-yellow2 underline">车辆照片</a>
+                                <div class="clearfix gap-20"></div>
+                                <img src="./img/pass/big-car.jpg">
+                                <div class="clearfix"></div>
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-6 col-xs-12 text-center gap-30">
+                                    <a href="">
+                                        <button type="button" class="btn btn-yellow btn-lg btn-block text-yellow3 btn-noBorder">
+                                            保存
+                                        </button>
+                                    </a>
+                                    <div class="gap-20"></div>
+                                </div>
+                                <div class="col-sm-3"></div>
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                     
+                       
+
+
+                    </div>
+                </div>
+
+</div>
+                <footer></footer>
+            
+
+
+        </div>
+    </ion-content>
+</div>
+
+

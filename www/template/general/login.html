@@ -1,0 +1,98 @@
+<div>
+    <navbar></navbar>
+    <ion-content>
+ <div class="transitions-content" ng-controller="loginCtrl">
+        <div class="bg-yellow4">
+            <div class="bg-earth">
+                <div class="container">
+                    <div class="row-bootstrap">
+
+                        <div class="col-sm-3 col-md-3">
+                            <h1></h1>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+
+                            <div class="row-bootstrap gap-100">
+
+
+                                <img src="img/general/logo-HT.png" class="img-responsive center-block img-logo-HTTX"/>
+
+                                <form name="myform" novalidate>
+                                <div class="well-infor-con-log gap-50">
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                         <span class="glyphicon glyphicon-top glyphicon glyphicon-phone" aria-hidden="true"></span>
+                                        </div>
+                                        <input type="text" class="" name="phoneNum" id="phoneNum" placeholder="输入手机号" ng-model="person.phone" ng-blur='phoneBlur()' ng-focus='phoneFocus()' maxlength="11"
+                                        ng-pattern="/(^13[0-9]{9}$)|(^15[0-9]{9}$)|(^17[0-9]{9}$)|(^18[012356789][0-9]{8}$)/" required>
+                                         <span class="text-red">{{msg.phone}}</span>
+                                    </div>
+                                    <div class="form-error"
+                                         ng-messages="myform.phoneNum.$dirty&&myform.phoneNum.$error">
+                                        <div ng-message="required">手机号不能为空</div>
+                                        <div ng-message="pattern">格式错误(11位手机号码)</div>
+                                    </div>
+                                    <!--  -->
+                                    <!-- <div class="input-group">
+                                        <div class="input-group-addon input-group-addon-log">
+                                        <span class="glyphicon-top glyphicon glyphicon-lock"
+                                              aria-hidden="true"></span>
+                                        </div>
+                                        <input type="text" style="display:block" id="pwd" placeholder="测试" ng-model="text" required >
+                                        <span style="display:block">{{text|upDigit}}</span>
+                                    </div> -->
+                                    <!--  -->
+                                    <div class="input-group">
+                                        <div class="input-group-addon input-group-addon-log">
+                                        <span class="glyphicon-top glyphicon glyphicon-lock"
+                                              aria-hidden="true"></span>
+                                        </div>
+                                        <!-- <input type="password" class="" id="pwd"
+                                               placeholder="输入密码" ng-model="person.pwd" ng-blur="pwdBlur()" ng-focus='pwdFocus()' required> -->
+                                        <input type="password" name="pwd" id="pwd" placeholder="输入密码" ng-model="person.pwd" ng-pattern="/^[a-zA-Z0-9]{6,16}$/" required >
+
+                                               <span class="text-red">{{msg.pwd}}</span>
+                                    </div>
+                                    <div class="form-error"
+                                         ng-messages="myform.pwd.$dirty&&myform.pwd.$error">
+                                        <div ng-message="required">密码不能为空</div>
+                                        <div ng-message="pattern">格式错误(6-16位字母与数字)</div>
+                                    </div>
+
+                                </div>
+                                <div class="well-infor-con-btn gap-20">
+                                    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                                        <div class="btn-group" role="group">
+                                            <!-- <a href="" > -->
+                                                <button type="button" class="btn btn-lg btn-purple btn-purple-next"
+                                                        id='login' ng-disabled="myform.$invalid" ng-click="login()">
+                                                    立即登录
+                                                </button>
+                                            <!-- </a> -->
+                                        </div>
+
+                                    </div>
+                                </div>
+                                </form>
+                                <div class="gap-30">
+
+                                    <a href="#tab/findPass" class="underline"><h5 class="text-center text-deep">找回密码？</h5></a>
+
+                                </div>
+
+                            </div>
+                        </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="gap-100"></div>
+        </div>
+        </div>
+
+    <footer></footer>
+</div>
+</div>
+
+</ion-content>
+<!-- <navapp></navapp> -->
+</div>

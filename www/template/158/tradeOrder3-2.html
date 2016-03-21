@@ -1,0 +1,96 @@
+<div>
+    <navbar
+            ng-init="navbar.title='质检结果' ;navbar.navRightHref='tab.';navbar.navRight='' ;navbar.navLeftHref='tab.' ;navbar.navLeft='返回';navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeftClick='goback()'" >
+    </navbar>
+    <ion-content>
+
+    <div class="transitions-content">
+        
+
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <navpc ng-init="isorder='active'"></navpc>
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <div class="row-bootstrap bg-white gap-20 gap-row">
+                        <div class="bg-green bg-green-border">
+                           
+                            <div class="col-xs-4 text-green1">
+                                <h6>参数</h6>
+                            </div>
+                            <div class="col-xs-4">
+                                <h6>协议标准</h6>
+                            </div>
+                            <div class="col-xs-4">
+                                <h6>质检结果</h6>
+                            </div>
+                            <div class="clearfix"> </div>
+                            <a href="" class="list-item-border gap-5"></a>
+                            <div ng-if="key != 'cost_total'" ng-repeat="(key,i) in order.att_product">
+                                <div class="col-xs-4 text-green1">
+                                    <h5>{{desc[[i.name]].chn}}：</h5>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h5 class="text-left text-gray1">{{i.value}} {{desc[[i.name]].unit}}</h5>
+                                </div>
+                                <div class="col-xs-4">
+                                    <h5  class="pull-left">
+                                    <!-- "质检为" -->
+                                    <span ng-if="!i.qualified">{{i.actual}}{{desc[[i.name]].unit}}</span>
+                                    <span ng-if="i.qualified" class="ion-checkmark-round text-green1"></span>
+                                    <span ng-if="!i.qualified" class="ion-close-round text-red1"></span>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"> </div>
+                        <div class="list-group col-sm-6 col-md-6" ng-repeat="(key,i) in order.att_product"> 
+                            <li class="list-group-item list-condensed list-group-item-no-border">
+                            <h5 ng-if="! i.qualified && key != 'cost_total'" class="text-red1" >                            
+                                {{desc[[i.name]].chn}} ：偏差:{{i.value - i.actual}} ({{desc[[i.name]].unit}})
+                                <span class="pull-right">差异扣款：<strong>{{ (i.value - i.actual ) * i.cost/i.step |fmoney}}元</strong></span>
+                            </h5>
+                            </li>
+                        </div>
+                        <div class="col-xs-12">
+                            <a href="" class="list-item-border"></a> 
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="list-group col-sm-6 col-md-6" ng-repeat="i in [1,]">
+                            <li class="list-group-item list-condensed list-group-item-no-border">
+                            <h5 class="text-black">                            
+                                &nbsp;&nbsp;质量扣款：<span class="text-gray1">（根据结算细则）</span>
+                                <span class="pull-right text-red1"><strong> {{order.att_product.cost_total |fmoney}}元</strong></span>
+                            </h5>
+                            </li>
+                        </div>
+                        <div class="clearfix"></div>
+                        <a href="" class="list-item-border gap-5"></a> 
+                        <div class="clearfix"></div>
+                 <div ng-if=" order.step >=5 && order.step <=5.4 && isCompany!=order.company_demand_id">
+                    <div class="col-xs-6">
+                        <button ng-if=" order.step ==5 " ng-click="order_5_req_forgiven()" class="btn btn-block btn-yellow md-trigger md-setperspective" >
+                            申请谅解
+                        </button>
+                    </div>
+                    <div class="col-xs-6">
+                        <button ng-if=" order.step ==5 " class="btn btn-block btn-yellow btn-square-gary md-trigger md-setperspective" ng-click="order_5_no_forgiven()" >
+                        不需要谅解
+                        </button>
+                    </div>
+                    <div class="gap-10" ></div>
+                     
+                </div>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>       
+    <footer></footer>
+</div>
+</ion-content>
+</div>
+
+

@@ -1,0 +1,126 @@
+﻿<div>
+    <navbar
+            ng-init="navbar.navLeft='返回';navbar.navLeftHref='tab.Roadline'; navbar.title='添加物流线路';navbar.navLeftIco='glyphicon glyphicon-chevron-left';navbar.navRightHref='tab.Roadline';">
+        <!--ng-init="navbar.navLeft='返回';navbar.navLeftHref='tab.Roadline'; navbar.title='添加物流线路' ;navbar.navRightHref='tab.AddCar';navbar.navRight='+添加车辆'">-->
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content" ng-controller="AddLineCtrl">
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+
+
+                        <!-- <div class="list-group">
+                            <li class="list-group-item list-condensed list-group-item-no-border" ng-click="select('begin')">
+                                <h5 class="text-purple2">
+                                    <span class="ion-ios-location-outline text-pink"></span>&nbsp;&nbsp;到达地：{{address.begin}}
+                                    <span class="pull-right ion-ios-arrow-forward text-gray1"></span>
+                                </h5>
+                            </li>
+
+                            <li class="list-group-item list-condensed list-group-item-border-top" ng-click="select('end')">
+                                <h5 class="text-purple2">
+                                    <span class="ion-ios-location-outline text-green1"></span>&nbsp;&nbsp;到达地：{{address.end}}
+                                    <span class="pull-right ion-ios-arrow-forward text-gray1"></span>
+                                </h5>
+                            </li>
+
+                            <li class="list-group-item list-condensed list-group-item-border-top">
+                                <h5 class="text-red1">
+                                    <span class="ion-social-yen"></span>&nbsp;&nbsp;该线路的货运价格：
+                                    <input type="text" ng-model="price"/>
+                                    <span class="pull-right"><strong></strong> 元/吨</span>
+                                </h5>
+                            </li>
+                        </div> -->
+                        <form>
+                            <div class="row-bootstrap bg-white gap-20">
+                                <div class="list-group bg-white">
+                                    <a class="item item-icon-left item-icon-right" ng-click="select('begin')">
+                                        <i class="icon ion-ios-location-outline text-pink"></i>
+                                        <span class="text-purple2">出发地：{{address.begin.text}}</span>
+                                    <span class="item-note">
+
+                                    </span>
+                                        <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                    </a>
+
+                                    <a class="item item-icon-left item-icon-right" ng-click="select('end')">
+                                        <i class="icon ion-ios-location-outline text-green1"></i>
+                                        <span class="text-purple2">到达地：{{address.end.text}}</span>
+                                    <span class="item-note">
+
+                                    </span>
+                                        <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                    </a>
+
+                                    <a class="item item-icon-left">
+                                        <i class="icon ion-social-yen text-red1"></i>
+                                        <span class="text-red1">该线路的货运价格：</span>
+                                    <span class="item-note text-red1 input-ionic1">
+                                        <input type="number" class="text-right" ng-model="price" placeholder="请填写线路价格"/>
+                                        <span>元/吨</span>
+                                    </span>
+                                    </a>
+                                </div>
+
+
+                            </div>
+                            <div class="row-bootstrap">
+                                <!--<h6 class="col-xs-12 text-gray1">该线路的车辆信息</h6>-->
+
+                                <!--<div class="clearfix"></div>-->
+                                <!--<div class="bg-white gap-row text-center">-->
+                                <!--<div class="gap-50"></div>-->
+                                <!--<a href="" class="text-gray1 underline">+请添加此线路的车辆</a>-->
+
+                                <!--<div class="gap-100"></div>-->
+                                <!--</div>-->
+                                
+                                    <!--<div class="col-xs-6 text-center">-->
+                                    <!--<a href="">-->
+                                    <!--<button type="button"-->
+                                    <!--class="btn btn-yellow btn-lg btn-block bg-white-border text-yellow3 btn-noBorder">-->
+                                    <!--修改-->
+                                    <!--</button>-->
+                                    <!--</a>-->
+                                    <!--</div>-->
+                                    <div class="col-sm-3 minHeight"></div>
+                                    <div class="col-sm-6 col-xs-12 text-center gap-20">
+                                        <button class="btn btn-yellow btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder"
+                                                ng-click="add()"
+                                                data-modal="modal-3"
+                                                ng-disabled="!address.begin.value||!address.end.value || !price "
+                                                >
+
+                                            确认
+                                        </button>
+                                        <!--ng-disabled="!address.begin.value||!address.end.value || !price || isConfirm"-->
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="gap-15"></div>
+                                    <div class="col-sm-3"></div>
+                               
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+            <footer></footer>
+
+
+        </div>
+    </ion-content>
+</div>
+
+

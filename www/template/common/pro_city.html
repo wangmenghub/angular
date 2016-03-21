@@ -1,0 +1,49 @@
+<!--<script language='javascript' src='../../config/config_province.js' ></script>-->
+<div ng-controller="procityCtrl">
+    <div ng-if="!data.prov" class="list" style="border: 0;">
+        <label class="item item-input item-select" style="border: 0">
+            <div class="input-label">
+                <span><span style="color: #6e6e6e">省 </span></span>
+            </div>
+            <select style="font-size: 16px"
+                    ng-model="data.currentProvince"
+                    ng-options="pp.name for pp in allProvinces"
+                    ng-change="switchProvince(data.currentProvince.ProID)" ng-mousedown="mousedown($event)">
+                <option value="">请选择省份</option>
+
+
+            </select>
+
+        </label>
+    </div>
+    <div ng-if="!data.city" class="list" style="border: 0">
+        <label class="item item-input item-select" style="border: 0">
+            <div class="input-label">
+                <span><span style="color: #6e6e6e">市</span></span>
+            </div>
+            <select style="font-size: 16px" ng-options="cc.name for cc in cities"
+                    ng-model="data.currentCity"
+                    ng-change="switchCity(data.currentCity.CityID)">
+                <option value="">请选择城市</option>
+
+            </select>
+        </label>
+    </div>
+    <div ng-if="!data.area" class="list" style="border: 0">
+        <label class="item item-input item-select" style="border: 0">
+            <div class="input-label">
+                <span style="color: #6e6e6e"> 县</span>
+            </div>
+            <select style="font-size: 16px" ng-options="aa.name for aa in areas"
+                    ng-model="data.currentArea"
+                    ng-change="switchArea(data.currentAreaId)">
+
+                <option value="">请选择地区</option>
+            </select>
+        </label>
+    </div>
+    <!--{{data | json}}-->
+    
+
+</div>
+

@@ -1,0 +1,184 @@
+/*我的日升昌页面样式*/
+.img-fixed {
+    margin-right: 4px;
+}
+
+.info-num {
+    position: absolute;
+    color: #FFFFFF;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    background-color: #FF4000;
+    border-radius: 100%;
+    text-align: center;
+    left: 60px;
+    top: 0px;
+}
+
+.letter {
+    position: fixed;
+
+}
+
+@media (max-width: 750px) {
+    .letter {
+        top: 15%;
+        right: 0%;
+    }
+}
+
+@media (min-width: 760px) {
+    .letter {
+        top: 15%;
+        right: 26%;
+    }
+}
+
+@media (min-width: 1170px) {
+    .letter {
+        top: 15%;
+        right: 34%;
+    }
+}
+
+@media (min-width: 1920px) {
+    .letter {
+        top: 15%;
+        right: 34%;
+    }
+}
+
+/*生产企业*/
+.gap-left {
+    padding-left: 40px;
+}
+
+.media-right1 {
+    width: 50%;
+}
+
+.media-right2 {
+    width: 50%;
+}
+
+/*生产型企业主页*/
+.title-pro {
+    height: 180px;
+    background: url("/img/me/earth_2.jpg") no-repeat center 0;
+    /*background-size: 582px;*/
+}
+
+.title-pro img {
+    width: 70px;
+    display: inline;
+    margin-top: -15px;
+}
+
+.credit .col-xs-4 {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.data-chart {
+    height: 180px;
+}
+
+.round {
+    border-radius: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.title-person {
+    height: 150px;
+    background: url("/img/me/earth.jpg") no-repeat center 0;
+}
+
+.title-person img {
+    width: 70px;
+    display: inline;
+    margin-top: -15px;
+    margin-left: -30px;
+}
+
+/*个人主页-对外*/
+.data-own {
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.data-own .col-xs-6:first-child {
+    border-right: 1px solid #DDDDDD;
+}
+
+.data-own .col-xs-6 {
+    padding-left: 30px;
+}
+
+.data-own .col-xs-6:last-child {
+    padding-left: 60px;
+}
+
+.btn-arr .col-xs-6:first-child {
+    padding-right: 3px;
+    padding-left: 0px;
+}
+
+.btn-arr .col-xs-6:last-child {
+    padding-right: 0px;
+    padding-left: 3px;
+}
+
+.btn-arr button {
+    width: 100%;
+}
+
+/*//////////////系统通知///////////////////////*/
+
+
+.infor-box {
+    padding: 2px 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    line-height: 1.7;
+}
+
+.infor-box-red {
+    background-color: #DB3400;
+    color: #fff;    
+    
+}
+
+.infor-box-white {
+    background-color: #fff;
+    color: #333;    
+    border: 1px solid #E3E3E3;
+}
+/*我页面图片*/
+.ico-110{
+    width:55px;
+    height:55px;
+}
+
+ .media-width {
+    width: 200px;
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+<!-- 临时存在 sj -->
+<div>
+	<navbar
+            ng-init="navbar.navLeft='返回'; navbar.navLeftHref='#/tab/myRsc' ;navbar.title='仓库管理' ;navbar.navRightHref='tab.';navbar.navRight=''">
+    </navbar>
+	<ion-content>
+	<h1>....</h1><h1>....</h1>
+	<div class="list">
+            <div class="list" style="border: 0;">
+                <label class="item item-input item-select" style="border: 0">
+                    <div class="input-label">
+                        <span><span style="color: #6e6e6e"> </span></span>
+                    </div>
+                    <select style="font-size: 16px" ng-model="data.currentProvinceId"
+                            ng-options="pp.ProID as pp.name for pp in allProvinces"
+                            ng-change="switchProvince(data.currentProvinceId)" ng-mousedown="mousedown($event)">
+                    </select>
+ 
+                </label>
+            </div>
+            <div class="list" style="border: 0">
+                <label class="item item-input item-select" style="border: 0">
+                    <div class="input-label">
+                        <span><span style="color: #6e6e6e"> </span></span>
+                    </div>
+                    <select style="font-size: 16px" ng-options="cc.CityID as cc.name for cc in cities"
+                            ng-model="data.currentCityId" ng-change="switchCity(data.currentCityId)">
+                    </select>
+                </label>
+            </div>
+            <div class="list" style="border: 0">
+                <label class="item item-input item-select" style="border: 0">
+                    <div class="input-label">
+                        <span style="color: #6e6e6e"> </span>
+                    </div>
+                    <select style="font-size: 16px" ng-options="aa.DisID as aa.name for aa in areas"
+                            ng-model="data.currentAreaId" ng-change="switchArea(data.currentAreaId)">
+                    </select>
+                </label>
+            </div>
+            <input type="text" ng-model="data.name" placeholder="名字" />
+            <input type="text" ng-model="data.detail" placeholder="详细地址">
+            <input type="number" ng-model="data.latitude" placeholder="经度"/>
+            <input type="number" ng-model="data.longitude" placeholder="纬度" />
+
+ 			<button ng-click="submit()"> 添加仓库</button>
+        </div>
+        {{data | json}}
+        
+        <hr/>
+        <h2> 公司仓库:共计{{lists.length}}处  </h2>
+        <div>
+        	<ul>
+        		<li id="{{i._id}}" ng-repeat="i in lists"> {{i.provice}} | {{i.city}} | {{i.district}} | {{i.addr}} 公司id :{{i.company_id}}</li>
+        	</ul>
+        </div>
+	</ion-content>
+</div>

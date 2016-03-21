@@ -1,0 +1,74 @@
+<!-- 交易物流信息 -->
+<div class="row-bootstrap bg-white gap-10" ng-if='order.step>=4'> 
+    <div class="bg-white">                      
+        <h5 class="col-xs-12">
+            <company-label company-id="passinfo.company_traffic_id" type="traffic"></company-label>
+        </h5>  
+        <div class="clearfix"></div>
+        <div class="list-group">                        
+            <li class="list-group-item list-condensed list-group-item-no-border">
+            <!--  ng-repeat="i in passinfo.counts" -->
+                <h5 class="text-black">
+                  <!-- {{i.truck_info.type | carType}}(载{{i.truck_info.weight | carWeight}}吨)： -->
+                  派出车辆共计
+                    <span class="pull-right text-purple2"> <strong>{{passinfo.counts.length}}</strong> 辆</span>
+                </h5>
+            </li>
+        </div>
+    </div>
+    <div ng-if="passinfo.route_info.length>0" class="driver-submit gap-10">
+        <div class="col-xs-9  ">
+            <div class="gap-10"></div>
+            <h5 class=" text-black"><span class="ion-record text-yellow6"></span>&nbsp;&nbsp;司机：{{passinfo.route_info[0].user_info.real_name}}
+                <span class="text-purple2">{{passinfo.route_info[0].truck_info.number}} </span>
+            </h5>
+            <h6 class="text-gray2">&nbsp;&nbsp;&nbsp;  {{passinfo.route_info[0].truck_info.type |carType}}(载{{passinfo.route_info[0].truck_info.weight |carWeight}}吨)</h6>
+            <h6 class="text-purple2">&nbsp;&nbsp;&nbsp;  到货{{passinfo.route_info[0].last}} 吨</h6>
+        </div>
+        <div class="col-xs-3  text-right">
+            <button type="button" class="btn  btn-square btn-square-gary "><a class="glyphicon glyphicon-earphone text-gray2" aria-hidden="true" href="tel:{{passinfo.route_info[0].user_info.phone}}"></a></button>
+        </div>
+    </div>
+    <h5 class="text-center gap-10"><a href="#/tab/tradeOrderPassList2/{{order._id}}" class="text-red2">所有物流车辆信息 ></a></h5>
+    <div class="clearfix"></div>                
+</div>
+<div class="row-bootstrap bg-whit" ng-if="order.step>=3 && order.step<4">
+    <div class="bg-white">
+        <h5 class="col-xs-12">
+            <company-label company-id="passinfo.company_traffic_id" type="traffic"></company-label>
+        </h5>
+        <div class="clearfix"></div>
+        <div class="list-group">                        
+            <li ng-if="driveinfo.length>0" class="list-group-item list-condensed list-group-item-no-border">
+                <h5 class="text-black">
+                  派出车辆共计
+                    <span class="pull-right text-purple2"><strong>{{driveinfo.length}}</strong> 辆</span>
+                </h5>
+            </li>
+            <li ng-if="passinfo.route_info.length>0" class="list-group-item list-condensed list-group-item-no-border">
+                <h5 class="text-center gap-10 text-red2">
+                  运输完毕等待交货确认
+                </h5>
+            </li>
+        </div>
+        <div ng-if='driveinfo.length>0' class="driver-submit gap-10">
+            <div class="col-xs-9  ">
+                <div class="gap-10"></div>
+                <h5 class=" text-black"><span class="ion-record text-yellow6"></span>&nbsp;&nbsp;司机：{{driveinfo[0].user_info.real_name}}
+                    <span class="text-purple2">{{driveinfo[0].truck_info.number}} </span>
+                </h5>
+                <h6 class="text-gray2">&nbsp;&nbsp;&nbsp;  {{driveinfo[0].truck_info.type |carType}}(载{{driveinfo[0].truck_info.weight |carWeight}}吨)</h6>
+                <h6 class="text-purple2">&nbsp;&nbsp;&nbsp;  {{ driveinfo[0].status|routeStatus}}...</h6>
+
+            </div>
+            <div class="col-xs-3  text-right">
+                <button type="button" class="btn  btn-square btn-square-gary "><a class="glyphicon glyphicon-earphone text-gray2" aria-hidden="true" href="tel:{{driveinfo[0].user_info.phone}}"></a></button>
+            </div>
+        </div>
+        
+        <div class="gap-10">
+            <h5 ng-if="driveinfo.length>0" class="text-center"><a href="#/tab/tradeOrderPassList/{{order._id}}" class="text-red2">其余物流车辆信息 ></a></h5>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,184 @@
+
+<div>
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='发布货源' ;navbar.navRightHref='tab.';navbar.navRight='';navbar.navLeftHref='';">
+    </navbar>
+    <ion-content>
+
+    <div class="transitions-content">
+
+
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <navpc ng-init="passorder='active'"></navpc>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-9 col-md-9">
+
+                    <div class="row-bootstrap bg-white gap-25 row3">
+
+
+
+                            <div class="list bg-white">
+                                <div class="col-sm-6 col-md-6">
+                                  <a class="item item-condensed item-no-border">
+                                     货物类别：
+                                     <span class="item-note input-ionic">
+                                        <input type="text" class="text-gray1 text-right"  placeholder="输入类别">
+                                    </span>
+                                  </a>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                  <a class="item item-condensed item-no-border">
+                                     货物重量：
+                                    <span class="item-note  input-ionic1">
+                                        <input type="text" class="text-gray1 text-right" placeholder="输入重量"/>
+                                        <span>吨</span>
+                                    </span>
+                                  </a>
+                                </div>
+
+
+                                <div class="col-sm-6 col-md-6">
+                                  <a class="item item-icon-left item-icon-right item-border-bottom-no">
+                                     <i class="icon ion-ios-location-outline text-pink"></i>
+                                      <span class="text-purple2">提货地点：</span>
+                                     <span class="item-note input-ionic">
+                                        <input type="text" class="text-gray1 text-right"  placeholder="输入起点">
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                  </a>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                  <a class="item item-icon-left item-icon-right item-border-bottom-no">
+                                     <i class="icon ion-ios-location-outline text-green1"></i>
+                                     <span class="text-purple2">交货地点：</span>
+                                    <span class="item-note  input-ionic1">
+                                        <input type="text" class="text-gray1 text-right" placeholder="输入终点"/>
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                  </a>
+                                </div>
+
+                                <div class="col-sm-6 col-md-6">
+                                  <a class="item item-icon-left item-border-bottom-no">
+                                     <i class="icon ion-person"></i>
+                                      发货人姓名：
+                                     <span class="item-note input-ionic">
+                                        <input type="text" class="text-gray1 text-right"  placeholder="输入姓名">
+                                    </span>
+                                  </a>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                  <a class="item item-icon-left item-border-bottom-no">
+                                     <i class="icon ion-ios-telephone"></i>
+                                     联系方式：
+                                    <span class="item-note  input-ionic1">
+                                        <input type="text" class="text-gray1 text-right" placeholder="输入联系方式"/>
+                                     </span>
+                                  </a>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                  <a class="item item-icon-left item-icon-right item-border-bottom-no">
+                                     <i class="icon ion-android-alarm-clock"></i>
+                                     计划发货时间：
+                                    <span class="item-note input-ionic">
+                                        <input type="text" class="text-gray1 text-right" placeholder="输入时间" />
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                  </a>
+                                </div>
+
+                                <div class="col-sm-6 col-md-6">
+                                  <a class="item item-icon-right item-border-bottom-no">
+                                     <span class="text-red2">结算方式：</span>
+                                     <span class="item-note">
+                                        现金结算
+                                     </span>
+                                     <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                  </a>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                  <a class="item item-icon-right item-border-bottom-no">
+                                     <span class="text-red2">付款方式：</span>
+                                     <span class="item-note">
+                                        全额支付
+                                     </span>
+                                     <i class="icon ion-ios-arrow-right text-gray1"></i>
+                             </a>
+                                </div>
+                                <div class="col-sm-6 col-md-6">
+                                  <a class="item item-icon-right item-border-bottom-no">
+                                     <span class="text-red2">定价招标：</span>
+                                     <span class="item-note">
+                                        80元/吨
+                                     </span>
+                                     <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                  </a>
+                                </div>
+
+                                <!--<div class="col-sm-6 col-md-6">-->
+                                  <!--<a class="item item-icon-right item-border-bottom-no">-->
+                                     <!--<span>发布有效期</span>-->
+                                     <!--<span class="item-note">-->
+                                        <!--7天限时-->
+                                     <!--</span>-->
+                                     <!--<i class="icon ion-ios-arrow-right text-gray1"></i>-->
+                                  <!--</a>-->
+                                <!--</div>-->
+
+                                <div class="col-sm-6 col-md-6">
+                                   <li class="item item-toggle item-border-bottom-no">
+                                       <span>是否允许凑单<small class="text-gray1">(可选择多个物流运输)</small></span>
+                                       <label class="toggle toggle-balanced">
+                                         <input type="checkbox">
+                                         <div class="track">
+                                           <div class="handle"></div>
+                                         </div>
+                                       </label>
+                                    </li>
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+                        <div class="col-xs-12 gap-15">
+                            <blockquote class="rules-pink text-red">
+                                <h6>物流结算细则： </h6>
+                                <h6>1、运输到目的地，+-0.5吨为正常耗损，不涉及违约。</h6>
+                                <h6>2、如超过0.5吨，每减少1吨，扣500元。</h6>
+                                <h6>3、延期运送到目的地，每延期1天扣100元。</h6>
+                            </blockquote>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12 textarea">
+                            <textarea class="rules-gray text-gray2"> 备注：</textarea>
+                        </div>
+                        <div class="col-sm-3 minHeight"></div>
+                        <div class="col-sm-6 col-xs-12 gap-20">
+                            <button class="btn btn-block btn-yellow">
+                                确认发布货源
+                            </button>
+                            <div class="gap-20"></div>
+                        </div>
+                        <div class="col-sm-3"></div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+
+    </div>
+    </div>
+    <footer></footer>
+
+    </div>
+</ion-content>
+</div>
+

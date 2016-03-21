@@ -1,0 +1,63 @@
+﻿<div ng-controller="DriverManageCtrl" ng-init="init()">
+    <navbar
+            ng-init="">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="row-bootstrap gap-5">                                                        
+                            <div class="col-xs-10">
+                                <h4 class="input-search">
+                                    <i class="icon ion-search placeholder-icon pull-left"></i>
+                                    <input type="text" placeholder="按姓名查找">
+                                </h4>
+                            </div>
+                            <button class="button button-clear">搜索</button>
+                        </div>
+                        <div class="row-bootstrap gap-5 bg-white">
+                            <a ui-sref="tab.DriverNotHasCar">
+
+                                <div class="list-group" ng-click="goCarAssign()">
+                                    <li class="list-group-item list-condensed list-group-item-no-border">
+                                        <h5 class="text-brown1">
+                                            <img class="face6 img-fixed img-circle" src="./img/me/face-7.png">
+                                            等待分配车辆的司机({{UserCount}})
+                                            <span class="pull-right ion-chevron-right gap-15"></span>
+                                        </h5>
+                                    </li>
+                                </div>
+                            </a>
+
+                            <div class="clearfix"></div>
+                            <a href="" class="list-item-border"></a>
+                        </div>
+                        <div ng-repeat="item in items">
+                            <driver-car-info-item item="item">
+
+                            </driver-car-info-item>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+</div>
+
+                <footer></footer>
+            
+
+        </div>
+    </ion-content>
+</div>
+
+

@@ -1,0 +1,158 @@
+<!-- 支付款 -->
+<div class="row-bootstrap bg-white">
+    <h5 class="text-center"><strong>付款方式<br />settle accounts</strong></h5>
+
+    <!-- 第1步 -->
+    <div ng-if="order.step < 3" class="bg-white gap-row">
+        <div class="list-group col-sm-6 col-md-6">
+            <li class="list-group-item list-condensed list-group-item-no-border">
+                <h5 class="text-black">
+                   总金额：
+                    <span class="pull-right text-red"><strong>￥ {{ (order.price_unit * order.amount) | fmoney}} </strong> 元</span>
+                </h5>
+            </li>
+        </div>
+        <div class="list-group col-sm-6 col-md-6">
+            <li class="list-group-item list-condensed list-group-item-no-border">
+                <h5 class="text-black" ng-show="order.payment_method=='partition'">
+                   预付：
+                    <span class="pull-right text-red"><strong>￥ {{order.price_advance|fmoney}}  </strong> 元</span>
+                </h5>
+            </li>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- 第2步 -->
+    <div ng-if="(order.step > 5 && order.step != 5.6) || order.step==2" class="bg-white gap-row text-center">
+    等待支付</div>
+    <div ng-if="order.step == 5.8 || order.step==2.5" class="bg-white gap-row text-center">
+        支付成功<br />
+        <img ng-if="order.url_payment_advance"  class="img-responsive gap-row" style="display:inline-block;" ng-src="{{order.url_payment_advance}}">
+        <img ng-if="order.url_payment_gross"  class="img-responsive gap-row" style="display:inline-block;" ng-src="{{order.url_payment_gross}}">
+        <span ng-if="order.credit_final_payment" >信用支付：{{order.price_remain|fmoney}}</span>
+    </div>
+    <!-- 第3步 -->
+    <!-- 第4步 -->
+    <div ng-if="order.exist_payment_middle && order.step>3 && order.step<5" >
+        <div class="list-group col-xs-12">
+            <li class="list-group-item list-condensed list-group-item-no-border">
+                <h5 class="text-black">
+                   货到款:
+                    <span class="pull-right text-red"><strong>￥ {{ order.price_middle | fmoney}} </strong> 元</span>
+                </h5>
+            </li>
+        </div>
+    </div>
+    <!-- 第5步 -->
+    <div ng-if="order.step>=5 || order.status=='complete'" class="bg-white gap-row">
+        <div class="list-group col-sm-6 col-md-6">
+            <li class="list-group-item list-condensed list-group-item-no-border">
+                <h5 class="text-black">
+                  扣款金额：
+                    <span class="pull-right text-red1"><strong>{{order.price_cost|fmoney }}</strong> 元</span>
+                </h5>
+            </li>
+        </div>
+        <div class="list-group col-sm-6 col-md-6">
+            <li class="list-group-item list-condensed list-group-item-no-border">
+                <h5 ng-if=" order.payment_method == 'partition' " class="text-black">
+                   货物尾款：
+                    <span  class="pull-right text-red1"><strong>￥ {{order.price_remain |fmoney }} </strong> 元</span>
+                </h5>
+                <h5 ng-if=" order.payment_method != 'partition' " class="text-black">
+                  款后的金额：
+                    <span class="pull-right text-red1"><strong>￥ {{order.price_gross |fmoney }} </strong> 元</span>
+                </h5>
+                <!-- 货到款 款到货 -->
+
+            </li>
+        </div>
+
+        <div ng-if="order.att_forgiven" class="list-group col-sm-6 col-md-6">
+            <li class="list-group-item list-condensed list-group-item-no-border">
+                <h5 class="text-black">
+                   谅解款合计：
+                    <span class="pull-right text-red1"><strong>{{order.att_forgiven.total|fmoney }}</strong> 元</span>
+                </h5>
+            </li>
+        </div>
+        <div class="col-xs-12" ng-if="order.status=='complete'">
+            <div class="bg-yellow-radius">
+                <h5 >订单结账金额</h5>
+                <h2>￥ {{order.price_actual| fmoney}} 元</h2>
+            </div>
+        </div>
+        <!-- 采购 -->
+        <!--
+        <div ng-if="isCompany==order.company_demand_id">
+
+            <div class="col-sm-3 minHeight"></div>
+            <div class="col-xs-12 col-sm-6 gap-10" >
+                <button ng-if="order.status !='complete' && order.step ==5" class="btn btn-lg btn-block bg-yellow2 text-yellow3" disabled="">
+                    等待对方确认
+                </button>
+                <button ng-if="order.status !='complete' && order.step ==5.5" class="btn btn-lg btn-block bg-yellow2 text-yellow3" ng-click="trade_delivery()">
+                    立即支付
+                </button>
+                <button class="btn btn-block btn-yellow md-trigger md-setperspective" ng-if="order.status !='complete' &&order.step ==5.6 " disabled="">
+                    等待审核
+                </button>
+                <button class="btn btn-block btn-yellow md-trigger md-setperspective" ng-if="order.status !='complete' &&order.step ==5.7 " ng-click="order_5_payment()">
+                    审核通过,请支付尾款
+                </button>
+                <button ng-if="order.status !='complete' && order.step == 5.8" class="btn btn-block btn-yellow md-trigger md-setperspective" disabled=""> 等待对方收款确认 </button>
+                <button ng-if="order.status =='complete' && order.step == 5.8" class="btn btn-block btn-yellow md-trigger md-setperspective" disabled=""> 订单完成 </button>
+            </div>
+            <div class="col-sm-3"></div>
+
+            <div ng-if=' order.step ==5.1 '>
+                <div class="clearfix"></div>
+                <div class="col-xs-6">
+                    <button class="btn btn-block btn-yellow md-trigger md-setperspective"  ng-click="order_5_confirm_forgiven_yes()">
+                        接收谅解
+                    </button>
+                </div>
+                <div class="col-xs-6">
+                    <button class="btn btn-block btn-yellow md-trigger md-setperspective" ng-click="order_5_confirm_forgiven_no()">
+                        不接收谅解
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        -->
+        <!-- 销售角色 -->
+        <!--
+        <div ng-if="isCompany!=order.company_demand_id" class="col-xs-12 gap-10">
+
+            <div ng-if=' order.step >=5.5  '>
+                <div  class="col-sm-3 minHeight"></div>
+                <div  class="col-xs-12 col-sm-6">
+                    <button ng-if="order.status !='complete' && (order.step >5 && order.step < 5.8)" class="btn btn-lg btn-block bg-yellow2 text-yellow3" disabled="">
+                    等待付款
+                    </button>
+                    <button ng-if="order.status !='complete' && order.step ==5.8" class="btn btn-lg btn-block bg-yellow2 text-yellow3" ng-click="order_5_confirm()">
+                        确认收款
+                    </button>
+                    <button ng-if="order.status =='complete' " class="btn btn-lg btn-block bg-yellow2 text-yellow3" disabled=""> 订单完成 </button>
+                </div>
+                <div  class="col-sm-3"></div>
+
+            </div>
+            <div ng-if=" order.step >=5 && order.step <=5.4 ">
+                <div class="col-sm-3 minHeight"></div>
+                <div class="col-sm-6 col-xs-12">
+                    <button ng-if=" order.step ==5.1 " class="btn btn-block btn-yellow md-trigger md-setperspective" disabled="">
+                        等待谅解
+                    </button>
+                </div>
+                <div class="col-sm-3"></div>
+                <div class="gap-10" ></div>
+
+            </div>
+        </div>
+        -->
+        <div class="clearfix"></div>
+    </div>
+
+</div>

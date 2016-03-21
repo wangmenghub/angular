@@ -1,0 +1,195 @@
+﻿<div name="myCompanySet" ng-controller="myCompanySetCtrl">
+    <navbar></navbar>
+    <ion-content>
+    <div class="transitions-content">
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <navpc ng-init="me='active'"></navpc>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+
+                    <div class="row-bootstrap bg-white gap-10">
+                        <div class="list-group">
+                            <li class="list-group-item">
+                                <h5 class="text-black" ng-click="MyCompSet.modify_companyinfo('url_logo')">
+                                    <span class="pull-left gap-20">企业头像</span>
+                                    <a href="" class="pull-right" >
+                                        <img class="img-circle face3" ng-src="{{MyCompSet.company_info.url_logo}}">
+                                        <span class="glyphicon glyphicon-menu-right text-gray1"></span>
+                                    </a>
+                                    <div class="clearfix"></div>
+                                </h5>
+                            </li>
+                        </div>
+                        <div class="list bg-white">
+                            <a class="item item-border-top-no" ng-click="MyCompSet.modify_companyinfo('full_name')">
+                                    企业名称
+                                    <span class="item-note">
+                                        {{MyCompSet.company_info.full_name}}
+                                    </span>
+                                    <!-- <i class="icon ion-ios-arrow-right text-gray1"></i> -->
+                            </a>
+                            <!-- <a class="item item-icon-right">
+                                管理员
+                                <span class="item-note">
+                                    18521300639
+                                </span>
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>
+                            </a>
+                            <a class="item item-icon-right">
+                                管理员手机号
+                                <span class="item-note">
+                                    18521300639
+                                </span>
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>
+                            </a> -->
+
+                            <a class="item">
+                                    企业类型
+                                    <span href="" class="item-note text-gray1">
+                                        {{MyCompSet.company_info.type}}
+                                    </span>
+                                    <!-- <i class="icon ion-ios-arrow-right text-gray1"></i> -->
+                            </a>
+
+                            <a class="item item-icon-right" ng-click="MyCompSet.modify_companyinfo('manage')">
+                                    经营品类
+                                    <span class="item-note">{{MyCompSet.company_info.manage}}</span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                            </a>
+                            <!-- <a ng-if="MyCompSet.comp_info_local.type=='TRADE'" class="item item-icon-right" ng-click="MyCompSet.modify_companyinfo('sub_type')">
+                                    所属行业
+                                    <span class="item-note input-ionic">{{MyCompSet.company_info.sub_type |subType}}</span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                            </a> -->
+                          <a class="item item-icon-right" ng-click="MyCompSet.modify_companyinfo('des')">
+                            企业介绍
+                            <span class="item-note">{{MyCompSet.company_info.des |fstrLen}}</span>
+                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                          </a>
+                            <a class="item item-icon-right" ng-click="MyCompSet.modify_companyinfo('province')">
+                                    省市县
+                                    <span class="item-note">{{MyCompSet.company_info.provice}}{{MyCompSet.company_info.city}}{{MyCompSet.company_info.district}}
+                                    </span>
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>
+                            </a>
+                            <a class="item item-icon-right" ng-click="MyCompSet.modify_companyinfo('addr')">
+                                    公司办公地点
+                                    <span class="item-note">{{MyCompSet.company_info.addr}}
+                                    </span>
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="row-bootstrap bg-white gap-20">
+                            <form name="myform" novalidate>
+                        <div ng-if="MyCompSet.company_info.verify_phase == 'NO'" class="list">
+
+                            <a class="item item-icon-right item-border-top-no" ng-click="MyCompSet.modify_companyinfo('licenseimg')">
+                                <i class="glyphicon glyphicon-certificate"></i>
+                                上传企业执照
+                                <span class="item-note">
+                                    <span ng-if="msg.licenseimg" class="text-red">{{msg.licenseimg}}</span>
+                                   <!--  <img class="card2" ng-src="{{MyCompSet.licenseURL +'?tep='+random}}"> -->
+                                    <img ng-if="MyCompSet.company_info.url_yingyezhizhao"class="card2" ng-src="{{MyCompSet.company_info.url_yingyezhizhao}}">
+                                   <!-- <img class="card2" ng-src="{{previewImageSrc}}" /> -->
+                                </span>
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>
+                            </a>
+                            <!-- <a class="item item-icon-right" ng-click="MyCompSet.modify_companyinfo('license')">
+                                <i class="glyphicon glyphicon-briefcase"></i>
+                                    组织结构代码
+                                   <span class="item-note input-ionic">
+                                   <input type="text" class="text-right" ng-model="MyCompSet.license" placeholder="请输入组织结构代码">
+                                </span>
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>
+                            </a> -->
+
+                            <a class="item item-icon-right" ng-click="MyCompSet.modify_companyinfo('nick_name')">
+                                <i class="glyphicon glyphicon-home"></i>
+                                公司昵称
+                                <span class="item-note input-ionic">
+                                    <input class="text-right" type="text" ng-model="MyCompSet.company_info.nick_name" placeholder="公司昵称" name="nick_name" required ng-pattern="/^[a-zA-Z\u4e00-\u9fa5\s]{2,6}$/">
+                                </span>
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>
+
+                            </a>
+                            <div ng-if="myform.nick_name.$dirty && myform.nick_name.$error" class="text-red" style="padding-left:15px;" ng-messages="myform.nick_name.$dirty&&myform.nick_name.$error">
+                                    <div ng-message="required">昵称不能为空</div>
+                                    <div ng-message="pattern">格式错误(2-6个中英文字符)</div>
+                            </div>
+                            <a class="item item-icon-right" ng-click="MyCompSet.modify_companyinfo('currency')">
+
+                                <i class="glyphicon glyphicon-yen"></i>
+                                企业资金(元)
+                                <span class="item-note input-ionic">
+                                    <input class="text-right" type="text" ng-model="MyCompSet.company_info.currency" placeholder="注册资金" name="currency" required ng-pattern="/^[0-9]{0,10}$/" min='0'> <p>{{company_info|fmoney}}</p> </span>
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>
+                            </a>
+                            <div ng-if="myform.currency.$dirty&&myform.currency.$error" class="form-error" ng-messages="myform.currency.$dirty&&myform.currency.$error">
+                                    <div ng-message="required">注册资金不能为空</div>
+                                    <div ng-message="pattern">格式错误(阿拉伯数字[1-10])</div>
+                            </div>
+
+                            <div class="col-sm-2 minHeight"></div>
+                            <div class="col-xs-12 col-sm-8 gap-10" ng-if="MyCompSet.company_info.verify_phase == 'NO' || MyCompSet.company_info.verify_phase == 'FAILED'">
+                                <button class="btn btn-yellow text-center" ng-click="submit()" ng-disabled="myform.$invalid">申请认证修改</button>
+                                <div class="gap-10"></div>
+                            </div>
+                            <div class="col-sm-2"></div>
+                        </div>
+                        <div class="list">
+                            <a class="item item-border-top-no" ng-if="MyCompSet.company_info.verify_phase == 'PROCESSING'">
+                              <span>企业认证中....</span>
+                            </a>
+                        </div>
+                        <div class="list">
+                            <a class="item item-border-top-no" ng-if="MyCompSet.company_info.verify_phase == 'SUCCESS'">
+                              <span>企业认证中通过</span>
+                            </a>
+                        </div>
+                            </form>
+<!--
+                            <div class="col-sm-3 minHeight"></div>
+                            <div class="col-sm-6 col-xs-12 gap-50">
+                                <button type="button" class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder">
+                                    申请认证修改
+                                </button>
+                                <div class="gap-30"></div>
+                            </div>
+                            <div class="col-sm-3"></div> -->
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3"></div>
+            </div>
+            </div>
+            <footer></footer>
+
+    </div>
+
+</ion-content></div>
+
+<script id="myCompanySet/describe.html" type="text/ng-template">
+    <div class="list">
+        <label class="item item-input">
+            <textarea placeholder="简述公司介绍,限制200字" ng-model="data.desc" maxlength="200" style="height:300px;"></textarea>
+        </label>
+    </div>
+</script>
+<script id="myCompanySet/headerimg.html" type="text/ng-template">
+    <div class="list">
+        <label class="item item-input">
+            <input type="file" name="file" ng-model="data.file" onchange="angular.element(this).scope().getUploadPic(this.files)" />
+        </label>
+    </div>
+</script>
+
+<script id="myCompanySet/licenseimg.html" type="text/ng-template">
+    <div class="list">
+        <label class="item item-input">
+           <input type="file" name="file" ng-model="data.file" onchange="angular.element(this).scope().getUploadPic(this.files)" />
+        </label>
+    </div>
+</script>

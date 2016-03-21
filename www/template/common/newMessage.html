@@ -1,0 +1,93 @@
+<div ng-controller="MynewMessage2Ctrl">
+    <navbar
+            ng-init="navbar.navLeftIco='glyphicon glyphicon-chevron-left';navbar.navLeft='返回'; navbar.title='邀请联系人' ;navbar.navRightHref='tab.';navbar.navRight=''; navbar.navRightIco='';navbar.navLeftHref=''; navbar.navLeftClick='goBack()'">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="trade='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                        <form name="myform" novalidate>
+                        <div class="row-bootstrap bg-white">
+                            <div class="list">
+                                <!-- <label class="item item-icon-right">
+                                  联系人：
+                                  <input type="text" name='i.chn' class="text-right" ng-model="i.eng" maxlength="11" ng-pattern="/(^13[0-9]{9}$)|(^15[0-9]{9}$)|(^17[0-9]{9}$)|(^18[012356789][0-9]{8}$)/" required>
+                                  <i  ng-if="$first" ng-click="add2()" class="icon ion-ios-plus-outline">新增</i>
+                                  <i ng-if="!$first" ng-click="del2($index)" class="icon ion-ios-minus-outline">删除</i>
+                                </label> -->
+                                <a class="item item-icon-right" ng-repeat="i in listuser">
+                                    <span class="text-yellow2">联系人：</span>
+                                    <span class="item-note input-ionic1">
+                                        <input type="text"
+                                               name='{{i.chn}}'
+                                               class="text-right"
+                                               ng-model="i.eng"
+                                               maxlength="11"
+                                               ng-pattern="/(^13[0-9]{9}$)|(^15[0-9]{9}$)|(^17[0-9]{9}$)|(^18[012356789][0-9]{8}$)/"
+                                               ng-change="change()"
+                                          >
+                                    </span>
+                                    <i  ng-if="$first" ng-click="add()" class="icon ion-ios-plus-outline"></i>
+                                    <i ng-if="!$first" ng-click="del($index)" class="icon ion-ios-minus-outline"></i>
+                                    <span class="form-error" ng-messages="myform[i.chn].$dirty&&myform[i.chn].$error"><br/>
+                                      <span ng-message="pattern">格式错误(11位手机号码)</span>
+                                    </span>
+                                </a>
+                                <div class="item item-input item-select">
+                                  <strong>分配角色</strong>
+                                  <select name="roletype"
+                                          ng-model="sel_role.type"
+                                          ng-options="a.value as a.tips for a in rolelist"
+                                          required
+                                          ng-change="change()"
+                                      >
+                                  <option value="">请选择</option>
+                                  </select>
+
+                                </div>
+                                    <!-- {{type|json}}                                    -->
+                            </div>
+                            <!--  -->
+                            <div ng-if="invite" class="col-xs-12 gap-10">
+                                <span class="pull-left">邀请码：<input type="hidden" ng-model="invite" placeholder="{{invite}}"></span> {{invite}}
+                                <span class="pull-right"
+                                      clip-copy='invite'
+                                      clip-click-fallback="fallback(copy)"
+                                      clip-click="showMessage()"
+                                      ng-click="copyIndex()"
+                                      class="btn-copy"
+                                  >复制</span>
+                            </div>
+                            <div class="col-sm-3 minHeight"></div>
+                            <div class="col-sm-6 col-xs-12 gap-50">
+                                <button class="btn btn-block btn-yellow" ng-disabled="myform.$invalid || invite" ng-click="submit()" >
+                                    确定
+                                </button>
+                                <div class="gap-30"></div>
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+            <footer></footer>
+
+
+        </div>
+    </ion-content>
+</div>
+
+

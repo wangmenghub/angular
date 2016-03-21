@@ -1,0 +1,54 @@
+<div ng-controller="PrivateDriverCarListCtrl" ng-init="init()">
+    <navbar>
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+
+
+                        <!--<div ng-repeat="car in cars">-->
+                        <div class="row-bootstrap bg-white">
+                            <div class="list-group">
+                                <div ng-repeat="car in cars">
+                                    <car-item go-detail="goDetail(car)" car="car"></car-item>
+                                </div>
+                            </div>
+                        </div>
+                        <!--<car-item car="car"></car-item>-->
+                        <div class="clearfix"></div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <!--<div class="row-bootstrap gap-5">-->
+                    <!--<div class="col-xs-1">&nbsp;</div>-->
+                    <!--<div class="col-xs-10">-->
+                    <!--<h4 class="input-search">-->
+                    <!--<i class="icon ion-search placeholder-icon pull-left"></i>-->
+                    <!--<input type="text" placeholder="搜索">-->
+                    <!--</h4>-->
+                    <!--</div>-->
+                    <!--<div class="col-xs-1"></div>-->
+                    <!--</div>-->
+
+                </div>
+
+            </div>
+            <footer></footer>
+
+
+        </div>
+    </ion-content>
+</div>
+
+

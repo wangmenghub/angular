@@ -1,0 +1,6 @@
+<span class="item-note text-red1 ">
+    {{order.payment_method |paymentChoice}}
+    <span ng-if="order.payment_method=='all_goods'">,以货到日为准,最终支付可延期5天</span>
+    <!--<span ng-if="order.payment_method=='partition' ">,{{order.percent_advance}}%首付款,{{order.percent_middle}}%质保款</span>-->
+    <span ng-if="order.payment_method=='credit' ">,{{order.ref_day_extension |paymentChoice}}后{{order.count_day_extension}}日付款</span>
+</span>

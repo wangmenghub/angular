@@ -1,0 +1,101 @@
+﻿<div ng-controller="DriverHomeCtrl" ng-init="init()">
+    <navbar ng-init="navbar.navLeftHref='tab.nameCard_trade({id:user._id})';navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='主页' ;navbar.navRightHref='tab.';">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+
+                        <div class="row-bootstrap bg-purple">
+                            <div class="gap-5"></div>
+                        </div>
+                        <div class="row-bootstrap title-pro1 clearfix" ng-click="goCard()">
+                            <div class="col-xs-12 gap-80">
+                                <h5 class="col-xs-4 text-gray2 gap-80 text-left">{{company.full_name}}</h5>
+                                <img src="{{user.photo_url | imgDefault:'header'}}" class="col-xs-4 img-circle text-center gap-50">
+                                <!--<br>SHUN FENG Co.,Ltd</h5>-->
+                                <h6 class="col-xs-4 text-gray2 gap-80 text-right">手机号码<br>
+                                    {{user.phone}}</h6>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <h3 class="text-center">
+                                <div class="gap-50"></div>
+                                <br>
+                                {{user.real_name}} <label class="label-role-purple">司机</label>
+                            </h3>
+
+                        </div>
+                        <div class="row-bootstrap bg-white gap-row data-own">
+                            <div class="col-xs-6 text-red3 border-right-line-gray">
+                                <h6>以运输</h6>
+
+                                <h2>{{user.amountCount | number}}吨</h2>
+                            </div>
+                            <div class="col-xs-6 text-red3">
+                                <h6>订单数</h6>
+
+                                <h2>{{user.orderCount | number}}笔</h2>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <!-- 图 -->
+
+                        </div>
+
+                        <h6 class="col-xs-12">我的线路</h6>
+
+                        <div ng-repeat="item in items">
+                            <div class="row-bootstrap bg-gray2">
+                                <div class="col-xs-12">
+                                    <h5 class="text-black">{{item.start_province}} {{item.start_city}} -> {{item.end_province}}
+                                        {{item.end_city}}</h5>
+                                </div>
+                            </div>
+
+                            <div class="row-bootstrap bg-white">
+                                <div class="list-group" ng-repeat="car in item.truck">
+                                    <li class="list-group-item list-condensed list-group-item-no-border" >
+                                        <div class="pull-left">
+                                            <h4 class="text-purple2">
+                                                {{car.number}}
+                                            </h4>
+                                            <h6>{{car |carDes }}</h6>
+                                        </div>
+                                        <span class="pull-right gap-5">
+                                           <img src="{{car.che_tou_zhao_url | imgDefault:'car'}}"
+                                                class="card2">
+                                             <span class="ion-chevron-right text-gray2">
+
+                                             </span>
+                                          </span>
+                                    </li>
+                                    <div class="clearfix"></div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <footer></footer>
+
+
+        </div>
+    </ion-content>
+</div>
+
+

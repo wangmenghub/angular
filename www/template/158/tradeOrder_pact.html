@@ -1,0 +1,59 @@
+<!-- 物流，货运细则 -->
+<div class="row-bootstrap bg-white gap-row">
+    <div class="col-xs-12">
+        <blockquote class="rules-pink text-red">
+            <h6>货物结算细则：<small class="text-gray1">以采购方的结果为准</small></h6>
+            <att-product data="order.att_product" attr-category="order.category"></att-product>
+        </blockquote>
+    </div>
+    <div ng-if="order.step >= 5 || order.status=='complete'" class="col-xs-12">
+        <a ng-href="#/tab/tradeOrder3-2/{{order._id}}">
+        <blockquote class="rules-green text-green1">
+            <h6>查看完整检测报告<span class="pull-right ion-chevron-right"></span></h6>        
+        </blockquote>
+        </a>
+    </div>
+    <div class="clearfix"></div>
+    <!-- <div  class="list-group col-sm-6 col-md-6" ng-repeat="i in [1,]">
+        <li ng-if="! i.qualified && i.name" class="list-group-item list-condensed list-group-item-no-border" ng-repeat="i in order.att_product">
+            <h5 class="text-red1">                            
+               &nbsp;&nbsp;{{desc[[i.name]][0]}} A：偏差:{{i.value - i.actual}} ({{desc[[i.name]][1]}})
+                <span class="pull-right">差异扣款：<strong>{{ (i.value - i.actual ) * i.cost/i.step}}元</strong></span>
+            </h5>
+        </li>
+    </div> -->
+    <div ng-if="order.step >= 5 || order.status=='complete'" class="list-group col-sm-6 col-md-6">
+        <li class="list-group-item list-condensed list-group-item-no-border">
+            <h5 class="text-black">                            
+                &nbsp;&nbsp;质量扣款：<span class="text-gray1">（根据结算细则）</span>
+                <span class="pull-right text-red1"><strong> {{order.att_product.cost_total| fmoney}}元</strong></span>
+            </h5>
+        </li>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-xs-12">
+        <blockquote class="rules-pink text-red">
+            <h6>物流结算细则：</h6>
+            <att-traffic data="order.att_traffic"></att-traffic>
+        </blockquote>
+    </div>
+    <div class="clearfix"></div>
+    <div ng-if="order.step >= 5 || order.status=='complete'" class="list-group col-sm-6 col-md-6">
+        <li class="list-group-item list-condensed list-group-item-no-border">
+            <h5 class="text-black">                            
+                &nbsp;&nbsp;共缺少吨数(等待获取)：
+                <span class="pull-right text-red1"><strong>{{(order.amount - order.amount_total)|fmoney}} 吨</strong></span>
+            </h5>
+        </li>
+    </div> 
+    <div ng-if="order.step >= 5" class="list-group col-sm-6 col-md-6" ng-repeat="i in [0,]">
+        <li class="list-group-item list-condensed list-group-item-no-border">
+            <h5 class="text-black">                            
+                &nbsp;&nbsp;物流差异扣款：
+                <span class="pull-right text-red1"><strong>
+                {{ order.att_traffic.cost_total| fmoney}}元</strong></span>
+            </h5>
+        </li>
+    </div> 
+    <div class="clearfix"></div>
+</div>

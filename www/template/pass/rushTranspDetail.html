@@ -1,0 +1,257 @@
+<div ng-init="loadData()" ng-controller="rushTranspDetailCtrl" ng-init="init()">
+    <navbar
+            ng-init="navbar.navLeftHref='tab.rushTransp'; navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='抢货源' ;navbar.navRightClick='share()';navbar.navRight='分享计划'">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+                    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                        <div class="row-bootstrap gap-10">
+                            <div class="gap-15 gap-row bg-white">
+                                <div class="gap-row bg-white">
+                                    <div class="col-xs-12">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <!--<h3 class="media-heading">-->
+                                                <!--<label class="label-supply-purple">货源</label>-->
+                                                <!--&nbsp;{{title.begin}}-> {{title.end}}，{{order.category_chn}}-->
+                                                <!--<span class="text-purple2">{{order.amount}}吨</span>-->
+                                                <!--</h3>-->
+                                                <pass-title amount="order.amount"
+                                                            begin-id="order.location_depart"
+                                                            end-id="order.location_arrival"
+                                                            order="order"
+                                                            type="order.category_chn">
+                                                </pass-title>
+
+                                                <h5 class="text-black">
+                                                    {{company.companyName}}
+                                                    <a title="企业已认证">
+                                                        <label ng-init="company.isVerifySuccess=true" ng-if="company.isVerifySuccess"
+                                                               class="label-v">
+                                                            <strong>v</strong>
+                                                        </label>
+                                                    </a>
+                                                </h5>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="list-group">
+                                        <li class="list-group-item list-condensed list-group-item-no-border">
+                                            <h5 class="text-purple2"><span class="ion-ios-location-outline text-pink"
+                                                                           aria-hidden="true"></span>
+                                                &nbsp;&nbsp;交货地点：{{address.location_arrival}}
+                                            </h5>
+                                        </li>
+                                        <li class="list-group-item list-condensed list-group-item-no-border">
+                                            <h5 class="text-purple2"><span class="ion-ios-location-outline text-green1"
+                                                                           aria-hidden="true"></span>
+                                                &nbsp;&nbsp;提货地址：{{address.location_depart}}
+                                            </h5>
+                                        </li>
+
+                                        <li class="list-group-item list-condensed list-group-item-no-border">
+                                            <h5 class="text-black"><span class="ion-android-alarm-clock" aria-hidden="true"></span>
+                                                &nbsp;&nbsp;提货时间：{{order.time_depart | rsctime}}
+                                            </h5>
+                                        </li>
+
+                                        <li class="list-group-item list-condensed list-group-item-no-border">
+                                            <h5 class="text-black"><span class="ion-android-alarm-clock" aria-hidden="true"></span>
+                                                &nbsp;&nbsp;到货时间：{{order.time_arrival | rsctime}}
+                                            </h5>
+                                        </li>
+                                        <pass-price ng-if="order.price" price-text="最高报价" price="order.price"></pass-price>
+                                        <!--<li class="list-group-item list-condensed list-group-item-no-border">-->
+                                        <!--<h5 class="text-red"><span class="glyphicon glyphicon-jpy" aria-hidden="true"></span>-->
+                                        <!--&nbsp;&nbsp;最低报价{{order.price}}元/吨-->
+                                        <!--</h5>-->
+                                        <!--</li>-->
+
+                                        <!--<li class="list-group-item list-condensed list-group-item-no-border">-->
+                                        <!--<h5 class="text-red"><span class="ion-ios-pie-outline" aria-hidden="true"></span>-->
+                                        <!--&nbsp;&nbsp;剩余{{order.amount_remain>0?order.amount_remain:0}}吨-->
+                                        <!--</h5>-->
+                                        <!--</li>-->
+
+                                        <li class="list-group-item list-condensed list-group-item-no-border">
+                                            <h5 class="text-red"><span class="ion-ios-pricetags-outline" aria-hidden="true"></span>
+                                                &nbsp;&nbsp;{{order|payTypeDes}} {{order.can_join?',可凑单':''}}
+                                            </h5>
+                                        </li>
+
+                                        <!--<li class="list-group-item list-condensed list-group-item-no-border" ng-switch="order.can_join">-->
+                                        <!--<h5 ng-switch-when="true" class="text-red"><span class="ion-ios-pricetags-outline"-->
+                                        <!--aria-hidden="true"></span>-->
+                                        <!--&nbsp;&nbsp;可凑单-->
+                                        <!--</h5>-->
+                                        <!--&lt;!&ndash;<h5 ng-switch-when="false" class="text-red"><span class="glyphicon glyphicon-jpy"&ndash;&gt;-->
+                                        <!--&lt;!&ndash;aria-hidden="true"></span>&ndash;&gt;-->
+                                        <!--&lt;!&ndash;&nbsp;&nbsp;不可凑单&ndash;&gt;-->
+                                        <!--&lt;!&ndash;</h5>&ndash;&gt;-->
+                                        <!--</li>-->
+
+                                        <!--<li class="list-group-item list-condensed list-group-item-no-border" ng-if="order.can_join">-->
+                                        <!--<h5 class="text-red"><span class="glyphicon glyphicon-jpy" aria-hidden="true"></span>-->
+                                        <!--&nbsp;&nbsp;可凑单-->
+                                        <!--</h5>-->
+                                        <!--</li>-->
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-xs-12" ng-if="order.appendix">
+                                        <blockquote class="rules-pink text-red">
+                                            <h6>备注:</h6>
+                                            <h6>{{order.appendix}}</h6>
+                                        </blockquote>
+                                    </div>
+
+                                    <pass-balance-detail data="order"></pass-balance-detail>
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<blockquote class="rules-gray text-gray2">-->
+                                    <!--<h6 class="pull-left">-->
+                                    <!--违约责任，纠纷解决方式-->
+                                    <!--<br/>-->
+                                    <!--谅解协议-->
+                                    <!--</h6>-->
+
+                                    <!--<a href="" class="glyphicon glyphicon-menu-right pull-right gap-20 text-gray2"></a>-->
+
+                                    <!--<div class="clearfix"></div>-->
+                                    <!--</blockquote>-->
+                                    <!--</div>-->
+
+                                </div>
+                                <div class="col-sm-3 minHeight"></div>
+                                <div class="col-sm-6 col-xs-12">
+
+                                    <button ng-if="canOffer||hasAuthority" ng-disabled="user.type=='TRADE' || timeOut" ng-click="goNext()"
+                                            class="btn btn-block btn-yellow">
+                                        {{ user.type| demandRole:timeOut}}
+                                        <timer end-time="order.time_validity" language="zh-CN" ng-if="!timeOut">
+                                            <span>{{days}}天,{{hours}}时,{{minutes}}分,{{seconds}}秒.</span>
+                                        </timer>
+                                    </button>
+                                    <button ng-if="!canOffer&&!hasAuthority" ng-disabled="user.type=='TRADE' || timeOut"
+                                            ng-click="companyCertification()"
+                                            class="btn btn-block btn-yellow">
+                                        申请认证
+                                    </button>
+
+                                </div>
+
+                                <div class="col-sm-3"></div>
+                                <div class="clearfix"></div>
+                                <div class="gap-15"></div>
+                            </div>
+                        </div>
+
+                        <div class="row-bootstrap gap-5 text-center">
+                            <div ng-if="user.type=='TRAFFIC'">
+                                <h6>已报价企业[{{offers.count}}]家</h6>
+                            </div>
+                            <div ng-if="user.type=='TRADE'">
+                                <h6>
+                                    邀请[{{order.invite_list.length}}]家、已注册[{{order.signup_list.length}}]家、未注册[{{order.unsignup_list.length}}]家、已报价[{{order.offer_list.length}}]家、未报价[{{order.unoffer_list.length}}]家</h6>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row-bootstrap bg-white gap-10">
+                            <div class="btn-group btn-group-justified col-xs-6" role="group" aria-label="...">
+                                <!--<div class="btn-group" role="group">-->
+                                <!--<a href="">-->
+                                <!--<button type="button" class="btn btn-navbar3 btn-navbar3-active">综合</button>-->
+                                <!--</a>-->
+                                <!--</div>-->
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <!--<button type="button" ng-click="query('price')" class="btn btn-navbar3">价格 <span-->
+                                        <!--class="ion ion-android-arrow-dropup"></span>-->
+                                        <!--</button>-->
+                                        <button type="button" ng-click="query('price')"
+                                                class="btn btn-navbar3 {{selected.sort=='price'?'btn-navbar3-active':''}} ">价格
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <button type="button" ng-click="query('date')"
+                                                class="btn btn-navbar3 {{selected.sort=='date'?'btn-navbar3-active':''}}">时间
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <button type="button" ng-click="query('arrival_time')"
+                                                class="btn btn-navbar3 {{selected.sort=='arrival_time'?'btn-navbar3-active':''}}">交货时间
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <button type="button" ng-click="query('payment')"
+                                                class="btn btn-navbar3 {{selected.sort=='payment'?'btn-navbar3-active':''}}">支付方式
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <button type="button" class="btn btn-navbar3"></button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <button type="button" class="btn btn-navbar3"></button>
+                                    </a>
+                                </div>
+                                <!--<div class="btn-group" role="group">-->
+                                <!--<a href="">-->
+                                <!--<button type="button" class="btn btn-navbar3">已关注</button>-->
+                                <!--</a>-->
+                                <!--</div>-->
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="row1-bootstrap">
+                            <div ng-repeat="item in offerlist" class="col-sm-6 col-md-6 gap-10">
+                                <pass-offer-list index="$index"
+                                                 has-authority="hasAuthority"
+                                                 user-type="user.type"
+                                                 data="item"
+                                                 time-out="timeOut"
+                                                 selected-change="selectedChange(item,$event)"
+                                                 edit-offer="EditOffer(item)"
+                                >
+                                </pass-offer-list>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <footer></footer>
+
+
+        </div>
+
+        <ion-infinite-scroll ng-if="hasMore" icon="ion-loading-c" on-infinite="loadMore()" distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+</div>
+<script>
+
+</script>

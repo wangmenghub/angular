@@ -1,0 +1,201 @@
+<div class="row-bootstrap bg-white gap-row">
+    <div ng-if="isCompany==order.company_demand_id " class="col-xs-12">
+        <div class="col-xs-3" ng-if="[1,4.5].indexOf(order.step)==-1 || order.status=='complete'"> &nbsp;</div>
+        <div class="col-xs-6" ng-if="order.step==1">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder"  ng-click="demandStep.orderCancel()">
+                取消订单
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==1">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="demandStep.order1ConfirmDemand()">
+                立即下单
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==1.5">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待对方确认
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==2">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="demandStep.percentAdvance()">
+                支付预付款
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==2.5">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待确认
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==3 && order.traffic_orders.length == 0">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待派车
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==3 && order.traffic_orders.length > 0">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待收货
+            </button>
+        </div>
+        <!-- <div class="col-xs-6" ng-if="(order.step==3.5 && order.traffic_orders.length > 0) || (order.step==3.5 && order.traffic_choice =='two')"> -->
+        <div class="col-xs-6" ng-if="order.step==3.5 ">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="demandStep.order3TrafficAllArrival()">
+                确认收货
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==4">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="demandStep.order4Payment()">
+                货到款支付
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==4.1">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待货款确认
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==4.5 && order.status!='complete'">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="demandStep.order4Validation()">
+                填写质检
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==4.5 && order.status!='complete'">
+            <button class="btn btn-lg btn-block bg-white-border text-yellow3 btn-noBorder" ng-click="demandStep.order4AllOk()">
+                质检通过
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==5 && order.status!='complete'">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待供应方确认
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==5.1 && order.status!='complete'">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="demandStep.order5ConfirmForgiven()">
+                审核谅解协议
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==5.5">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="demandStep.order5Payment()">
+                支付货款
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==5.6 && order.status!='complete' ">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待供应方收款
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.status=='complete' ">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                订单完成
+            </button>
+        </div>
+        <div class="col-xs-3" ng-if="[1,4.5].indexOf(order.step)==-1 "> &nbsp;</div>
+    </div>
+    <!-- 销售角色 -->
+    <div ng-if="isCompany!=order.company_demand_id" class="col-xs-12">
+        <div class="col-xs-3" ng-if="[1.5,3,5].indexOf(order.step)==-1 || order.status=='complete'"> &nbsp;</div>
+        <div class="col-xs-6" ng-if="order.step==1.5">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder"  ng-click="supplyStep.orderCancel()">
+                取消订单
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==1.5">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="supplyStep.order1ConfirmSupply()">
+                确认订单
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==2 && order.payment_method!='all_goods' ">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待采购方付款
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==2.5 && order.payment_method!='all_goods' " >
+            <button ng-if="order.payment_method != 'credit'" class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="supplyStep.order2Confirm()">
+                确认支付
+            </button>
+            <button ng-if="order.payment_method == 'credit'" class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                审核信用款
+            </button>
+        </div>
+        <!-- 如果是货到付款，第2步发布物流；如果是款到发货，分期，信用，何时发货 -->
+        <!-- <div ng-if="order.step==3 && order.traffic_orders.length==0 && order.traffic_choice !='two' ">
+            <div class="divider-red-white gap-5">
+                <h6 class="pull-left bg-white"><label class="label-role-red">第一步</label><br></h6>                            
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-xs-1 minHeight"></div>
+            <a class="col-xs-10 list-border-red" href="" ng-click="supplyStep.order3TrafficChoice()">
+                <i class="pull-right ion-ios-arrow-right text-black1"></i>
+                <img src="./img/158/icon1.jpg" class="pull-left">
+                <div class="pull-left">
+                <h4>发布物流需求信息</h4>
+                <h6 class="text-red gap-5">*发布物流信息后请务必填写物流单号</h6>
+                </div>
+                <div class="clearfix"></div>
+                
+            </a>
+            <div class="col-xs-1"></div>
+        </div> -->
+        <!-- && order.traffic_orders.length==0 && order.traffic_choice !='two'  -->
+        <div class="col-xs-6"  ng-if="order.step==3 ">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="supplyStep.order3TrafficChoice()">
+               发布物流需求信息
+            </button>
+        </div>
+        <!-- && order.traffic_orders.length > 0) || (order.step==3 && order.traffic_choice =='two') -->
+        <div class="col-xs-6" ng-if="order.step==3">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="supplyStep.order3TrafficAllDepart()">
+               确认发货完毕
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==3.5">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+               等待验货
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==4">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待采购方付款
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==4.1">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="supplyStep.order4PaymentReceived()">
+                确认支付
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==4.5 && order.status!='complete'">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待质检结果
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==5 && order.status!='complete'">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="supplyStep.order5ReqForgiven()">
+                申请谅解
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==5 && order.status!='complete'">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="supplyStep.order5NoForgiven()">
+                不需要谅解
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==5.1 && order.status!='complete'">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待采购方确认
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==5.5">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                等待采购方付款
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.step==5.6 && order.status!='complete' ">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="supplyStep.order5Confirm()">
+                确认支付
+            </button>
+        </div>
+        <div class="col-xs-6" ng-if="order.status=='complete' ">
+            <button class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" disabled="">
+                订单完成
+            </button>
+        </div>
+        <div class="col-xs-3" ng-if="[1.5,3,5].indexOf(order.step)==-1"> &nbsp;</div>
+    </div>
+</div>

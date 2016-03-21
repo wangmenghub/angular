@@ -1,0 +1,202 @@
+<div>
+
+    <navbar
+            ng-init="navbar.title='线路详情' ;navbar.navRightHref='tab.';navbar.navRight='添加车辆'">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+            <div class="container gap-45" ng-controller="roadLineDetailCtrl">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="pass='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        {{line}}
+                        <!--<pass-traffic-line-detail ></pass-traffic-line-detail>-->
+                        <div class="row-bootstrap bg-white gap-20 gap-row">
+                            <div class="list-group">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h4>
+                                        <label class="label-supply-purple text-white">专线</label>
+                                        {{MyRouteDetail.route.start_province}} {{MyRouteDetail.route.start_city}} -> {{MyRouteDetail.route.end_province}} {{MyRouteDetail.route.end_city}}
+                                    </h4>
+                                </li>
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-yellow2">
+                                        <span class="ion-social-yen"></span> 该线路的货运价格：
+                                        <span class="pull-right"><strong>￥50</strong> 元/吨</span>
+                                    </h5>
+                                </li>
+                            </div>
+                        </div>
+
+                        <div class="row-bootstrap bg-gray2">
+                            <a href="" class="list-item-border"></a>
+
+                            <div class="col-xs-12">
+                                <h6 class="text-black"><span class="fa fa-truck text-black">
+                                </span>&nbsp;&nbsp;大货车（载15吨、长11米、20米^3）
+                                    <span class="pull-right">5 辆</span>
+                                </h6>
+                            </div>
+                        </div>
+
+                        <div class="row-bootstrap bg-white">
+                            <div class="list-group">
+                                <li class="list-group-item list-condensed list-group-item-border-top">
+                                    <div class="pull-left">
+                                        <h4 class="text-purple2">
+                                            沪E·D2501
+                                        </h4>
+                                        <h6>默认司机：张旭 13900000000</h6>
+                                    </div>
+                                <span class="pull-right gap-5">
+                                    <img src="./img/pass/car.jpg">
+                                    <span class="ion-chevron-right text-gray2"></span> 
+                                </span>
+                                </li>
+                                <div class="clearfix"></div>
+                                <li class="list-group-item list-condensed list-group-item-border-top">
+                                    <div class="pull-left">
+                                        <h4 class="text-purple2">
+                                            沪E·D2501
+                                        </h4>
+                                        <h6>默认司机：张旭 13900000000</h6>
+                                    </div>
+                                <span class="pull-right gap-5">
+                                    <img src="./img/pass/car.jpg">
+                                    <span class="ion-chevron-right text-gray2"></span> 
+                                </span>
+                                </li>
+                                <div class="clearfix"></div>
+                                <li class="list-group-item list-condensed list-group-item-border-top">
+                                    <div class="pull-left">
+                                        <h4 class="text-purple2">
+                                            沪E·D2501
+                                        </h4>
+                                        <h6>默认司机：张旭 13900000000</h6>
+                                    </div>
+                                <span class="pull-right gap-20">
+                                    <span class="ion-chevron-right text-gray2"></span> 
+                                </span>
+                                </li>
+                                <div class="clearfix"></div>
+                                <li class="list-group-item list-condensed list-group-item-border-top">
+                                    <div class="pull-left">
+                                        <h4 class="text-purple2">
+                                            沪E·D2501
+                                        </h4>
+                                        <h6>默认司机：张旭 13900000000</h6>
+                                    </div>
+                                <span class="pull-right gap-20">
+                                    <span class="ion-chevron-right text-gray2"></span> 
+                                </span>
+                                </li>
+                                <div class="clearfix"></div>
+                                <li class="list-group-item list-condensed list-group-item-border-top">
+                                    <div class="pull-left">
+                                        <h4 class="text-purple2">
+                                            沪E·D2501
+                                        </h4>
+                                        <h6>默认司机：张旭 13900000000</h6>
+                                    </div>
+                                <span class="pull-right gap-20">
+                                    <span class="ion-chevron-right text-gray2"></span> 
+                                </span>
+                                </li>
+                            </div>
+                        </div>
+
+                        <div class="row-bootstrap bg-gray2">
+                            <a href="" class="list-item-border"></a>
+
+                            <div class="col-xs-12">
+                                <h6 class="text-black"><span class="fa fa-truck text-black"></span>&nbsp;&nbsp;中型罐车（载15吨、长11米、20米^3）<span
+                                        class="pull-right">2 辆</span></h6>
+                            </div>
+                        </div>
+
+                        <div class="row-bootstrap bg-white">
+                            <div class="list-group">
+                                <li class="list-group-item list-condensed list-group-item-border-top">
+                                    <div class="pull-left">
+                                        <h4 class="text-purple2">
+                                            沪E·D2501
+                                        </h4>
+                                        <h6>默认司机：张旭 13900000000</h6>
+                                    </div>
+                                <span class="pull-right gap-5">
+                                    <img src="./img/pass/car.jpg">
+                                    <span class="ion-chevron-right text-gray2"></span> 
+                                </span>
+                                </li>
+                                <div class="clearfix"></div>
+                                <li class="list-group-item list-condensed list-group-item-border-top">
+                                    <div class="pull-left">
+                                        <h4 class="text-purple2">
+                                            沪E·D2501
+                                        </h4>
+                                        <h6>默认司机：张旭 13900000000</h6>
+                                    </div>
+                                <span class="pull-right gap-20">
+                                    <span class="ion-chevron-right text-gray2"></span> 
+                                </span>
+                                </li>
+                            </div>
+                        </div>
+
+                        <div class="row-bootstrap bg-gray2">
+                            <a href="" class="list-item-border"></a>
+
+                            <div class="col-xs-12">
+                                <h6 class="text-black"><span class="fa fa-truck text-black"></span>&nbsp;&nbsp;中型罐车（载15吨、长11米、20米^3）<span
+                                        class="pull-right">2 辆</span></h6>
+                            </div>
+                        </div>
+
+                        <div class="row-bootstrap bg-white">
+                            <div class="list-group">
+                                <li class="list-group-item list-condensed list-group-item-border-top">
+                                    <div class="pull-left">
+                                        <h4 class="text-purple2">
+                                            沪E·D2501
+                                        </h4>
+                                        <h6>默认司机：张旭 13900000000</h6>
+                                    </div>
+                                <span class="pull-right gap-20">
+                                    <span class="ion-chevron-right text-gray2"></span> 
+                                </span>
+                                </li>
+                                <div class="clearfix"></div>
+                                <li class="list-group-item list-condensed list-group-item-border-top">
+                                    <div class="pull-left">
+                                        <h4 class="text-purple2">
+                                            沪E·D2501
+                                        </h4>
+                                        <h6>默认司机：张旭 13900000000</h6>
+                                    </div>
+                                <span class="pull-right gap-20">
+                                    <span class="ion-chevron-right text-gray2"></span> 
+                                </span>
+                                </li>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+</div>
+                <footer></footer>
+            
+
+
+        </div>
+    </ion-content>
+</div>
+
+

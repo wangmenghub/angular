@@ -1,0 +1,121 @@
+<div ng-controller="myCompanyCertification" ng-init="init()">
+  <navbar
+    ng-init="navbar.navLeft='返回'; role == 'TRAFFIC_ADMIN'? navbar.title='交易企业': navbar.titles=[{eng:'TRADE',chn:'交易企业'},{eng:'TRAFFIC',chn:'物流企业'}];navbar.change='typeChange()';navbar.item='TRADE';navbar.navRightHref='tab.AddCar';navbar.navLeftHref='tab.myRsc';navbar.navLeftIco='glyphicon glyphicon-chevron-left';">
+  </navbar>
+  <ion-content>
+
+    <div class="transitions-content">
+
+      <div class="container gap-45">
+        <div class="row-bootstrap nav-pc-frameline">
+          <div class="col-sm-3 col-md-3">
+            <navpc ng-init="ispass='active'"></navpc>
+          </div>
+
+          <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+
+          <div class="col-xs-12 col-sm-9 col-md-9">
+            <div class="row-bootstrap bg-white gap-15">
+              <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                  <a ng-click="getCompanyCertification()">
+                    <button type="button" class="btn btn-navbar2 {{a?'active':''}}">已认证
+                    </button>
+                  </a>
+                </div>
+                <div class="btn-group" role="group">
+                  <a ng-click="getCompaningCertification()">
+                    <button type="button" class="btn btn-navbar2 {{b?'active':''}}">认证中
+                    </button>
+                  </a>
+                </div>
+                <div class="btn-group" role="group">
+                  <a ng-click="getNotCompanyCertification()">
+                    <button type="button" class="btn btn-navbar2 {{c?'active':''}}">未认证
+                    </button>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row-bootstrap bg-white gap-15">
+              <div class="list-group">
+                <div ng-repeat="item in Certification">
+                  <li class="list-group-item list-group-item-no-border">
+                    <a ng-click="goDetail(item)">
+                      <h4 class="pull-left">
+                        <img class="face4 img-fixed img-circle" src="{{item.url_logo | imgDefault:'company'}}"/>
+                        &nbsp;{{item.nick_name?item.nick_name:item.full_name}}
+                        <label ng-if="item.verify_phase == 'SUCCESS'" class="label-v"><strong
+                          title="已认证企业">v</strong></label>
+                      </h4>
+
+                      <div ng-if="c">
+                        <button ng-if="role == 'TRAFFIC_ADMIN'" ng-click="apply(item._id,$event)"
+                                ng-disabled="item.apply" class="btn btn-partner btn-partner-yellow pull-right gap-15">
+                          {{item.apply ==true? '已发起' : '申请认证'}}
+                        </button>
+                        <button style="border: none" class="btn btn-partner pull-right gap-15"></button>
+                        <button ng-if="role == 'TRADE_ADMIN'" ng-click="join(item._id,$event)"
+                                class="btn btn-partner btn-partner-yellow pull-right gap-15">
+                          认证
+                        </button>
+                      </div>
+
+                      <div ng-if="a">
+                        <button ng-click="del(item._id,$event)"
+                                class="btn btn-partner btn-partner-yellow pull-right gap-15">
+                          解除认证
+                        </button>
+                      </div>
+
+                      <div ng-if="b">
+                        <button ng-click="agree(false,item._id,$event)"
+                                class="btn btn-partner btn-partner-yellow pull-right gap-15">
+                          拒绝
+                        </button>
+                        <button style="border: none" class="btn btn-partner pull-right gap-15"></button>
+                        <button ng-click="agree(true,item._id,$event)"
+                                class="btn btn-partner btn-partner-yellow pull-right gap-15">
+                          同意
+                        </button>
+                      </div>
+
+                    </a>
+                  </li>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+
+          </div>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+          <!--<div class="row-bootstrap gap-5">-->
+          <!--<div class="col-xs-1">&nbsp;</div>-->
+          <!--<div class="col-xs-10">-->
+          <!--<h4 class="input-search">-->
+          <!--<i class="icon ion-search placeholder-icon pull-left"></i>-->
+          <!--<input type="text" placeholder="搜索">-->
+          <!--</h4>-->
+          <!--</div>-->
+          <!--<div class="col-xs-1"></div>-->
+          <!--</div>-->
+
+        </div>
+
+      </div>
+      <footer></footer>
+
+
+    </div>
+    <ion-infinite-scroll ng-if="hasMore" icon="ion-loading-c" on-infinite="loadMore()" distance="15%">
+    </ion-infinite-scroll>
+  </ion-content>
+</div>
+
+

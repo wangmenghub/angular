@@ -1,0 +1,69 @@
+﻿<div ng-controller="roadLineDetailCtrl">
+
+    <navbar
+            ng-init="navbar.navLeft='返回';navbar.title='线路详情' ;navbar.navLeftHref='tab.Roadline';navbar.navRightHref='tab.LineSelectCar({line_id:line_id})';navbar.navRight='分配车辆'">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <pass-traffic-line-detail line="line"></pass-traffic-line-detail>
+                        <!--<div class="row-bootstrap bg-white gap-20 gap-row">-->
+                        <!--<div class="list-group">-->
+                        <!--<li class="list-group-item list-condensed list-group-item-no-border">-->
+                        <!--<h4>-->
+                        <!--<label class="label-supply-purple text-white">专线</label> 广东 佛山 -> 上海 宝山-->
+                        <!--</h4>-->
+                        <!--</li>-->
+                        <div class="row-bootstrap bg-white">
+                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                <h5 class="text-yellow2">
+                                    <span class="ion-social-yen"></span> 该线路的货运价格：
+                                    <span class="pull-right"><strong>￥{{prices.money}}</strong> 元/吨</span>
+                                </h5>
+                            </li>
+                        </div>
+
+
+                        <!-- carTypeList-->
+                        <div ng-repeat="carType in carTypeList">
+                            <car-type-item type="carType.type" del-car="del()" show-car-remove="true" cars="carType.values.source">
+
+
+                            </car-type-item>
+                        </div>
+                        <!--</div>-->
+                        <!--</div>-->
+
+
+                        <!--price-->
+                        <!--<div ng-repeat="price in prices">-->
+                        <!--<line-price-car-list car-type="price.type" price="price">-->
+
+                        <!--</line-price-car-list>-->
+                        <!--</div>-->
+                        <!--price-->
+
+
+                        <!--<div ng-repeat="line in lines">-->
+                        <!--<my-car-item show-check="true" select-car="selected(car)" show-check="true" line="line">-->
+
+                        <!--</my-car-item>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+            <footer></footer>
+
+
+        </div>
+    </ion-content>
+</div>
+
+

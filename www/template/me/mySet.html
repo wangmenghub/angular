@@ -1,0 +1,177 @@
+﻿<div name="mySet" ng-init="getLock()">
+    <navbar></navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="me='active'"></navpc>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="row-bootstrap bg-white gap-20">
+                            <div class="list-group">
+                                <li id="myimgid" class="list-group-item">
+                                    <h5 class="text-black" ng-click="MySet.popup('img')">
+                                        <span class="pull-left gap-20">头像</span>
+
+                                        <div class="pull-right">
+                                        <span ng-if="msg.img" class="pull-left text-red">
+                                            {{msg.img}}
+                                        </span>
+                                            <img class="img-circle face3" ng-src='{{MySet.acc_photo_url}}'>
+                                            <span class="glyphicon glyphicon-menu-right text-gray1"></span>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </h5>
+                                </li>
+                            </div>
+                            <div class="list">
+                                <a class="item item-icon-right item-border-top-no" ng-click="MySet.popup('name')">
+                                    名字
+                                <span class="item-note">
+                                    <span ng-if="msg.real_name" class="pull-left text-red">
+                                        {{msg.real_name}}
+                                    </span>
+                                    {{MySet.acc_real_name}}
+                                </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-right" ng-click="MySet.popup('phone')">
+                                    手机号
+                                <span class="item-note">
+                                    {{MySet.acc_phone}}
+                                </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-right" ng-click="MySet.popup('sex')">
+                                    性别
+                                <span class="item-note">
+                                    {{MySet.acc_gender}}
+                                </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="row-bootstrap bg-white gap-10" ng-if="MySet.role =='TRAFFIC_DRIVER_PUBLISH' || MySet.role =='TRAFFIC_DRIVER_PRIVATE'">
+                            <div class="list">
+                                <a class="item item-icon-right item-border-top-no" ng-click="MySet.popup('idCard')">
+                                    身份证号码
+                                <span class="item-note">
+                                    <span ng-if="msg.id_card_number" class="pull-left text-red">
+                                        {{msg.id_card_number}}
+                                    </span>
+                                    {{MySet.acc_id_card_number}}
+                                </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-right" ng-click="MySet.popup('idCardImg')">
+                                    身份证照片
+                                <span class="item-note">
+                                      <img src="{{MySet.acc_id_card_number_url | imgDefault}}" class="card2"/>
+                                </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-right" ng-click="MySet.popup('JiaShiZheng')">
+                                    驾驶证照片
+                                <span class="item-note">
+                                     <img src="{{MySet.acc_jia_shi_zheng_url | imgDefault}}" class="card2"/>
+                                </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  ng-if="MySet.role=='TRAFFIC_DRIVER'" -->
+                        <div class="row-bootstrap bg-white gap-10">
+                            <div class="list">
+                                <a class="item item-icon-right item-border-top-no" ng-click="MySet.popup('address')">
+                                    省市县
+                                <span class="item-note">
+                                    <span ng-if="msg.real_name" class="pull-left text-red">
+                                        {{msg.real_name}}
+                                    </span>
+                                    {{MySet.acc_address}}
+                                </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-right" ng-click="MySet.popup('addr')">
+                                    详细地址
+                                <span class="item-note">
+                                    {{MySet.acc_addr}}
+                                </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-right" ng-click="MySet.popup('email')">
+                                    邮箱
+                                <span class="item-note">
+                                    <span ng-if="msg.email" class="pull-left text-red">
+                                        {{msg.email}}
+                                    </span>
+                                    {{MySet.acc_email}}
+                                </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-right" ng-click="MySet.popup('sign')">
+                                    个性签名
+                                <span class="item-note">
+                                    {{MySet.sign}}
+                                </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-right" ng-click="MySet.popup('post')">
+                                    职务
+                                <span class="item-note">
+                                    {{MySet.post}}
+                                </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row-bootstrap bg-white gap-10">
+                            <div class="list-group">
+                                <li class="list-group-item list-group-item-no-border list-condensed" ng-click="MySet.popup('role')">
+                                    <h5 class="text-black">
+                                        角色
+                                        <a href="" class="pull-right">
+                                            <label class="label-role-purple text-white">{{MySet.acc_role}}</label>
+                                        </a>
+                                    </h5>
+                                </li>
+                            </div>
+                        </div>
+
+
+                        <div class="row-bootstrap">
+                            <div class="col-sm-3 minHeight"></div>
+                            <div class="col-sm-6 col-xs-12 gap-20">
+                            <button type="button" id="loginOut" class="btn btn-lg btn-block btn-purple btn-purple-next" ng-click="MySet.logOut()">
+                                退出登录
+                            </button>
+                            <div class="gap-20"></div>
+                            <!-- <div class="list-group">
+                                <li class="list-group-item list-group-item-no-border text-center list-condensed">
+                                    <a id="loginOut" class="" ng-click="MySet.logOut()">
+                                        退出登录
+                                    </a>
+                                </li>
+                            </div> -->
+                            </div>
+                            <div class="col-sm-3"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3"></div>
+
+
+            </div>
+            <footer></footer>
+        </div>
+
+    </ion-content>
+</div>
+<!-- 弹出窗 上传图片-->
+
+
+
+

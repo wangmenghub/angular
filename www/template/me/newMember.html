@@ -1,0 +1,41 @@
+<div name="newMember"  ng-controller="NewMemberCtrl" ng-init="init()">
+   
+    <navbar
+            ng-init="navbar.navLeftIco='glyphicon glyphicon-chevron-left'; navbar.navLeft='返回'; navbar.title='添加联系人' ;navbar.navRightHref='tab.';navbar.navRight='' ;navbar.navLeftHref='tab.';navbar.navLeftClick='goback()' ;">
+    </navbar>
+    <ion-content>
+        <div class="transitions-content bg-me">
+            <div class="container  gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+
+                    <div class="col-sm-3 col-md-3">
+                        
+                        <navpc ng-init="me='active'"></navpc>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="bg-newface gap-30">
+                            <img class="img-responsive img-newface center-block" src="./img/me/face_13.png">
+
+                        </div>
+                        <div class=" row-bootstrap bg-white new-member-info gap-20">
+                            <div class="col-xs-12">
+                                <form class="form-inline bg-white">
+                                    <div class="form-group">
+                                        <div ng-repeat="info in invitationList">
+                                            <invitation-item info="info" btn-click="btnClick(info)">
+
+                                            </invitation-item>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="gap-15"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3"></div>
+                </div>
+            </div>
+            <footer></footer>
+        </div>
+    </ion-content>
+</div>

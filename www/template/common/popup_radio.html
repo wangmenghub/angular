@@ -1,0 +1,138 @@
+<!-- 单选框弹窗 type类型：radio text number select confirm file-->
+<div ng-if="data.type == 'radio' ">
+    <!-- 增加加载图片 -->
+    <ion-spinner ng-if="!popup_lists" icon="ios" ></ion-spinner>
+    <ion-radio ng-if="popup_lists.length >0" ng-repeat="item in popup_lists"
+               ng-value='{eng:item.eng,chn:item.chn}'
+               ng-model="data.subtype"
+               name="server-side">
+        {{item.chn}}
+    </ion-radio>
+</div>
+
+<div ng-if="data.type == 'radioObject' ">
+    <!-- 增加加载图片 -->
+    <ion-spinner ng-if="! (popup_lists.length==0) && popup_lists.length <0" icon="ios" ></ion-spinner>
+    <ion-radio ng-if="popup_lists.length >0" ng-repeat="item in popup_lists"
+               ng-value='item'
+               ng-model="data.subtype"
+               name="server-side">
+        {{item.chn}}
+    </ion-radio>
+</div>
+<div ng-if="data.type == 'text' ">
+    <div>
+        <label ng-repeat="item in popup_lists">
+        <span class="input-label">{{item.chn}}</span>
+            <input type='text' ng-value='xxx' ng-model="data.subtype[item.eng]" placeholder="请输入{{item.chn}}"/>
+        </label>
+    </div>
+</div>
+<div ng-if="data.type == 'number' ">
+    <form name="form">
+    <div ng-repeat="(key,item) in popup_lists">
+        <label class="item item-input">
+          <span class="input-label">{{item.chn}}</span>
+          <input type='text' name="{{key}}" ng-model="data.subtype[item.eng]" placeholder="{{item.chn}}" required ng-pattern="/^[1-9][0-9]{0,9}(\.\d{1,2})?$/" >
+        </label>
+        <span class="text-red" ng-messages="form[key].$dirty && form[key].$error">
+            <span ng-message="required">不能为空</span>
+            <span ng-message="pattern">整数[1-10位],小数[2位],且不能为0</span>
+        </span>
+    </div>
+    </form>
+</div>
+<div ng-if="data.type=='select' ">
+    <label class="item item-input">
+        <span class="input-label">{{data.subhead}}</span>
+        <select style="font-size: 16px" ng-model="data.subtype"
+                ng-options="item.eng as item.chn for item in popup_lists">
+        </select>
+    </label>
+</div>
+<div ng-if="data.type=='advanced_payment' ">
+    <label class="item item-input">
+        <span class="input-label">首付款支付方式:</span>
+        <select ng-model="data.advanced_payment"
+                ng-options="item.value as item.text for item in [{value:['url','现金'],text:'现金'},{value:['credit','信用'],text:'信用'}]">
+        </select>
+    </label>
+    <label class="item item-input">
+        <span class="input-label">尾款支付方式:</span>
+        <select ng-model="data.final_payment"
+                ng-options="item.value as item.text for item in [{value:['url','现金'],text:'现金'},{value:['credit','信用'],text:'信用'}]">
+        </select>
+    </label>
+</div>
+<div ng-if="data.type=='confirm' ">
+    <sapn>{{data.text}}</sapn>
+</div>
+<div ng-if=" data.type=='file' ">
+    <label class="item item-input">
+        <input type="file" name="file" accept=".jpg,.png,.jpeg,.bmp" ng-model="data.file" onchange="angular.element(this).scope().getUploadPic(this.files)" ng-disabled="0" />
+
+    </label>
+    <span class="text-red">请选择小于2M的jpg格式的图片</span>
+    <img ng-if="previewImageSrc" class="card2" ng-src="{{previewImageSrc}}"/ alt="预览图片">
+</div>
+
+
+<div ng-if="data.type=='selectDriver' ">
+    <label class="item item-input">
+        <span class="input-label">{{data.subhead}}</span>
+        <select style="font-size: 16px" ng-model="data.item"
+                ng-options="(item.real_name+'-' +item.phone ) for item in popup_lists">
+            <!--(o.ProductColor+'-'+o.ProductName)-->
+            <option value="">选择要更换的司机</option>
+        </select>
+    </label>
+</div>
+<div ng-if="data.type=='changeCar' ">
+    <label class="item item-input">
+        <span class="input-label">{{data.subhead}}</span>
+        <select style="font-size: 16px" ng-model="data.car"
+                ng-options="item.number for item in carList">
+            <!--(o.ProductColor+'-'+o.ProductName)-->
+            <option value="">选择要更换的车辆</option>
+        </select>
+    </label>
+
+    <label class="item item-input">
+        <span class="input-label">司机信息</span>
+        <select style="font-size: 16px" ng-model="data.driver"
+                ng-options="(item.real_name+'-' +item.phone ) for item in driverList">
+            <!--(o.ProductColor+'-'+o.ProductName)-->
+            <option value="">选择要更换的司机</option>
+        </select>
+    </label>
+</div>
+
+<div  ng-if="data.type=='changeDate' ">
+    <section  class="col-xs-12 col-md-12">
+      <!--  style="float:none; margin:20px auto; background:#fff; padding:20px;" -->
+        <datepicker ng-model="data.dt" min-date="data.minDate" max-date="data.maxDate" show-weeks="true" class="wellwell-sm"></datepicker>
+    </section>
+</div>
+<!--订单第三步，采购方需填写数字和时间 -->
+<div ng-if="data.type == 'numDate' ">
+    <form name="form">
+    <div>
+        <label class="item item-input" >
+          <span class="input-label">吨数</span>
+          <input type='text' name="amount" ng-model="data.subtype.amount" placeholder="吨数" required ng-pattern="/^[1-9][0-9]{0,9}(\.\d{1,2})?$/" >
+        </label>
+        <span class="text-red" ng-messages="form.amount.$dirty && form.amount.$error">
+            <span ng-message="required">不能为空</span>
+            <span ng-message="pattern">整数[1-10位],小数[2位],且不能为0</span>
+        </span>
+        <label class="item item-input" >
+          <span class="input-label">最终到货时间</span>
+          <input type='text' name="date" ng-model="data.subtype.date" placeholder="2016/01/01" required ng-pattern="/^(201[6-9])\/(0[1-9]|1[1-2])\/(0[1-9]|[1-2][0-9]|3[0-1])$/" >
+        </label>
+        <span class="text-red" ng-messages="form.date.$dirty && form.date.$error">
+            <span ng-message="required">不能为空</span>
+            <span ng-message="pattern">格式为"年/月/日,2016/01/01"</span>
+        </span>
+    </div>
+    </form>
+</div>

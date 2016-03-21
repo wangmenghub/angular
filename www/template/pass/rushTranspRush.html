@@ -1,0 +1,380 @@
+<div ng-init="loadData()" ng-controller="rushTranspRushCtrl">
+    <navbar
+            ng-init="navbar.navLeftHref='tab.rushTranspDetail({demand_id:demand_id})'; navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='立即抢单' ;navbar.navRightHref='tab.';navbar.navRight=''">
+    </navbar>
+    <ion-content>
+        <div class="transitions-content">
+
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                        <div class="row-bootstrap gap-10 row3">
+                            <div class="gap-15 gap-row bg-white">
+                                <div class="gap-row bg-white">
+                                    <div class="col-xs-12">
+                                        <div class="media">
+                                            <div class="media-body">
+                                                <!--<h3 class="media-heading">-->
+                                                <!--<label class="label-supply-purple">货源</label>-->
+                                                <!--&nbsp;{{title.begin}}-> {{title.end}}，{{demand.category_chn}}-->
+                                                <!--<span class="text-purple2">{{demand.amount}}吨</span>-->
+                                                <!--</h3>-->
+                                                <pass-title amount="demand.amount" order="demand"></pass-title>
+
+                                                <h5 class="text-black">
+                                                    {{company.companyName}}
+                                                    <a title="企业已认证">
+                                                        <label ng-init="company.isVerifySuccess=true" ng-if="company.isVerifySuccess"
+                                                               class="label-v">
+                                                            <strong>v</strong>
+                                                        </label>
+                                                    </a>
+                                                </h5>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="list bg-white">
+                                        <rsc-address order="demand" address-icon="ion-ios-location-outline text-pink" address-name="交货地点"
+                                                     address-id="demand.location_arrival"></rsc-address>
+                                        <rsc-address order="demand" address-icon="ion-ios-location-outline text-green1" address-name="提货地址"
+                                                     address-id="demand.location_depart"></rsc-address>
+                                        <!--<div class="col-sm-6 col-md-6">-->
+                                        <!--<a class="item item-icon-left item-icon-right item-no-border item-condensed">-->
+                                        <!--<i class="icon ion-ios-location-outline text-pink"></i>-->
+                                        <!--<span class="text-purple2">-->
+                                        <!--交货地点：{{address.location_arrival}}-->
+                                        <!--</span>-->
+                                        <!--</a>-->
+                                        <!--</div>-->
+                                        <!--<div class="col-sm-6 col-md-6">-->
+                                        <!--<a class="item item-icon-left item-icon-right item-no-border item-condensed">-->
+                                        <!--<i class="icon ion-ios-location-outline text-green1"></i>-->
+                                        <!--<span class="text-purple2">-->
+                                        <!--提货地点：{{address.location_depart}}-->
+                                        <!--</span>-->
+                                        <!--</a>-->
+                                        <!--</div>-->
+                                        <div class="col-sm-6 col-md-6">
+                                            <li class="item item-icon-left item-no-border item-condensed">
+                                                <i class="icon ion-android-alarm-clock"></i>
+                                                提货时间：{{demand.time_depart | rsctime}}
+                                            </li>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <li class="item item-icon-left item-no-border item-condensed">
+                                                <i class="icon ion-android-alarm-clock"></i>
+                                                到货时间：{{demand.time_arrival | rsctime}}
+                                            </li>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6">
+                                            <pass-price ng-if="demand.price||demand.price>=0" price-text="最高报价"
+                                                        price="demand.price"></pass-price>
+                                        </div>
+                                        <!--<div class="col-sm-6 col-md-6">-->
+                                        <!--<li class="list-group-item list-condensed list-group-item-no-border">-->
+                                        <!--<h5 class="text-red"><span class="glyphicon glyphicon-jpy" aria-hidden="true"></span>-->
+                                        <!--&nbsp;&nbsp;剩余{{demand.amount_remain}}吨-->
+                                        <!--</h5>-->
+                                        <!--</li>-->
+                                        <!--</div>-->
+                                        <div class="col-sm-6 col-md-6">
+                                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                                <h5 class="text-red"><span class="ion-ios-pricetags-outline" aria-hidden="true"></span>
+                                                    &nbsp;&nbsp;{{demand |payTypeDes}}{{demand.can_join ?',可凑单':''}}
+                                                </h5>
+                                            </li>
+                                        </div>
+
+                                        <!--<div class="col-sm-6 col-md-6" ng-if="demand.can_join">-->
+                                        <!--<li class="item item-icon-left item-no-border item-condensed">-->
+                                        <!--<i class="icon ion-social-yen text-red1"></i>-->
+                                        <!--<span class="text-red1">{{demand.can_join ?'可凑单':'不可凑单'}}</span>-->
+                                        <!--</li>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <!--<div class="divider-purple-white gap-5">-->
+                                <!--<h6 class="pull-left bg-white"> &nbsp;我的所有车辆<br></h6>-->
+                                <!--</div>-->
+                                <!--<div class="clearfix"></div>-->
+                                <!--<div ng-repeat="car in carTotal">-->
+                                <!--<div class="list-group col-sm-6 col-md-6">-->
+                                <!--<pass-cars-total car="car" text-color="text-black1"></pass-cars-total>-->
+                                <!--</div>-->
+                                <!--</div>-->
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="text-center">
+                                <h5>填写抢单信息</h5>
+                            </div>
+                            <form name="myform" novalidate>
+                                <div class="list bg-white">
+
+
+                                    <div class="col-sm-6 col-md-6">
+                                        <a class="item item-icon-right" ng-click="selPaymentChoice()">
+                                            <span class="text-yellow2">结算方式:</span>
+                                            <span class="item-note">
+                                                <span ng-if="!offer.payment_choice"> 请选择</span>
+                                                <span ng-if="offer.payment_choice">{{offer.payment_choice|settlementType}}
+                                                </span>
+                                            </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <a class="item item-icon-right" ng-click="selPaymentMethod()">
+                                            <span class="text-yellow2">付款方式：</span>
+                                            <span class="item-note">
+                                                <span ng-if="!offer.payment_method"> 请选择</span>
+                                                <span ng-if="offer.payment_method">{{offer.payment_method|payType}}</span>
+                                            </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                        </a>
+                                    </div>
+                                    <!-- 分期付款 -->
+                                    <div class="col-sm-6 col-md-6" ng-if="offer.payment_method=='partition'">
+                                        <a class="item item-icon-right">
+                                            <span class="text-yellow2">预付款比例(%)：</span>
+                                            <span class="item-note input-ionic">
+                                               <span class="pull-left text-red"
+                                                     ng-messages="myform.percentage_advance.$dirty && myform.percentage_advance.$error">
+                                                    <span ng-message="required">不能为空</span>
+                                                    <span ng-message="max">必须在0-100之间</span>
+                                                    <span ng-message="min">必须在0-100之间</span>
+                                                </span>
+                                                <input type="number" class="text-right" ng-model="offer.percentage_advance" min="0"
+                                                       max="100"
+                                                       placeholder="预付款比例" name="percentage_advance" style="margin-top:-2px;" required
+                                                >
+                                                <!-- ng-pattern="/(^13[0-9]{9}$)|(^15[0-9]{9}$)|(^17[0-9]{9}$)|(^18[012356789][0-9]{8}$)/"
+                                                ng-pattern="/(^[0-9]{1,2}$)|(^[1][0]{2}$)/"
+                                                 -->
+                                            </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                        </a>
+
+                                    </div>
+                                    <!--<div class="col-sm-6 col-md-6" ng-if="offer.payment_method=='partition'">-->
+                                    <!--<li class="item item-toggle">-->
+                                    <!--<span class="text-yellow2">有无质保款</span>-->
+                                    <!--<label class="toggle toggle-balanced">-->
+                                    <!--<input type="checkbox" ng-model="offer.exist_payment_final"-->
+                                    <!--ng-click="checkChange(offer.exist_payment_final)"-->
+                                    <!--ng-checked="offer.percentage_remain">-->
+                                    <!--<div class="track">-->
+                                    <!--<div class="handle"></div>-->
+                                    <!--</div>-->
+                                    <!--</label>-->
+                                    <!--</li>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-sm-6 col-md-6" ng-if="offer.exist_payment_final||offer.percentage_remain">-->
+                                    <!--<a class="item item-icon-right">-->
+                                    <!--<span class="text-yellow2">付质保款比例(%)：</span>-->
+                                    <!--<span class="item-note input-ionic">-->
+                                    <!--<span class="pull-left text-red"-->
+                                    <!--ng-messages="myform.percentage_remain.$dirty && myform.percentage_remain.$error">-->
+                                    <!--<span ng-message="required">不能为空</span>-->
+                                    <!--<span ng-message="pattern">需为0-100之间</span>-->
+                                    <!--</span>-->
+                                    <!--<input type="number" class="text-right" ng-model="offer.percentage_remain" min="0"-->
+                                    <!--max="100"-->
+                                    <!--placeholder="预付款" name="percentage_remain" style="margin-top:-2px;" required>-->
+                                    <!--</span>-->
+                                    <!--<i class="icon ion-ios-arrow-right text-gray1"></i>-->
+                                    <!--</a>-->
+
+                                    <!--</div>-->
+                                    <!-- 信用付款 -->
+                                    <div class="col-sm-6 col-md-6" ng-if="offer.payment_method=='credit' ">
+                                        <a class="item item-icon-right" ng-click="selRefDayExtension()">
+                                            <span class="text-yellow2">起始日期:</span>
+                                    <span class="item-note">
+                                        <span ng-if="!offer.ref_day_extension"> 请选择</span>
+                                        <span ng-if="offer.ref_day_extension">{{offer.ref_day_extension =='goods'?"货到日":"订单日"}}</span>
+                                    </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6"
+                                         ng-if="offer.payment_method=='all_goods'">
+                                        <a class="item item-icon-right">
+                                            <span class="text-yellow2">付款备注:</span>
+                                            <span class="item-note input-ionic">
+                                                   以采购确认全部到货并质检完毕后5日内付款。
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6"
+                                         ng-if="offer.payment_method=='credit' || offer.payment_method=='all_goods'">
+                                        <a class="item item-icon-right">
+                                            <span class="text-yellow2">延期支付天数:</span>
+                                            <span class="item-note input-ionic">
+                                                   <span class="pull-left text-red"
+                                                         ng-messages="myform.count_day_extension.$dirty && myform.count_day_extension.$error">
+                                                        <span ng-message="required">不能为空</span>
+                                                        <span ng-message="pattern">[1-180]之间</span>
+                                                    </span>
+                                                    <input type="number" name="count_day_extension" placeholder="有效期" class="text-right"
+                                                           ng-model="offer.count_day_extension" min='1' min='180' required
+                                                           ng-pattern="/^[1-7]{1}$/">
+                                            </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6" ng-if="offer.payment_method=='partition'">
+                                        <a class="item item-icon-right">
+                                            <span class="text-yellow2">尾款延期天数：</span>
+                                            <span class="item-note input-ionic">
+                                                <span class="text-red pull-left"
+                                                      ng-messages="myform.count_day_extension.$dirty && myform.count_day_extension.$error">
+                                                    <span ng-message="required">不能为空</span>
+                                                    <span ng-message="pattern">整数</span>
+                                                    <span ng-message="max">范围1-180</span>
+                                                    <span ng-message="min">范围1-180</span>
+                                                </span>
+                                                <input type="number" name="count_day_extension"
+                                                       min="1"
+                                                       max="180"
+                                                       ng-model="offer.count_day_extension" class="text-right"
+                                                       placeholder="尾款延期天数" ng-pattern="/^[1-9][0-9]*(\.\d{1,2})?$/">
+                                            </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <a class="item item-border-bottom-no">
+                                            <span class="text-yellow2">抢单报价(元/吨)：</span>
+                                            <span class="item-note input-ionic">
+                                                <span class="text-red pull-left" ng-messages="myform.price.$dirty && myform.price.$error">
+                                                    <span ng-message="required">不能为空</span>
+                                                    <span ng-message="pattern">整数或小数</span>
+                                                    <span ng-message="pattern">整数或小数</span>
+                                                    <span ng-message="maxlength">超过最大范围</span>
+                                                </span>
+                                                <input type="number"
+                                                       name="price"
+                                                       min="1"
+                                                       ng-maxlength="7"
+                                                       maxlength="7"
+                                                       ng-model="offer.price" class="text-right"
+                                                       placeholder="请输入单价" ng-pattern="/^[1-9][0-9]*(\.\d{1,2})?$/">
+                                            </span>
+                                            <!--<i class="icon ion-ios-arrow-right text-gray1"></i>-->
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <a class="item item-icon-right" ng-click="changeDate('time_depart')">
+                                            <span class="text-purple2">提货时间：</span>
+                                            <span class="item-note input-ionic">
+                                                <!--  <input type="date" name="time_traffic" placeholder="输入时间" class="text-right" ng-model="demand.time_traffic" required> -->
+                                               <span ng-if="!offer.time_depart"> 请选择</span>
+                                               <span ng-if="offer.time_depart">{{offer.time_depart |rsctime}}</span>
+
+                                            </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+                                        <a class="item item-icon-right" ng-click="changeDate('time_arrival')">
+                                            <span class="text-purple2">到货时间：</span>
+                                            <span class="item-note input-ionic">
+                                                <!--  <input type="date" name="time_traffic" placeholder="输入时间" class="text-right" ng-model="demand.time_traffic" required> -->
+                                               <span ng-if="!offer.time_arrival"> 请选择</span>
+                                               <span ng-if="offer.time_arrival">{{offer.time_arrival |rsctime}}</span>
+
+                                            </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                        </a>
+                                    </div>
+                                    <div ng-if="demand.can_join">
+                                        <div class="col-sm-6 col-md-6">
+
+                                            <a class="item">
+                                                <span class="text-purple2">最低运输量(吨)：</span>
+                                        <span class="item-note input-ionic">
+                                            <input type="number"
+                                                   ng-model="offer.min"
+                                                   min="1"
+                                                   max="offer.amount"
+                                                   ng-model="offer.min" class="text-right"
+                                                   placeholder="输入吨数">
+                                        </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-6">
+
+
+                                        <a class="item">
+                                            <span class="text-purple2">可运输量(吨)：</span>
+                                        <span class="item-note input-ionic">
+                                            <input type="number"
+                                                   ng-disabled="!demand.can_join"
+                                                   ng-model="offer.amount"
+                                                   min="1"
+                                                   max="offer.amount"
+                                                   ng-model="offer.amount" class="text-right"
+                                                   placeholder="输入吨数">
+                                        </span>
+                                        </a>
+                                    </div>
+
+                                    <a href="">
+                                        <pass-balance-detail data="data" class="gap-20"></pass-balance-detail>
+                                    </a>
+                                    <!--<a href="">-->
+                                    <!--<div class="col-xs-12">-->
+                                    <!--<blockquote class="rules-gray text-gray2">-->
+                                    <!--<h6 class="pull-left">-->
+                                    <!--违约责任，纠纷解决方式-->
+                                    <!--<br/>-->
+                                    <!--谅解协议-->
+                                    <!--</h6>-->
+                                    <!--<span class="glyphicon glyphicon-menu-right pull-right gap-20 text-gray2"></span>-->
+
+                                    <!--<div class="clearfix"></div>-->
+                                    <!--</blockquote>-->
+                                    <!--</div>-->
+                                    <!--</a>-->
+
+                                    <div class="col-sm-3 minHeight"></div>
+                                    <div class="col-sm-6 col-xs-12">
+                                        <!--ng-disabled="!offer.amount||!offer.style_payment||!offer.price"-->
+
+                                        <button type="button" ng-click="commit()"
+                                                class="btn-block btn-yellow cbutton cbutton--effect-jagoda">
+
+                                            {{type ?'修改抢单':'确认抢单'}}
+                                        </button>
+                                        <div class="gap-20"></div>
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <footer></footer>
+
+        </div>
+</div>
+</ion-content>
+</div>
+

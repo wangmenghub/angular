@@ -1,0 +1,173 @@
+<div name="companyProHome">
+
+    <navbar ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navRightClick='share(1)';navbar.navRight='分享计划'"></navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+
+                    <div class="col-sm-3 col-md-3">
+
+                        <navpc ng-init="me='active'"></navpc>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="row-bootstrap gap-20 title-pro clearfix">
+                            <div class="gap-40">
+                                <h6 class="col-xs-4 text-gray2 gap-40 text-left"><!-- {{vm.company_info.type |subType}} --></h6>
+                                <img class="col-xs-4 img-circle face1 text-center" ng-src="{{vm.company_info.url_logo}}">
+                                <h6 class="col-xs-4 text-gray2 gap-40 text-right"><!-- {{vm.company_info.sub_type |subType}} --></h6>
+                            </div>
+                            <div class="clearfix"></div>
+                            <h4 class="text-center gap-10">
+                                {{vm.company_info.full_name}} <a title="企业已认证"><label ng-if="vm.company_info.verify_phase == 'SUCCESS'"
+                                                                     class="label-v"><strong>v</strong></label></a>
+                            </h4>
+                            <h5 class="text-center gap-10 text-gray1">主要经营:{{vm.company_info.manage}}</h5>
+                            <h5 class="text-center gap-10 text-gray1">地址:{{vm.company_info.province}}{{vm.company_info.city}}{{vm.company_info.district}}{{vm.company_info.addr}}</h5>
+                        </div>
+
+                        <div class="row-bootstrap bg-white gap-5">
+                            <h5 class="col-xs-12 text-center text-gray1"><a ng-if="userInfo[1]=='ADMIN'" href="" class="pull-right" ng-click="share('culture')"><strong class="glyphicon glyphicon-option-horizontal text-gray1"></strong></a>企业介绍</h5>
+                            <div class="col-xs-12 text-center">
+                                <ion-slide-box auto-play="true" does-continue="true" slide-interval=3000 show-pager="true">
+                                  <ion-slide ng-repeat="i in [0,1,2,3,4,5,6,7]">
+                                    <div class="box">
+                                        <img ng-src="{{vm.company_info.url_culture[i]}}" class="img-responsive" />
+                                    </div>
+                                  </ion-slide>
+                                </ion-slide-box>
+                                <!-- <img src="./img/me/company-img.png" class="img-responsive"> -->
+                            </div>
+                            <div class="col-xs-12 gap-20">
+                                <p>{{vm.company_info.des}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row-bootstrap bg-white gap-15">
+                            <h5 class="col-xs-12 text-center text-gray1"><a ng-if="userInfo[1]=='ADMIN'" href="" class="pull-right" ng-click="share('honor')"><strong class="glyphicon glyphicon-option-horizontal text-gray1"></strong></a>企业荣誉</h5>
+                            <div class="col-xs-12 text-center">
+                               <ion-slide-box auto-play="true" does-continue="true" slide-interval=5000 show-pager="true">
+                                  <ion-slide ng-repeat="i in [0,1,2,3,4,5,6,7]">
+                                    <div class="box">
+                                        <img ng-src="{{vm.company_info.url_honor[i]}}" class="img-responsive" />
+                                    </div>
+                                  </ion-slide>
+                                </ion-slide-box>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="gap-20"></div>
+                        </div>
+
+                        <div class="col-sm-3 minHeight"></div>
+                        <div class="col-sm-6 col-xs-12 gap-20">
+                            <!-- <a href="#/tab/myCompanySet"> -->
+                            <a href="#/tab/tradeCarListPlan-1">
+                            <button type="button" class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder">
+                                <!-- 企业设置 -->
+                                查看物流计划
+                            </button>
+                            </a>
+                            <div class="gap-30"></div>
+                        </div>
+                        <div class="col-sm-3"></div>
+                        <!-- 弹出层 -->
+                            <!-- <div class="row-bootstrap bg-gray1 gap-row">
+                                <div class="col-xs-12">
+                                    <div class="btn-group btn-group-justified text-center gap-10" role="group" aria-label="...">
+                                        <div class="btn-group" role="group">
+                                            <a href="#tab/link-man">
+                                                <img src="./img/me/icon-add.png"/>
+                                                <h6 class="text-black">添加</h6>
+                                            </a>
+                                        </div>
+                                        <div class="btn-group" role="group">
+                                            <a>
+                                                <img src="./img/me/icon-delate.png"/>
+                                                <h6 class="text-black">删除</h6>
+                                            </a>
+                                        </div>
+                                        <div class="btn-group" role="group">
+
+                                        </div>
+                                        <div class="btn-group" role="group">
+
+                                        </div>
+                                        <div class="btn-group" role="group">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 minHeight"></div>
+                                    <div class="col-sm-6 col-xs-12 gap-20 text-gray1">
+                                        <button ng-click="closeModal()" class="btn btn-lg btn-block">取消
+                                        </button>
+                                    </div>
+                                    <div class="col-sm-3"></div>
+                                </div>
+                            </div> -->
+
+                    </div>
+
+                    <div class="col-sm-3"></div>
+                </div>
+            </div>
+            <footer></footer>
+
+        </div>
+
+    </ion-content>
+</div>
+
+<script id="templates/honorModal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+      <h1 class="title">修改荣誉图片</h1>
+      <button class="button button-clear button-primary" ng-click="closeModal('honor')">关闭</button>
+    </ion-header-bar>
+    <ion-content>
+        <div class="row-bootstrap">
+            <div class="col-xs-12">
+                <div class="btn-group btn-group-justified text-center gap-10 " role="group" aria-label="...">
+                    <div class="col-xs-6 col-sm-3" role="group" ng-repeat="i in [1,2,3,4,5,6,7,8]">
+                        <a ng-if="!vm.company_info.url_honor[i-1]" href="" ng-click="addImg('honor',i)">
+                            <img src="./img/me/icon-add.png"/>
+                            <h6 class="text-black">添加</h6>
+                        </a>
+                        <a ng-if="vm.company_info.url_honor[i-1]" ng-click="delImg('honor',i)">
+                            <img class="face4 img-circle" ng-src="{{vm.company_info.url_honor[i-1]}}" />
+                            <h6 class="text-black">删除</h6>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+  </ion-modal-view>
+</script>
+<script id="templates/cultureModal.html" type="text/ng-template">
+  <ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-positive">
+      <h1 class="title">修改企业文化图</h1>
+      <button class="button button-clear button-primary" ng-click="closeModal('culture')">关闭</button>
+    </ion-header-bar>
+    <ion-content>
+        <div class="row-bootstrap">
+            <div class="col-xs-12">
+                <div class="btn-group btn-group-justified text-center gap-10 " role="group" aria-label="...">
+                    <div class="col-xs-6 col-sm-3" role="group" ng-repeat="i in [1,2,3,4,5,6,7,8]">
+                        <a ng-if="!vm.company_info.url_culture[i-1]" href="" ng-click="addImg('culture',i)">
+                            <img src="./img/me/icon-add.png"/>
+                            <h6 class="text-black">添加</h6>
+                        </a>
+                        <a ng-if="vm.company_info.url_culture[i-1]" ng-click="delImg('culture',i)">
+                            <img class="face4 img-circle" ng-src="{{vm.company_info.url_culture[i-1]}}" />
+                            <h6 class="text-black">删除</h6>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+  </ion-modal-view>
+</script>

@@ -1,0 +1,18 @@
+<div name="navApp">
+    <div class="row-bootstrap navbar-fixed-bottom pc-hide">
+        <div class="col-xs-12">
+            <div class="btn-group btn-group-navApp btn-group-justified" role="group" aria-label="...">
+
+                <div class="btn-group btn-group-navApp" role="group" ng-repeat="i in roles" >
+                    <a type="button" id="trade" class="btn btn-navApp"  ng-class={{i.active}}  ng-href='#/tab/{{i.href}}'>
+                        <small><i class="{{i.icon}}" style="font-size: 20px; margin-top: 2px;"></i></small>
+                        <h6>{{i.title}}</h6>
+                    </a>
+                </div>
+
+            </div>
+            <!-- <pre>{{roles |json}} -->
+        </div>
+    </div>
+</div>
+

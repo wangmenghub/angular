@@ -1,0 +1,238 @@
+<div ng-controller="rushTranspCtrl" ng-init="init()">
+    <navbar
+            ng-init="navbar.navLeftIco='ion-android-pin'; navbar.title='货源信息' ;">
+    </navbar>
+    <ion-content>
+        <div class="container gap-45">
+            <div class="row-bootstrap">
+                <div class="nav-2 bg-white mobi-hide nav-pc-line2">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <a href="#" style="color: #979797;">移动端 APP <span class="glyphicon glyphicon-qrcode"></span></a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 text-center text-brown1">
+                        <span>值得信赖的大宗商品交易平台</span>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3 text-right">
+                        <!-- <a ui-sref="tab.rushPublish"><button class="btn navRight-btn navRight-btn-gray">发布线路</button></a>  -->
+                        <a ui-sref="tab.TranspSearchAdv">
+                            <button class="btn navRight-btn navRight-btn-gray">搜索货源</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="transitions-content">
+            <div class="container">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+                    <ion-refresher ng-if="ionic.Platform.isWebView()" pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                        <div class="row-bootstrap gap-10 mobi-hide">
+                            <div ng-hide="queryDetail.hide">
+                                <!--<ul class="nav nav-tabs-pc bg-white">-->
+                                <!--<li>-->
+                                <!--<a href="">城市搜索：</a>-->
+                                <!--</li>-->
+
+                                <!--<li ng-repeat="item in conditions.areas">-->
+                                <!--<a ng-click="selectedArea(item)" class="{{item.default?'active':''}}">{{item.text}}</a>-->
+                                <!--</li>-->
+
+
+                                <!--<li>-->
+                                <!--<a href="">更多...</a>-->
+                                <!--</li>-->
+                                <!--</ul>-->
+                                <ul class="nav nav-tabs-pc bg-white">
+                                    <li>
+                                        <a href="">货物重量：</a>
+                                    </li>
+                                    <li ng-repeat="item in conditions.amount">
+                                        <a ng-click="selectedAmount(item)" class="{{item.default?'active':''}} hover">{{item.text}}</a>
+                                    </li>
+                                </ul>
+                                <!--<div ng-include="'template/common/pro_city.html'"></div>-->
+                                <ul class="nav nav-tabs-pc bg-white">
+                                    <li>
+                                        <a href="">线路搜索：</a>
+                                    </li>
+                                    <li>
+                                        <a ng-click="areaSelect()" class="{{selectd.area?'active':''}}">不限</a>
+                                    </li>
+                                    <li>
+                                        <a class="{{!selectd.area?'active':''}}">出发地</a>
+                                    </li>
+                                    <li>
+                                        <select
+                                                ng-model="data.startProvince"
+                                                ng-options="pp.name for pp in allProvinces"
+                                                ng-change="switchProvince(data.startProvince.ProID,'start')"
+                                                ng-mousedown="mousedown($event)">
+                                            <option value="">请选择省份</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select ng-options="cc.name for cc in cities"
+                                                ng-model="data.startCity"
+                                                ng-change="switchCity(data.startCity.CityID,'start')">
+                                            <option value="">请选择城市</option>
+
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <a href=""><i class="ion-arrow-right-c"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="{{!selectd.area?'active':''}}">到达地</a>
+                                    </li>
+                                    <li>
+                                        <select
+                                                ng-model="data.endProvince"
+                                                ng-options="pp.name for pp in allProvinces"
+                                                ng-change="switchProvince(data.endProvince.ProID,'end')"
+                                                ng-mousedown="mousedown($event)">
+                                            <option value="">请选择省份</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <select ng-options="cc.name for cc in endCities"
+                                                ng-model="data.endCity"
+                                                ng-change="switchCity(data.endCity.CityID,'end')">
+                                            <option value="">请选择城市</option>
+
+                                        </select>
+                                    </li>
+                                </ul>
+                                <ul class="nav nav-tabs-pc bg-white">
+                                    <li>
+                                        <a href="">支付方式：</a>
+                                    </li>
+                                    <li ng-repeat="item in conditions.payType">
+                                        <a ng-click="selectedPayType(item)" class="{{item.default?'active':''}} hover">{{item.text}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="text-center">
+                                <a ng-click="queryDetail.hide=!queryDetail.hide" class="search-more hover">{{queryDetail.hide?'更多筛选':'收起'}} <i
+                                        class="{{queryDetail.hide?'ion-ios-arrow-down':'ion-ios-arrow-up'}}"></i></a>
+                            </div>
+                        </div>
+
+
+                        <div class="row-bootstrap gap-10 mobi-hide bg-gray2">
+                            <ul class="nav nav-tabs-pc1 col-xs-4">
+                                <li>
+                                    <a ng-click="orderByTime()"
+                                       class="{{!selectd.sort?'':(query.direction?'ion-arrow-up-b':'ion-arrow-down-b')}} {{selectd.sort?'active':''}} hover">时间</a>
+                                </li>
+                                <li>
+                                    <a ng-click="orderByAmount()"
+                                       class="{{selectd.sort?'':(query.direction?'ion-arrow-up-b':'ion-arrow-down-b')}} {{!selectd.sort?'active':''}} hover">需求量 </a>
+                                </li>
+                                <!--<li>-->
+                                <!--<a href="">信用 </a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                <!--<a href="">价格 <i class="ion-arrow-down-b text-gray1"></i></a>-->
+                                <!--</li>-->
+
+                            </ul>
+                            <!---->
+                            <!--<div class="col-xs-2 nav-tabs-pc1 text-rig<div class="col-xs-6 nav-tabs-pc1 text-right">-->
+                            <!--<h5>货源需求 <strong>88</strong> 万吨-->
+                            <!--<small>&nbsp;已成交 <span class="text-red">5294万吨</span></small>-->
+                            <!--</h5>-->
+                            <!--</div>ht">-->
+                            <!--<a href=""><i class="ion-arrow-left-b text-gray1"></i></a>-->
+                            <!--<a href="" class="text-red1">1</a>/<a href="">100</a>-->
+                            <!--<a href=""><i class="ion-arrow-right-b"></i></a>-->
+                            <!--</div>-->
+                        </div>
+
+                        <div class="row-bootstrap gap-10 pc-hide">
+                            <div class="text-center">
+                                <h4><a href="" class="text-black" ui-sref='tab.TranspSearchAdv'>
+                                    搜索 <span class="ion-android-search"></span> 现有货源 {{amount.count|fmoney}}吨</a></h4>
+                            </div>
+                        </div>
+
+                        <div class="row-bootstrap bg-white gap-10 pc-hide">
+                            <div class="btn-group btn-group-justified col-xs-6" role="group" aria-label="...">
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <button type="button" ng-click="orderByTime()"
+                                                class="btn btn-navbar3 btn-navbar3-active {{selectd.sort?'active':''}}">最新
+                                            <span ng-if="selectd.sort"
+                                                  class="ion {{query.direction?'ion-android-arrow-dropup':'ion-android-arrow-dropdown'}}"></span>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a>
+                                        <!--<button type="button" ng-click="orderByAmount()" class="btn btn-navbar3">需求量 <span-->
+                                        <!--class="ion ion-android-arrow-dropup"></span>-->
+                                        <!--</button>-->
+                                        <button type="button" ng-click="orderByAmount()"
+                                                class="btn btn-navbar3 {{!selectd.sort?'active':''}}">需求量
+                                            <span ng-if="!selectd.sort"
+                                                  class="ion {{query.direction?'ion-android-arrow-dropup':'ion-android-arrow-dropdown'}} "></span>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group" ng-if="false">
+                                    <a href="">
+                                        <button type="button" class="btn btn-navbar3">距离</button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <button type="button" class="btn btn-navbar3"></button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <button type="button" class="btn btn-navbar3"></button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group" ng-if="false">
+                                    <a href="">
+                                        <button type="button" class="btn btn-navbar3">已关注</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="row1-bootstrap gap-10">
+                            <!--<div infinite-scroll="loadMore()" infinite-scroll-distance='0'>-->
+                            <ion-list>
+                                <div ng-repeat="item in orders" class="col-sm-6 gap-10 hover height">
+                                    <!--<h1>{{$index}}</h1>-->
+                                    <pass-rush-list data="item" hide-count-down="false" show-count="false" go-detail="goDetail(item)">
+                                    </pass-rush-list>
+                                </div>
+                            </ion-list>
+                            <!--</div>-->
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <footer></footer>
+
+
+        </div>
+
+        <ion-infinite-scroll ng-if="hasMore" icon="ion-loading-c" on-infinite="loadMore()" distance="15%">
+        </ion-infinite-scroll>
+    </ion-content>
+    <!-- <navapp ng-init="ispass='active'"></navapp> -->
+</div>
+
+
+

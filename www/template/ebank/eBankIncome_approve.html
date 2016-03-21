@@ -1,0 +1,57 @@
+<div ng-controller="eBankIncomeApproveCtrl">
+     <navbar
+            ng-init="navbar.navLeft='返回'; navbar.title='审批' ;navbar.navRightHref='tab.';navbar.navRight='' ;navbar.navLeftHref='tab.eBankIncome.center';navbar.navLeftIco='ion-ios-arrow-back';">
+    </navbar>
+    <ion-content>
+ 
+    <div class="transitions-content">
+
+        <div class="container gap-45" >
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <navpc ng-init="pass='active'"></navpc>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                  <div class="list-group" >
+                      <li ng-if="credit_lists.length==0" > 
+                      <no-data-hint></no-data-hint>
+                      </li>
+                      
+                      <div ng-if="credit_lists.length>0" ng-repeat="i in credit_lists" ng-click="approve(i._id ,i.price, i.to)">
+                        <div class="gap-20">
+                          <div class="col-xs-12 bg-red-top"></div>
+                          <div class="col-xs-12 bg-white bg-white-border1">
+                              
+                              <h4>{{i.company.full_name}}
+                                  <a href="">
+                                      <span class="pull-right text-red1">
+                                          ￥ {{i.price |fmoney}}
+                                           <span class="ion-ios-arrow-forward"></span>
+                                      </span>
+                                  </a>
+                              </h4>
+                              <h6>交易员：{{i.user_info.real_name}}</h6>
+                              <h6>交易单号：{{i.order_index}}</h6>
+                              <h6>授信提交日：{{i.time_creation |rsctime}}</h6>
+                          </div>
+                      </div>
+                      <div class="clearfix"></div>
+                      </div>
+                      
+
+                  </div>
+                </div>
+            </div>
+
+</div>
+        <footer></footer>
+        
+
+       
+    </div>
+</ion-content>
+</div>
+
+

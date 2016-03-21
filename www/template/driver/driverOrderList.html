@@ -1,0 +1,118 @@
+<div ng-controller="DriverOrderListCtrl" ng-init="init()">
+  <navbar
+    ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.title='订单' ;navbar.navRightHref='tab.';navbar.navRight='';navbar.navLeftHref='tab.myRsc';">
+  </navbar>
+  <ion-content ng-init="start()">
+    <div class="transitions-content">
+      <div class="container gap-45">
+        <div class="row-bootstrap nav-pc-frameline">
+          <div class="col-sm-3 col-md-3">
+            <navpc ng-init="isorder='active'"></navpc>
+          </div>
+          <div class="col-xs-12 col-sm-9 col-md-9">
+            <div class="row-bootstrap bg-white">
+              <div class="btn-group btn-group-justified" role="group">
+                <div ng-if="role == 'TRAFFIC_DRIVER_PRIVATE'" class="btn-group" role="group">
+                  <a ng-click="canGrab(false)">
+                    <button type="button" class="btn btn-navbar2 {{a?'active':''}}">可抢单</button>
+                  </a>
+                </div>
+                <div ng-if="role == 'TRAFFIC_DRIVER_PRIVATE'" class="btn-group">
+                  <a ng-click="robbed(true)">
+                    <button type="button" class="btn btn-navbar2 {{b?'active':''}}">已抢单</button>
+                  </a>
+                </div>
+                <div class="btn-group">
+                  <a ng-click="loding()">
+                    <button type="button" class="btn btn-navbar2 {{c?'active':''}}">进行中</button>
+                  </a>
+                </div>
+                <div class="btn-group">
+                  <a ng-click="isOk()">
+                    <button type="button" class="btn btn-navbar2 {{d?'active':''}}">已完成</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- 进行中-->
+            <div class="row-bootstrap bg-white gap-15" ng-repeat="current in currents">
+              <div class="col-xs-12 col-sm-6 col-md-6 gap-10">
+                <driver-order-current-item route="current" go-detail="goDetail(current)"></driver-order-current-item>
+                <!--<pass-order-item order="order" go-detail="goDetail(order)">-->
+                <!--</pass-order-item>-->
+              </div>
+            </div>
+
+            <!-- 已完成-->
+            <div class="row1-bootstrap bg-white gap-15" ng-repeat="order in orders">
+              <div class="col-xs-12 col-sm-6 col-md-6 gap-10">
+                <!--<driver-order-current-item route="current" go-detail="goDetail(current)">-->
+                <!--</driver-order-current-item>-->
+                <!--<pass-order-item order="order" go-detail="goDetail(order)">-->
+                <!--</pass-order-item>-->
+                <driver-old-order-item order-id="order.order_id" over="d"></driver-old-order-item>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <!-- 可抢单-->
+            <div class="row1-bootstrap bg-white gap-15" ng-repeat="grab in grabs">
+              <div class="col-xs-12 col-sm-6 col-md-6 gap-10">
+                <!--<driver-order-current-item route="current" go-detail="goDetail(current)">-->
+                <!--</driver-order-current-item>-->
+                <!--<pass-order-item order="order" go-detail="goDetail(order)">-->
+                <!--</pass-order-item>-->
+                <driver-old-order-item order-id="grab._id" gain="gain(id)" grab= "a"></driver-old-order-item>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <!-- 已抢单-->
+            <div class="row1-bootstrap bg-white gap-15" ng-repeat="robbed in robbeds">
+              <div class="col-xs-12 col-sm-6 col-md-6 gap-10">
+                <!--<driver-order-current-item route="current" go-detail="goDetail(current)">-->
+                <!--</driver-order-current-item>-->
+                <!--<pass-order-item order="order" go-detail="goDetail(order)">-->
+                <!--</pass-order-item>-->
+                <driver-old-order-item order-id="robbed._id"></driver-old-order-item>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+
+            <!--<div class="row-bootstrap bg-white gap-15">-->
+              <!--<div class="col-xs-12">-->
+                <!--<div class="pull-left">-->
+                  <!--<h4 class=""><label class="{{textClass?textClass:'label-supply-purple'}}">物流</label>&nbsp;广东 -> 上海，炼焦煤-->
+                    <!--<span class="text-purple2">200吨</span>-->
+                  <!--</h4>-->
+                  <!--<h5 class="text-black">顺达物流 <label class="label-v"><strong>v</strong></label>-->
+                    <!--<h6 class="input-ionic3">物流单号：2015000000000000011</h6>-->
+                <!--</div>-->
+                <!--<div class="pull-right gap-15">-->
+                  <!--<div class="signage1 signage-gray">-->
+                    <!--<h5>已完成</h5>-->
+                  <!--</div>-->
+                <!--</div>-->
+              <!--</div>-->
+              <!--<div class="list">-->
+                <!--<li class="item item-icon-left item-no-border item-condensed">交货地点：-->
+                    <!--<span class="item-note text-black">广东省佛山1号仓库</span>-->
+                    <!--<i class="icon ion-ios-location-outline text-black"></i>-->
+                <!--</li>-->
+                <!--<li class="item item-icon-left item-no-border item-condensed">提货地点：-->
+                    <!--<span class="item-note text-black">上海市中信江阴码头</span>-->
+                    <!--<i class="icon ion-ios-location-outline text-black"></i>-->
+                <!--</li>-->
+              <!--</div>-->
+            <!--</div>-->
+
+          </div>
+        </div>
+      </div>
+      <footer></footer>
+    </div>
+  </ion-content>
+</div>
+
+

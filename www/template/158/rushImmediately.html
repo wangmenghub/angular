@@ -1,0 +1,267 @@
+<div>
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='立即抢单' ;navbar.navRightHref='tab.';navbar.navRight='';navbar.navLeftHref='tab.rushDetail({id:id})';">
+    </navbar>
+    <ion-content>
+    <div class="transitions-content">
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <navpc ng-init="istrade='active'"></navpc>
+                </div>
+
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <div class="row-bootstrap gap-10 row3">
+                        <div class="gap-10 gap-row bg-white">
+                            <div class="col-xs-12">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h3 class="text-black"><label class="label-supply-red">采购</label>&nbsp;{{demand_detail.category_chn}}
+                                            <span class="text-purple2">{{demand_detail.amount}}吨</span>
+                                        </h3>
+                                        <company-label company-id="demand_detail.company_id" type="trade"></company-label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <my-attr-prod-info attr-product='demand_detail.att_product' attr-show='4' attr-category="demand_detail.category"></my-attr-prod-info>
+
+                            <div class="clearfix"></div>
+                            <demand-detail data='demand_detail'></demand-detail>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <h5 class="text-center"><strong>请填写抢单信息</strong></h5>
+                            <form name="myform" novalidate>
+                        <div class="list bg-white">
+                            <!-- 付款方式，报价类型 最高报价-->
+                            <div class="col-sm-6 col-md-6">
+                                <a class="item item-icon-right" ng-click="selPaymentChoice()">
+                                    <span class="text-yellow2">结算方式:</span>
+                                    <span class="item-note">
+                                        <span ng-if="!sale.payment_choice" > 请选择结算方式</span>
+                                        <span ng-if="sale.payment_choice.chn" >{{sale.payment_choice.chn}}
+                                        </span>
+                                        <span ng-if="sale.payment_choice" >{{sale.payment_choice |paymentChoice}}
+                                        </span>
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <a class="item item-icon-right" ng-click="selPaymentMethod()">
+                                    <span class="text-yellow2">付款方式：</span>
+                                    <span class="item-note">
+                                        <span ng-if="!sale.payment_method" > 请选择付款方式</span>
+                                        <span ng-if="sale.payment_method.chn" >{{sale.payment_method.chn}}</span>
+                                        <span ng-if="sale.payment_method" >{{sale.payment_method |paymentChoice}}</span>
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <!-- 首付款比例 -->
+                            <div class="col-sm-6 col-md-6" ng-if="sale.payment_method.eng=='partition' || sale.payment_method == 'partition' ">
+                                <a class="item item-icon-right">
+                                    <span class="text-yellow2">首付款比例(%)：</span>
+                                    <span class="item-note input-ionic">
+                                        <span ng-if="msg.percent_advance" class="pull-left text-red"> !{{msg.percent_advance}} </span>
+                                        <span class="pull-left text-red" ng-messages="myform.percent_advance.$dirty && myform.percent_advance.$error">
+                                            <span ng-message="required">不能为空</span>
+                                            <span ng-message="pattern">需为0-100之间</span>
+                                        </span>
+                                        <input type="text" name="percent_advance" class="text-right" ng-model="sale.percent_advance" min="0" max="100" placeholder="预付款" style="margin-top:-2px;" required ng-pattern="/(100)|(^[0-9]{0,2}$)/">
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <!--<div class="col-sm-6 col-md-6" ng-if="sale.payment_method.eng=='partition' || sale.payment_method == 'partition' ">-->
+                               <!--<li class="item item-toggle">-->
+                                   <!--<span class="text-yellow2">有无质保款</span>-->
+                                   <!--<label class="toggle toggle-balanced">-->
+                                     <!--<input type="checkbox" ng-model="sale.exist_payment_middle">-->
+                                     <!--<div class="track">-->
+                                       <!--<div class="handle"></div>-->
+                                     <!--</div>-->
+                                   <!--</label>-->
+                                <!--</li>-->
+                            <!--</div>-->
+                            <!-- 质保款比例 -->
+                            <!--<div class="col-sm-6 col-md-6" ng-if="sale.exist_payment_middle">-->
+                                <!--<a class="item item-icon-right">-->
+                                    <!--<span class="text-yellow2">质保款比例(%)：</span>-->
+                                    <!--<span class="item-note input-ionic">-->
+                                        <!--<span class="pull-left text-red" ng-messages="myform.percent_middle.$dirty && myform.percent_middle.$error">-->
+                                            <!--<span ng-message="required">不能为空</span>-->
+                                            <!--<span ng-message="pattern">需为0-100之间</span>-->
+                                        <!--</span>-->
+                                        <!--<input type="text" name="percent_middle" class="text-right" ng-model="sale.percent_middle" min="0" max="100" placeholder="质保款" required ng-pattern="/(100)|(^[0-9]{0,2}$)/">-->
+                                    <!--</span>-->
+                                    <!--<i class="icon ion-ios-arrow-right text-gray1"></i>                           -->
+                                <!--</a> -->
+                            <!--</div>-->
+                            <!-- 信用 计息日 -->
+                            <div class="col-sm-6 col-md-6" ng-if="sale.payment_method.eng=='credit' ">
+                                <a class="item item-icon-right" ng-click="selRefDayExtension()">
+                                    <span class="text-yellow2">计息日:</span>
+                                    <span class="item-note">
+                                        <span ng-if="!sale.ref_day_extension" > 请选择</span>
+                                        <span ng-if="sale.ref_day_extension.chn" >{{sale.ref_day_extension.chn}}</span>
+                                        <span ng-if="sale.ref_day_extension" >{{sale.ref_day_extension|paymentChoice}}</span>
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <!-- 延期支付日 -->
+                            <div class="col-sm-6 col-md-6" ng-if="sale.payment_method.eng=='credit' || sale.payment_method.eng=='partition'">
+                                <a class="item item-icon-right">
+                                    <span class="text-yellow2">延期支付天数:</span>
+                                    <span class="item-note input-ionic">
+                                       <span class="pull-left text-red" ng-messages="myform.count_day_extension.$dirty && myform.count_day_extension.$error">
+                                            <span ng-message="required">不能为空</span>
+                                            <span ng-message="pattern">[1-180]之间</span>
+                                        </span>
+                                        <input type="text" name="count_day_extension" placeholder="有效期" class="text-right" ng-model="sale.count_day_extension" min='1' required ng-pattern="/(^[1-9]{1}$)|(^[1-9][0-9]$)|(^1[0-7][0-9]$)|(^180$)/">
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <!-- 报价 -->
+                            <div class="col-sm-6 col-md-6">
+                                <a class="item item-icon-right">
+                                    <span class="text-yellow2">抢单报价(元/吨)：</span>
+                                    <span class="item-note input-ionic">
+                                        <span class="text-red pull-left" ng-messages="myform.price.$dirty && myform.price.$error">
+                                             <span ng-message="required">不能为空</span>
+                                            <span ng-message="pattern">区间[1-9999999]</span>
+                                        </span>
+                                        <input type="text" placeholder="到岸价" class="text-right" name="price" ng-model="sale.price" min="1" required  ng-pattern="/^[1-9][0-9]{0,6}(\.\d{1,2})?$/">
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <a class="item item-icon-left item-icon-right" ng-click="changeDate('depart')">
+                                    <i class="icon ion-android-alarm-clock"></i>
+                                    <span class="text-purple2">提货时间:(给物流发抢单做基础)</span>
+                                    <span class="item-note input-ionic">
+                                        <span ng-if="msg.time_depart" class="pull-left text-red"> !{{msg.time_depart}} </span>
+                                        <!-- <input type="date" placeholder="输入交货时间" class="text-right" ng-model="sale.time_traffic" required> -->
+                                        <span ng-if="sale.time_depart">{{sale.time_depart|rsctime}}</span>
+                                        <span ng-if="!sale.time_depart">请选择</span>
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <div ng-if="sale.time_depart" class="col-sm-6 col-md-6">
+                                <a class="item item-icon-left item-icon-right" ng-click="changeDate('arrival')">
+                                    <i class="icon ion-android-alarm-clock"></i>
+                                    <span class="text-purple2">到货时间:(交货时间提前排名靠前)</span>
+                                    <span class="item-note input-ionic">
+                                        <span ng-if="msg.time_arrival" class="pull-left text-red"> !{{msg.time_arrival}} </span>
+                                        <!-- <input type="date" placeholder="输入交货时间" class="text-right" ng-model="sale.time_traffic" required> -->
+                                        <span ng-if="sale.time_arrival">{{sale.time_arrival|rsctime}}</span>
+                                        <span ng-if="!sale.time_arrival">请选择</span>
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+
+                            <div class="col-sm-6 col-md-6">
+                                <a class="item item-icon-left item-icon-right" ng-click="popLstorage()">
+                                <i class="icon ion-ios-location-outline text-green1"></i>
+                                    <span class="text-purple2">提货仓库地点：</span>
+                                    <span ng-if="!sale.location_storage_num" class="item-note">
+                                        我的仓库
+                                        <span ng-if="msg.location_storage" class="pull-left text-red"> !{{msg.location_storage}} </span>
+                                    </span>
+                                    <span ng-if="sale.location_storage_num" class="pull-right">
+                                        {{sale.location_storage_num}}
+                                    </span>
+                                    <input type="hidden" ng-model="sale.location_storage" />
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-md-6" ng-if="demand_detail.can_join">
+                                <a class="item item-icon-right">
+                                    最低供应量(吨)：
+                                    <span class="item-note input-ionic">
+                                        <span class="text-red pull-left" ng-messages="myform.amount_low.$dirty && myform.amount_low.$error">
+                                             <span ng-message="required">不能为空</span>
+                                            <span ng-message="pattern">整数或大于1的小数</span>
+                                        </span>
+                                        <input type="text" placeholder="请输入" class="text-right" ng-model='sale.amount_low' required ng-pattern="/^[1-9][0-9]{0,6}(\.\d{1,2})?$/" name="amount_low">
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-md-6" ng-if="demand_detail.can_join">
+                                <a class="item item-icon-right">
+                                    可供应总量(吨)：
+                                    <span class="item-note input-ionic">
+                                        <span class="text-red pull-left" ng-messages="myform.amount.$dirty && myform.amount.$error">
+                                            <span ng-message="pattern">整数或大于1的小数</span>
+                                        </span>
+                                        <input type="text" placeholder="默认是该笔采购订单的最高采购吨数" class="text-right" ng-model='sale.amount' ng-pattern="/^[1-9][0-9]{0,6}(\.\d{1,2})?$/" name="amount" >
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-white">
+
+                                <div class="col-xs-12 gap-10">
+                                    <blockquote class="rules-pink text-red">
+                                        <h6>产品结算细则：
+                                        <small class="text-gray1">以采购方的结果为准</small></h6>
+                                        <att-product data="demand_detail.att_product" attr-category="demand_detail.category"></att-product>
+                                    </blockquote>
+                                </div>
+
+                                <div class="col-xs-12">
+                                    <blockquote class="rules-pink text-red">
+                                        <h6>物流结算细则：
+                                        </h6>
+                                        <att-traffic data="demand_detail.att_traffic"></att-traffic>
+                                    </blockquote>
+                                </div>
+
+                            <div class="col-sm-3 minHeight"></div>
+
+                            <div class="col-sm-6 col-xs-12">
+                                <button ng-if="offerid=='null'" class="btn btn-block btn-yellow md-trigger md-setperspective" data-modal="modal-3" ng-disabled="myform.$invalid"  ng-click='upImmediate()'>
+                                    确认抢单
+                                </button>
+                                <button ng-if="offerid!='null'" class="btn btn-block btn-yellow md-trigger md-setperspective" data-modal="modal-3" ng-disabled="myform.$invalid" ng-click='modifyImmediate()'>
+                                    确认修改
+                                </button>
+                                <div class="gap-20"></div>
+                            </div>
+
+                            <div class="col-sm-3"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <footer></footer>
+
+
+</ion-content>
+</div>
+<script id="rushImmediately/popLstorage.html" type="text/ng-template">
+    <span ng-if="location_storages.length==0" class="text-red">
+    <span ng-if="roletype != 'ADMIN'">请联系贵公司管理员，添加仓库信息</span>
+    <a ng-if="roletype == 'ADMIN'" ng-click="share($buttonTapped(buttons[0], $event))">添加仓库</a>
+    </span>
+    <ion-radio ng-repeat="item in location_storages"
+        ng-value="[item._id,item.addr,item.district,item.city,item.province]"
+        ng-model="data.storage"
+        name="server-side">
+        {{item.province+item.city+item.district+item.addr}}
+    </ion-radio>
+</script>

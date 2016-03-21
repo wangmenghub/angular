@@ -1,0 +1,46 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">分享计划</h1>
+    </ion-header-bar>
+    <ion-content>
+        <div class="row-bootstrap bg-gray1 gap-row">
+            <div class="col-xs-12">
+                <div class="btn-group btn-group-justified text-center gap-10" role="group" aria-label="...">
+                    <div class="btn-group" role="group">
+                        <a href="#tab/link-man">
+                            <img src="./img/158/spare-2.png"/>
+                            <h6 class="text-black">通讯录</h6>
+                        </a>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <a>
+                            <img src="./img/158/spare-3.png"/>
+                            <h6 class="text-black">朋友圈</h6>
+                        </a>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <a ng-click="shared('wechat')">
+                            <img src="./img/158/spare-1.png"/>
+                            <h6 class="text-black">微信</h6>
+                        </a>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <a ng-click="shared('sms')">
+                            <img src="./img/158/spare-4.png"/>
+                            <h6 class="text-black">短信</h6>
+                        </a>
+                    </div>
+                    <div class="btn-group" role="group">
+
+                    </div>
+                </div>
+                <div class="col-sm-3 minHeight"></div>
+                <div class="col-sm-6 col-xs-12 gap-20 text-gray1">
+                    <button ng-click="closeModal()" class="btn btn-lg btn-block">取消
+                    </button>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+    </ion-content>
+</ion-modal-view>

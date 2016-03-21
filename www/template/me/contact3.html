@@ -1,0 +1,148 @@
+﻿<div name="contact3"  ng-controller="contact3Ctrl">
+   <!--  {{#contentFor "header"}}
+       {{>navbar navLeftIco='glyphicon glyphicon-chevron-left' navLeft='返回' onclick='window.history.go(-1)'
+        title='我的关注'
+        transitionLeftOut="slideRightOut" transitionRightOut='slideLeftOut'
+        navRight='' navRightHref=''  navRightIco=''}}
+    {{/contentFor}}
+
+    {{#contentFor "navApp"}}
+        {{>navApp general/face="active"}}
+    {{/contentFor}} -->
+    <navbar></navbar>
+    <ion-content>
+
+    <div class="transitions-content">
+
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <!-- {{>navPc me='active'}} -->
+                    <navpc ng-init="me='active'"></navpc>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 ">
+                    <div class="row-bootstrap bg-white gap-20">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <a href="">
+                                    <button type="button" class="btn btn-navbar3 btn-navbar3-active">已关注</button>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href="">
+                                    <button type="button" class="btn btn-navbar3">被关注</button>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href="">
+                                    <button type="button" class="btn btn-navbar3 ">互相关注</button>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href="">
+                                    <button type="button" class="btn btn-navbar3"></button>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href="">
+                                    <button type="button" class="btn btn-navbar3"></button>
+                                </a>
+                            </div>
+ 
+                        </div>
+                    </div>  
+                    <div class="row-bootstrap gap-20">
+                        <li class="list-unstyled list-condensed bg-white-hover2">
+                            <h5 class="text-brown1">
+                                <a href="#">
+                                    <img class="face4 img-fixed img-circle" src="./img/general/face/19.jpg">
+                                </a>
+                                张旭 <label class="label-role-purple1 text-white">物流中心主任</label>
+                                <small class="text-purple1">顺发公司</small>
+                                <button class="btn btn-partner pull-right gap-15"><span class="glyphicon glyphicon-ok text-gray2"></span> 已关注，取消</button>
+                            </h5>
+                        </li>
+                        <div class="clearfix"></div>
+
+                        <li class="list-unstyled list-condensed bg-white-hover2">
+                            <h5 class="text-brown1">
+                                <a href="#">
+                                    <img class="face4 img-fixed img-circle" src="./img/general/face/21.jpg">
+                                </a>
+                                崔哥
+                                <small class="text-purple1">航道物流</small>
+                                <button class="btn btn-partner pull-right gap-15"><span class="glyphicon glyphicon-ok text-gray2"></span> 互相关注</button>
+                            </h5>
+                        </li>
+                        <div class="clearfix"></div>
+
+                            <li class="list-unstyled list-condensed bg-white-hover2">
+                                <h5 class="text-brown1">
+                                    <a href="#">
+                                        <img class="face4 img-fixed img-circle" src="./img/general/face/12.jpg">
+                                    </a>
+                                    崔哥
+                                    <small class="text-purple1">航道物流</small>
+                                    <button class="btn btn-partner pull-right gap-15"><span class="glyphicon glyphicon-ok text-gray2"></span> 互相关注</button>
+                                </h5>
+                            </li>
+                            <li class="list-unstyled list-condensed bg-white-hover2">
+                                <h5 class="text-brown1">
+                                    <a href="#">
+                                        <img class="face4 img-fixed img-circle" src="./img/general/face/8.jpg">
+                                    </a>
+                                    胡德军 <label class="label-role-purple1 text-white">生产中心主任</label>
+                                    <small class="text-purple1">亚鑫集团</small>
+                                    <button class="btn btn-partner pull-right gap-15"><span class="glyphicon glyphicon-ok text-gray2"></span> 已关注，取消</button>
+                                </h5>
+                            </li>
+                             <li class="list-unstyled list-condensed bg-white-hover2">
+                            <h5 class="text-brown1">
+                                <a href="#">
+                                    <img class="face4 img-fixed img-circle" src="./img/general/face/19.jpg">
+                                </a>
+                                张旭 <label class="label-role-purple1 text-white">物流中心主任</label>
+                                <small class="text-purple1">顺发公司</small>
+                                <button class="btn btn-partner pull-right gap-15"><span class="glyphicon glyphicon-ok text-gray2"></span> 互相关注</button>
+                            </h5>
+                        </li>
+                        <li class="list-unstyled list-condensed bg-white-hover2">
+                                <h5 class="text-brown1">
+                                    <a href="#">
+                                        <img class="face4 img-fixed img-circle" src="./img/general/face/8.jpg">
+                                    </a>
+                                    胡德军 <label class="label-role-purple1 text-white">生产中心主任</label>
+                                    <small class="text-purple1">亚鑫集团</small>
+                                    <button class="btn btn-partner pull-right gap-15"><span class="glyphicon glyphicon-ok text-gray2"></span> 已关注，取消</button>
+                                </h5>
+                            </li>
+                             <li class="list-unstyled list-condensed bg-white-hover2">
+                            <h5 class="text-brown1">
+                                <a href="#">
+                                    <img class="face4 img-fixed img-circle" src="./img/general/face/19.jpg">
+                                </a>
+                                张旭 <label class="label-role-purple1 text-white">物流中心主任</label>
+                                <small class="text-purple1">顺发公司</small>
+                                <button class="btn btn-partner pull-right gap-15"><span class="glyphicon glyphicon-ok text-gray2"></span> 互相关注</button>
+                            </h5>
+                        </li>
+                    </div>
+
+
+                </div>                
+            </div>
+
+            <div class="col-sm-3 col-md-3"></div>
+
+        </div>
+
+
+
+        <!-- {{>footer}} -->
+    </div>
+</ion-content>
+</div>
+
+
+

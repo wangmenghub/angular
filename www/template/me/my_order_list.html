@@ -1,0 +1,75 @@
+<ion-view  ng-controller="ordertradeCtrl">
+    <navbar
+            ng-init="navbar.navLeftIco='glyphicon glyphicon-chevron-left'; navbar.navLeft='返回'; navbar.title='已完成订单' ;navbar.navRightHref='tab.';navbar.navRight='' ;navbar.navLeftHref='tab.myRsc';">
+    </navbar>
+    <!-- <navbar></navbar> -->
+    <ion-content>
+
+    <div class="transitions-content" ng-init="verification()">
+        
+
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline gap-10">
+                <div class="col-sm-3 col-md-3">
+                    <navpc ng-init="isme='active'"></navpc>
+                </div>
+                
+
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <div class="row1-bootstrap">
+                            <div ng-if="lists.length==0">
+                                <no-data-hint></no-data-hint>
+                            </div>
+                            <div ng-if="lists.length > 0 && i.status=='complete' " ng-repeat="i in lists" class="col-sm-6 col-md-6 gap-10">
+                            <!-- 若销售step为1时不能查阅,单如何再次修改订单价格呢 -->
+                            <div ng-hide=" isCompany!=i.company_demand_id && i.step==1 " class="gap-row bg-white" ><a ng-href="#/tab/my_order_list1/{{i._id}}">
+                            
+                                <div class="col-xs-12">
+                                    <div class="pull-left">
+                                        <h3 class="text-black"><label class="label-supply-red">
+                                        <span ng-if="i.side=='demand'">采购</span>
+                                        <span ng-if="i.side=='supply' || !i.side ">销售</span>
+
+                                        </label>&nbsp;{{i.category_chn}} 
+                                            <span class="text-purple2">{{i.amount}}吨</span>
+                                        </h3>
+                                        <h6 class="text-black">订单号：{{i.index}}</h6>
+                                    </div>
+                                    <div class="pull-right">                                    
+                                        <div class="signage1 signage-red2"><h5>{{i.step |tradestep}}</h5></div>                                   
+                                    </div>     
+                                </div>                                                                     
+                                <div class="clearfix"></div>
+                                <div class="col-xs-12 bg-yellow3">
+                                    <my-attr-prod-info attr-product='i.att_product' attr-show='4' attr-category="i.category" status="true"></my-attr-prod-info>
+                                </div>      
+                             
+                                <div class="clearfix"></div>
+
+                                <div class="list-group  ">
+                                    
+                                    <li class="list-group-item list-condensed1 list-group-item-no-border">
+
+                                    </li>
+                                    <rsc-address ng-if="i.side=='demand'" order="i" address-id="i.location_arrival" address-name="交货地点"
+                                           address-icon="ion-ios-location-outline text-purple2"
+                                           text-class=""></rsc-address>
+                                    <rsc-address ng-if="i.side!='demand'" order="i" address-id="i.location_depart" address-name="提货地点"
+                                       address-icon="ion-ios-location-outline text-purple2"
+                                       text-class=""></rsc-address>
+                                    <div class="clearfix"></div>
+                                </div></a>
+                                
+                            </div>
+
+                            </div>
+                        
+                    </div>
+                </div>
+        </div>
+    </div>
+    <footer></footer>
+   
+</div>
+</ion-content>
+</ion-view>

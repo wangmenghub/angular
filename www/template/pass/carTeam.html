@@ -1,0 +1,41 @@
+﻿<div ng-controller="CarTeamCtrl" >
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回';navbar.title='组建车队' ; ">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="row-bootstrap bg-white gap-15 text-center">
+                            <div ng-click="applyDriver()" class="box-car gap-50">
+                                <h5 class="gap-30">邀请车辆</h5>
+                                <h6 class="text-gray1">(挂靠车辆)</h6>
+                            </div>
+                            <div ng-click="selfDriver()" class="box-car gap-20">
+                                <h5 class="gap-30">自有车辆</h5>
+                                <h6 class="text-gray1">(本公司车辆)</h6>
+                            </div>
+                            <div class="gap-100"></div>
+                        </div>
+
+
+                    </div>
+                </div>
+    </div>
+
+    <footer></footer>
+
+
+        </div>
+    </ion-content>
+</div>
+
+

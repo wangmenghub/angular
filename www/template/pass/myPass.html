@@ -1,0 +1,199 @@
+﻿<div>
+    <navbar
+            ng-init="navbar.navLeftIco=''; navbar.navLeft=''; navbar.title='我' ;navbar.navRightHref='tab.';navbar.navRight=''">
+    </navbar>
+    <ion-content>
+ 
+    <div class="transitions-content">
+
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <navpc ng-init="pass='active'"></navpc>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                     <div class="row-bootstrap gap-15 bg-white">                        
+                        <div class="list">
+                            <a class="item item-avatar item-icon-right" href="#/tab/mySet">
+                              <img class="img-circle face3" src="./img/me/face_1.png">
+                              <h2>
+                                安景圣
+                                <label class="label-role-purple text-white">销售副总裁</label>
+                              </h2>
+                              <p>手机：13676886689</p>
+                              <i class="icon ion-ios-arrow-right"></i>
+                            </a>
+                        </div>
+                        
+                        
+                        <div class="btn-group btn-group-justified col-xs-6" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <a href="#tab/contact1">
+                                    <button type="button" class="btn btn-navbar3">我的同事(32)</button>
+
+                                </a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="#tab/contact2">
+                                    <button type="button" class="btn btn-navbar3">我的客户(24)</button>
+                                </a>
+                            </div>
+                            <!-- <div class="btn-group" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn" role="group">
+                                <a href="#tab/contact3">
+                                    <button type="button" class="btn btn-navbar3">我的关注(459)</button>
+                                </a>
+                            </div> --> 
+                        </div>
+                    </div>
+
+                    <div class="row-bootstrap bg-white gap-15">
+                        <div class="list bg-white">
+                            <a class="item item-icon-left item-icon-right" href="#tab/inforSysterm">
+                                <i class="icon ion-android-notifications-none text-gray1"></i>
+                                系统通知 (8)                                
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>  
+                            </a>
+                            <a class="item item-icon-left item-icon-right" href="#tab/companyProHome">
+                                <i class="icon ion-android-home text-blue"></i>
+                                亚鑫集团 <span title="企业已认证"><label class="label-v"><strong>v</strong></label></span>
+                                <span class="item-note">
+                                    企业主页
+                                </span>                              
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>  
+                            </a> 
+                        </div>
+                    </div>
+                    <!-- <div class="row-bootstrap bg-white gap-20">
+                        <a href="#tab/inforSysterm" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">
+                            <div class="list-group">
+                                <li class="list-group-item list-group-item-no-border list-condensed">
+                                    <h5 class="text-black">
+                                        <span class="glyphicon glyphicon-bell text-black bg-yellow img-circle"></span>&nbsp;&nbsp;系统通知 (8)
+                                        <span class="pull-right glyphicon glyphicon-menu-right text-gray1 gap-10" aria-hidden="true"></span>
+                                    </h5>
+                                </li>
+                            </div>
+                        </a>    
+                        <a href="" class="list-item-border"></a>
+                        <a href="#tab/companyProHome" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">
+                            <div class="list-group">
+                                <li class="list-group-item list-group-item-no-border list-condensed">
+                                    <h5 class="text-black">
+                                        <span class="glyphicon glyphicon-home text-white bg-blue img-circle"></span>&nbsp;&nbsp;亚鑫集团 <label class="label-v"><strong>v</strong></label>
+                                        <span class="pull-right text-gray1 gap-10">企业主页<span class="pull-right glyphicon glyphicon-menu-right text-gray1" aria-hidden="true"></span></span>
+                                    </h5>
+                                </li>
+                            </div>
+                        </a>      
+                    </div> -->
+                    <div class="row-bootstrap">
+                        <h6 class="text-center">企业管理</h6>
+                    </div>
+
+                    <div class="row-bootstrap bg-white">
+                        <div class="btn-group btn-group-justified text-center gap-10" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <a href='#tab/myCompanySet' data-transition-out="slideLeftOut"   data-transition-in="slideLeftIn">
+                                    <img class="ico-110" src="./img/pass/my-icon.png"/>
+                                    <h5>企业设置</h5>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href='#tab/contact4' data-transition-out="slideLeftOut"   data-transition-in="slideLeftIn">
+                                    <img class="ico-110" src="./img/pass/my-icon1.png"/>
+                                    <h5>司机管理</h5>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href='#tab/attention' data-transition-out="slideLeftOut"   data-transition-in="slideLeftIn">
+                                    <img class="ico-110" src="./img/pass/my-icon2.png"/>
+                                    <h5>合作伙伴</h5>
+                                </a>
+                            </div>                           
+                        </div>
+                        <div class="btn-group btn-group-justified text-center gap-10" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <a href='#tab/rushList' data-transition-out="slideLeftOut"   data-transition-in="slideLeftIn">
+                                    <img class="ico-110" src="./img/pass/my-icon3.png"/>
+                                    <h5>线路管理</h5>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href='#tab/supplyList' data-transition-out="slideLeftOut"   data-transition-in="slideLeftIn">
+                                    <img class="ico-110" src="./img/pass/my-icon4.png"/>
+                                    <h5>车辆管理</h5>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href='#tab/my_demand_list' data-transition-out="slideLeftOut"   data-transition-in="slideLeftIn">
+                                    <img class="ico-110" src="./img/me/icon_4.jpg"/>
+                                    <h5>订单管理</h5>
+                                </a>
+                            </div>                           
+                        </div>
+                    </div>
+
+                    <!-- <div class="row-bootstrap bg-white gap-15">
+                        <a href="#tab/partner1" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">
+                        <div class="list-group">
+                             <li class="list-group-item list-group-item-no-border">
+                                <h5 class="text-black">
+                                    <span class="glyphicon glyphicon-transfer text-pink"></span>&nbsp;&nbsp;邀请合作伙伴 
+                                    <span class="pull-right glyphicon glyphicon-menu-right text-gray1" aria-hidden="true"></span>
+                                </h5>
+                            </li>
+                        </div>
+                        </a>    
+                    </div> -->
+
+                    <div class="row-bootstrap bg-white gap-15">
+                        <div class="list bg-white">
+                            <a class="item item-icon-left item-icon-right" href="">
+                                <i class="icon ion-arrow-swap text-pink"></i>
+                                邀请合作伙伴                                
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>  
+                            </a>                            
+                        </div>
+                    </div>
+
+                    <div class="row-bootstrap bg-white gap-15">
+                        <div class="list bg-white">
+                            <a class="item item-icon-left item-icon-right" href="#/tab/mySet">
+                                <i class="icon ion-gear-a text-blue"></i>
+                                个人设置                                
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>  
+                            </a>                            
+                        </div>
+                    </div>
+                    <!-- <div class="row-bootstrap bg-white gap-15">
+                        <a href="#/tab/mySet" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">
+                        <div class="list-group">
+                             <li class="list-group-item list-group-item-no-border">
+                                <h5 class="text-black">
+                                    <span class="glyphicon glyphicon-cog text-blue"></span>&nbsp;&nbsp;个人设置 
+                                    <span class="pull-right glyphicon glyphicon-menu-right text-gray1" aria-hidden="true"></span>
+                                </h5>
+                            </li>
+                        </div>
+                        </a>    
+                    </div> -->
+
+
+
+
+
+                </div>
+            </div>
+
+</div>
+
+        <footer></footer>
+        
+       
+    </div>
+</ion-content>
+</div>
+
+

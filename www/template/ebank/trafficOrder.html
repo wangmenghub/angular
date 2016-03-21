@@ -1,0 +1,1 @@
+<div ng-if="orders.length==0">    <no-data-hint></no-data-hint></div><div ng-if="orders.length>0" class="row1-bootstrap gap-10" ng-repeat="order in orders">    <div class="col-sm-6 col-md-6 gap-10">        <pass-order-item order="order" go-detail="goDetail(order)" order-type="TRAFFIC">        </pass-order-item>    </div></div>

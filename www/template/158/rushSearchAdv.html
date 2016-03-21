@@ -1,0 +1,148 @@
+﻿<div ng-controller="rushCtrl">
+     <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='搜索采购' ;navbar.navRightHref='tab.';navbar.navRight='';navbar.navLeftHref='tab.rush';">
+    </navbar>
+<ion-content>
+<div class="transitions-content">
+        
+
+    <div class="container gap-45" ng-init="app_search()">
+        <div class="row-bootstrap nav-pc-frameline">
+            <div class="col-sm-3 col-md-3">
+                <navpc ng-init="istrade='active'"></navpc>
+            </div>
+            <div class="col-xs-12 col-sm-9 col-md-9">
+                <!-- <div class="row-bootstrap gap-10">
+                    <div class="text-center">
+                        <h4 ui-sref='tab.rushSearchAdv' class="text-black">
+                            <span class="ion-search"></span> 已搜索现有采购需求 {{total_amount |numCeil}} 吨
+                        </h4>
+                    </div>
+                </div> -->
+                
+                <div class="row-bootstrap row3 gap-20">
+                    <div ng-if="!search_state" class="list"> 
+                        <a class="item item-icon-left item-icon-right item-border-top-no">
+                            <i class="icon ion-ios-copy"></i>                         
+                            订单编号：
+                            <span class="item-note input-ionic">
+                                <input type="text" class="text-right" ng-model="demandIndex">
+                            </span>
+                            <i class="icon ion-ios-arrow-right text-gray1"></i> 
+                        </a>                            
+                        <li class="item item-icon-left item-icon-right" ng-click="app_selectCategory()">
+                            <i class="icon ion-ios-pricetags"></i>                         
+                            选择产品种类：
+                            <span class="item-note text-black">
+                                <span ng-if="!cate">默认全部</span>
+                                <span ng-if="cate">{{cate}}</span>
+                            </span>
+                            <i class="icon ion-ios-arrow-right text-gray1"></i> 
+                        </li> 
+                        <li class="item item-icon-left item-icon-right" ng-click="app_selectProcity()">
+                            <i class="icon ion-android-pin"></i>
+                            交货地点：
+                            <span class="item-note text-black">
+                                <span ng-if="!prov">默认全国</span>
+                                <span ng-if="prov">{{prov}}</span>
+                            </span>
+                            <i class="icon ion-ios-arrow-right text-gray1"></i> 
+                        </li> 
+                        <li class="item item-icon-left item-icon-right item-border-bottom-no" ng-click="app_selectAmount()">
+                            <i class="icon ion-ios-cart"></i>                          
+                            采购需求量：
+                            <span class="item-note text-black">
+                                <span ng-if="!selectAmount">0</span>
+                                <span ng-if="selectAmount">{{selectAmount}}</span>吨 以上
+                            </span>
+                            <i class="icon ion-ios-arrow-right text-gray1"></i> 
+                        </li> 
+                    </div>    
+                    
+                    <div ng-if="!search_state"> 
+                        <div class="col-xs-6 gap-10 text-center">
+                            <a ng-click="app_search('click')">
+                            <!-- tab.supply -->
+                                <button type="button" class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder">
+                                    立即搜索
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col-xs-6 gap-10 text-center">
+                            <!-- <a ui-sref='tab.supplyMap'> -->
+                            <a>
+                                <button type="button" class="btn btn-lg btn-block bg-white-border text-yellow3 btn-noBorder">
+                                    地图模式查找
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                    <div ng-if="search_state" class="col-xs-12 text-center">   
+                        <a href="" class="search-more" ng-click="changeSearch()">
+                        <span>更多筛选</span> <i class="ion-ios-arrow-down"></i></a>
+                    </div>
+                
+                    <div class="clearfix"></div> 
+                    <div class="gap-10"></div>
+                   
+                </div>
+                 <div class="row1-bootstrap">
+                    <!--  搜索结果 -->
+                    <div ng-if="lists.length==0">
+                       <no-data-hint></no-data-hint>
+                    </div>
+
+                    <div ng-if="lists.length>0" ng-repeat="i in lists" class="col-sm-6 col-md-6 gap-10">
+
+                        <a ng-href='#/tab/rushDetail/{{i._id}}' >
+                        <div class="gap-row bg-white" >
+                        <div class="col-xs-12">
+                            <div class=" pull-left">
+                                <h3 class=""><label class="label-supply-red">采购</label>&nbsp;{{i.category_chn}} 
+                                    <span class="text-purple2">{{i.amount}}吨</span>
+                                </h3>
+                                <company-label company-id="i.company_id" type="trade"></company-label>
+                            </div>
+                            <div class="pull-right gap-5">
+
+                                <div class="signage1 signage-red2">有效期<br>
+                                    <span>{{i.time_validity |formvalidity}}天</span>
+                                </div>
+                            </div>     
+                        </div>                                                                     
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12 bg-yellow3">
+                            <my-attr-prod-info attr-product='i.att_product' attr-show='4' attr-category="i.category" status="true"></my-attr-prod-info>
+                        </div>
+                            
+                        <div class="clearfix"></div>
+                        <div class="list gap-5">
+                            <rsc-address address-id="i.location_storage" order="i" address-name="交货地点"
+                                             address-icon="ion-ios-location-outline text-purple2"
+                                             text-class=""></rsc-address>
+                            <a class="item  item-icon-right item-no-border item-condensed">
+                                <span class="item-note">
+                                    <small>已有 {{i.count}}家 企业报价</small>
+                                </span>  
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>                          
+                            </a>
+                            
+                        </div>
+                         
+                        </div>
+                        </a>
+                    </div>
+                    </div>
+
+            </div>
+            
+    
+        </div>
+    </div>
+    <footer></footer>
+        
+</div>
+</ion-content>
+</div>
+
+

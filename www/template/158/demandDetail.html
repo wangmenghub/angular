@@ -1,0 +1,71 @@
+<div class="list">
+    <div class="col-sm-6 col-md-6">
+        <li class="item item-icon-left item-no-border item-condensed">
+            <i class="icon ion-android-alarm-clock"></i>
+            交货时间：
+            <span class="item-note">
+                {{demand_detail.time_traffic|rsctime}}
+            </span>
+        </li>
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <rsc-address order="demand_detail" address-id="demand_detail.location_storage" address-name="交货地点"
+           address-icon="icon ion-ios-location-outline text-purple2"
+           text-class="item-note text-purple2"></rsc-address>
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <li class="item item-icon-left item-no-border item-condensed">
+            <i class="icon ion-ios-pricetags-outline text-red1"></i>
+            <span class="text-red1">结算方式：</span>
+            <span class="item-note text-red1">
+                {{demand_detail.payment_choice |paymentChoice}}
+            </span>
+        </li>
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <li class="item item-icon-left item-no-border item-condensed">
+            <i class="icon ion-social-yen text-red1"></i>
+            <span class="text-red1">付款方式：</span>
+            <!-- <span class="item-note text-red1" ng-if="demand_detail.payment_method=='all_cash' ">
+            {{demand_detail.payment_method |paymentChoice}}
+            </span>
+            <span class="item-note text-red1" ng-if="demand_detail.payment_method=='all_goods' ">
+                {{demand_detail.payment_method |paymentChoice}},最终支付可延期{{demand_detail.count_day_extension}}天
+            </span>
+            <span class="item-note text-red1" ng-if="demand_detail.payment_method=='partition' ">
+                {{demand_detail.payment_method |paymentChoice}},{{demand_detail.percent_advance}}%首付款,{{demand_detail.percent_middle}}%质保款
+            </span>
+            <span class="item-note text-red1" ng-if="demand_detail.payment_method=='credit' ">
+                {{demand_detail.payment_method |paymentChoice}},以{{demand_detail.ref_day_extension |paymentChoice}}为准,最终支付可延期{{demand_detail.count_day_extension}}天
+            </span>   -->
+            <payment-method order="demand_detail"></payment-method>
+        </li>
+    </div>
+    <div class="col-sm-6 col-md-6" ng-if="demand_detail.price">
+        <li class="item item-icon-left item-no-border item-condensed">
+            <i class="icon ion-android-checkmark-circle text-red1"></i>
+            <span class="text-red1">采购价格：</span>
+            <span class="item-note text-red1">
+               {{demand_detail.price}}元/吨
+            </span>
+        </li>
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <li class="item item-icon-left item-no-border item-condensed">
+            <i class="icon ion-android-checkmark-circle text-red1"></i>
+            <span class="text-red1">是否可凑单</span>
+            <span class="item-note text-red1">
+               {{demand_detail.can_join|canjoin}}
+            </span>
+        </li>
+    </div>
+    <div class="col-sm-6 col-md-6">
+        <li class="item item-icon-left item-no-border item-condensed">
+            <i class="icon ion-android-checkmark-circle text-red1"></i>
+            <span class="text-red1">质检结果</span>
+            <span class="item-note text-red1">
+               以{{demand_detail.quality_origin | paymentChoice}}的质检结果为准
+            </span>
+        </li>
+    </div>
+</div>

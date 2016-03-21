@@ -1,0 +1,66 @@
+﻿<div ng-controller="DriverHomeCtrl" ng-init="init()">
+    <navbar ng-init="navbar.navLeftHref='tab.DriverCard({user_id:user_id})';navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='主页' ;navbar.navRightHref='';navbar.navRight=''">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+
+                        <div class="row-bootstrap bg-purple">
+                            <div class="gap-5"></div>
+                        </div>
+                        <div class="row-bootstrap title-pro1 clearfix" ng-click="goCard()">
+                            <div class="col-xs-12 gap-80">
+                                <h5 class="col-xs-4 text-gray2 gap-80 text-left">{{company.full_name}}</h5>
+                                <img src="{{user.photo_url | imgDefault:'header'}}" class="col-xs-4 img-circle text-center  gap-50">
+                                <!--<br>SHUN FENG Co.,Ltd</h5>-->
+                                <h6 class="col-xs-4 text-gray2 gap-80 text-right">手机号码<br>
+                                    {{user.phone}}</h6>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <h3 class="text-center">
+                                <div class="gap-50"></div>
+                                <br>
+                                {{user.real_name}} <label class="label-role-purple">司机</label>
+                            </h3>
+
+                        </div>
+                        <div class="row-bootstrap bg-white gap-row data-own">
+                            <div class="col-xs-6 text-red3 border-right-line-gray">
+                                <h6>已运输</h6>
+
+                                <h2>{{user.amountCount | number}}吨</h2>
+                            </div>
+                            <div class="col-xs-6 text-red3">
+                                <h6>订单数</h6>
+                                <h2>{{user.orderCount | number}}笔</h2>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <h6 class="col-xs-12">我的车辆</h6>
+
+                        <div ng-repeat="carType in carTypeList">
+                            <car-type-item hide-detail-icon="true" del="del(car)" type="carType.type" show-car-remove="false" show-del="true" del-text="移除" cars="carType.values.source">
+                            </car-type-item>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <footer></footer>
+
+
+        </div>
+    </ion-content>
+</div>
+
+

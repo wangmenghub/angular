@@ -1,0 +1,244 @@
+﻿
+<ion-view>
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='采购抢单' ;navbar.navRight='邀请报价';navbar.navLeftHref='tab.rush';navbar.navRightHref='tab.';navbar.navRightClick='share()';">
+    </navbar>
+    <ion-content>
+
+    <div class="transitions-content">
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <navpc ng-init="istrade='active'"></navpc>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <div class="row-bootstrap gap-10 row3">
+                        <div class="gap-15 gap-row bg-white">
+                        <div class="col-xs-12">
+                            <div class="media">
+                                <div class="media-body">
+                                    <h3 class="text-black"><label class="label-supply-red">采购</label>&nbsp;{{demand_detail.category_chn}}
+                                        <span class="text-purple2">{{demand_detail.amount}}吨</span>
+                                    </h3>
+                                    <company-label company-id="demand_detail.company_id" type="trade"></company-label>
+                                    <h6 class="text-gray2">需求单号：{{demand_detail.index}}</h6>
+                                </div>
+                            </div>
+                            <my-attr-prod-info attr-product='demand_detail.att_product' attr-show='4' attr-category="demand_detail.category"></my-attr-prod-info>
+
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <demand-detail data='demand_detail'></demand-detail>
+
+                        <div class="clearfix"></div>
+                          <!--产品备注-->
+                          <div class="col-xs-12">
+                            <blockquote class="rules-pink text-red">
+                              <h6>产品备注：</h6>
+                              <span>
+                                 {{demand_detail.appendix}}
+                              </span>
+
+                            </blockquote>
+                          </div>
+                        <div class="col-xs-12">
+                            <blockquote class="rules-pink text-red">
+                                <h6>产品结算细则：</h6>
+                                <att-product data="demand_detail.att_product" attr-category="demand_detail.category"></att-product>
+                            </blockquote>
+                        </div>
+                        <div class="col-xs-12">
+                            <blockquote class="rules-pink text-red">
+                                <h6>物流结算细则：
+                                </h6>
+                                <att-traffic data="demand_detail.att_traffic"></att-traffic>
+                            </blockquote>
+                        </div>
+                        <div class="col-sm-3 minHeight"></div>
+                        <div class="col-sm-6 col-xs-12">
+                            <!-- <a ng-if="user.company_id == demand_detail.company_id && orderCount>0 && role.role != 'SALE'" ng-click="orderSubmit()">
+                                <button  type="button" class="btn-block btn-yellow cbutton cbutton--effect-jagoda">
+                                 已选{{orderCount}}家,立即下单
+                                </button>
+
+                            </a> -->
+                            <a ng-if="user.company_id == demand_detail.company_id && user.role!='TRADE_PURCHASE'">
+                            <!--  && orderCount==0 && role.role != 'SALE' -->
+                                <button type="button" class="btn-block btn-yellow cbutton cbutton--effect-jagoda" disabled="">
+                                    抢购进行中,<timer end-time="demand_detail.time_validity" language="zh-CN">
+                                    <span>{{days}}天{{hours}}时{{minutes}}分{{seconds}}秒.</span>
+                                </timer>
+                                </button>
+                            </a>
+                            <!-- 判断订单是否为全局，若为限定判断是否在限定范围内；若非则显示申请认证 -->
+                            <a ng-if="user.company_id != demand_detail.company_id && user.role!='TRADE_PURCHASE'">
+                                <button
+                                    ng-if="(demand_detail.offer_limit=='limited' && demand_detail.list_un_offer.concat(demand_detail.list_offer).indexOf(user.company_id)!=-1) || demand_detail.offer_limit=='all'"
+
+                                    type="button" class="btn-block btn-yellow cbutton cbutton--effect-jagoda"  ng-click="saleSubmit()">
+                                立即抢单,
+
+                                <timer end-time="demand_detail.time_validity" language="zh-CN">
+                                    <span>{{days}}天{{hours}}时{{minutes}}分{{seconds}}秒.</span>
+                                </timer>
+
+                                </button>
+
+                                <button ng-if="demand_detail.offer_limit=='limited' && demand_detail.list_un_offer.concat(demand_detail.list_offer).indexOf(user.company_id)==-1" type="button" class="btn-block btn-yellow cbutton cbutton--effect-jagoda"  ng-click="demandApply()">申请加入认证企业</button>
+                              <!--<span ng-if="demand_detail.offer_limit!='offer_limit'">abc</span>-->
+                            </a>
+                            <input type="hidden" ng-model="demand_detail.time_validity" />
+                        </div>
+                        <div class="col-sm-3"></div>
+                        <div class="clearfix"></div>
+                        <div class="gap-15"></div>
+                        </div>
+                    </div>
+                    <div class="row-bootstrap gap-5 text-center">
+                        <!-- <h5>已报价企业</h5> -->
+
+                        <h6>
+                        <span ng-if="user._id == demand_detail.user_id">邀请{{demand_detail.count_invite}}家、已注册{{demand_detail.count_signup}}家、未注册{{demand_detail.count_un_signup}}家、</span>
+                        已报价{{offer.count}}家
+                        <span ng-if="demand_detail.offer_limit == 'limited' && user._id == demand_detail.user_id">、未报价{{demand_detail.count_un_offer}}家</span></h6>
+                    </div>
+
+                    <div class="row-bootstrap bg-white gap-10">
+                        <div class="btn-group btn-group-justified col-xs-6" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <a >
+                                    <button type="button" class="btn btn-navbar3 {{get_price_active}}" ng-class="getPriceActive==4 ? 'btn-navbar3-active' : '' " ng-click="get_price('price')">价格
+                                    <span class="ion ion-android-arrow-dropdown"></span>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a>
+                                    <button type="button" class="btn btn-navbar3 " ng-class="getPriceActive==8 ? 'btn-navbar3-active' : '' " ng-click="get_price('gross')">
+                                     综合
+                                    <span class="ion ion-android-arrow-dropdown"></span>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href="">
+                                    <button type="button" class="btn btn-navbar3" ng-class="getPriceActive==16 ? 'btn-navbar3-active' : '' " ng-click="get_price('time_arrival')">
+                                    交货时间<span class="ion ion-android-arrow-dropdown"></span>
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href="">
+                                    <button type="button" class="btn btn-navbar3"></button>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a href="">
+                                    <button type="button" class="btn btn-navbar3"></button>
+                                </a>
+                            </div>
+                            <div ng-if="user._id != demand_detail.user_id" class="btn-group" role="group">
+                                <a href="" ng-click="get_price('self')">
+                                    <button type="button" class="btn btn-navbar3 " ng-class="getPriceActive==32 ? 'btn-navbar3-active' : '' ">
+                                    已发布
+                                    </button>
+                                   <!--  <button type="button" class="btn btn-navbar3">已发布</button> --> <!-- 销售角色 -->
+                                </a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="row1-bootstrap gap-10">
+                        <div ng-repeat="i in offerLists |filter:Myofferid" class="col-sm-6 col-md-6 gap-10">
+                        <div class="bg-white gap-row">
+                            <div class="col-xs-12">
+                                <div class="media">
+                                    <div class="media-body">
+
+                                        <h4 class=""><label class="label-1">{{$index+1}}</label>
+                                        <span>{{[user.company_id,i.company_id,i.demand_company_id,i.company_name]|judgeAnonymity }}</span>
+                                        <!-- <span  ng-if="i.show == false">***公司</span> -->
+                                            <label ng-if="demand_detail.company_verify_phase=='SUCCESS'" class="label-v"><strong  title="企业已认证">v</strong></label>
+                                            <!-- <label class="label-partner ">优质伙伴</label> -->
+                                    <span class="item-note text-gray2">
+                                        <!-- <label ng-if=" user.company_id == demand_detail.company_id && !i.has_generated" ng-click="seloffer('{{i._id}}','{{$index}}','{{i.amount}}','{{i.amount_low}}')" type="btn" class="toggle toggle-balanced">
+                                            <input type="checkbox">
+                                             <div class="track">
+                                               <div class="handle"></div>
+                                             </div>
+                                        </label> -->
+                                        <button ng-if=" user.company_id == demand_detail.company_id && !i.has_generated" ng-click="seloffer('{{i._id}}','{{$index}}','{{i.amount}}','{{i.amount_low}}')" type="btn" class="btn-choice">下订单</button>
+
+                                         <button ng-if="user.company_id != demand_detail.company_id && i.offer_edit==true && !i.has_generated" type="btn" class="btn-choice" ng-click="self_offer_edit('{{i._id}}','{{$index}}')">修改
+                                         </button>
+                                    </span>
+                                        </h4>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="list">
+                                <li class="item item-no-border item-condensed">
+                                    到岸价:
+                                    <span class="item-note text-red1">
+                                        <strong>￥{{i.price}} </strong>元/吨
+                                    </span>
+                                </li>
+                                <li class="item item-no-border item-condensed">
+                                    提货时间:
+                                    <span class="item-note">
+                                        <strong>{{i.time_depart|rsctime}}</strong>
+                                    </span>
+                                </li>
+                                <li class="item item-no-border item-condensed">
+                                    交货时间:
+                                    <span class="item-note">
+                                        <strong>{{i.time_arrival|rsctime}}</strong>
+                                    </span>
+                                </li>
+                                <li class="item item-no-border item-condensed">
+                                    支付方式:
+                                    <!-- <span class="item-note text-red1" ng-if="i.payment_method=='all_cash' || i.payment_method=='all_goods'">
+                                    {{i.payment_method |paymentChoice}}
+                                    </span>
+                                    <span class="item-note text-red1" ng-if="i.payment_method=='partition' ">
+                                        {{i.payment_method |paymentChoice}},{{i.percent_advance}}%首付款,{{i.percent_middle}}%质保款
+                                    </span>
+                                    <span class="item-note text-red1" ng-if="i.payment_method=='credit' ">
+                                        {{i.payment_method |paymentChoice}},以{{i.ref_day_extension |paymentChoice}}为准,最终支付可延期{{i.count_day_extension}}天
+                                    </span> -->
+                                    <payment-method order="i"></payment-method>
+                                </li>
+                            </div>
+
+                            <div class="divider-purple-white gap-10">
+                                <h6 class="pull-left bg-white">发货地点<br>
+                                </h6>
+                            </div>
+                            <div class="list gap-10">
+                                <li class="item item-no-border item-condensed">
+                                   {{[user.company_id,i.company_id,i.demand_company_id,i.location_storage_name]|judgeAnonymity }}
+                                <span ng-if="demand_detail.can_join" class="item-note text-gray2">
+                                    最小<strong class="text-black">{{i.amount_low}}</strong>最多<strong class="text-black">{{i.amount}} </strong>吨
+                                </span>
+                                <span ng-if="!demand_detail.can_join" class="item-note text-gray2"><strong>{{i.amount}}</strong>吨</span>
+                                </li>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <footer></footer>
+    </div>
+</ion-content>
+
+</ion-view>

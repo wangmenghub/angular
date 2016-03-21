@@ -1,0 +1,383 @@
+<div ng-controller="DriverOrderDetailCtrl" ng-init="init()">
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.navLeftHref='tab.driverOrderList';navbar.title='订单详情' ;navbar.navRightHref='';navbar.navRight='分享计划';">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                        <div class="row-bootstrap bg-white gap-20 gap-row">
+                            <div class="col-xs-12">
+                                <div class="pull-left">
+                                    <pass-title order="order"></pass-title>
+                                    <h6 class="text-gray1">物流单号：{{order.index}}</h6>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="bg-pink1 navbar4-fixed">
+                                <div class=" btn-group btn-group-justified text-center" role="group" aria-label="...">
+                                    <div class="btn-group" role="group">
+                                        <h6 class="text-red1">确认订单</h6>
+
+                                        <button type="button" class="btn-navbar4 {{ order.step | stepCSS:1 }}"><span>1</span></button>
+
+                                    </div>
+
+                                    <div class="btn-group" role="group">
+                                        <h6 class="text-red1">预付款</h6>
+
+                                        <button type="button" class="btn-navbar4-c btn-navbar4-active-custom {{ order.step | stepCSS:2 }}">
+                                            <span>2</span></button>
+
+                                    </div>
+
+                                    <div class="btn-group" role="group">
+                                        <h6 class="text-red1">物流</h6>
+
+                                        <button type="button" class="btn-navbar4-c {{ order.step | stepCSS:3 }}"><span>3</span></button>
+
+                                    </div>
+
+                                    <div class="btn-group" role="group">
+                                        <h6 class="text-red">检验</h6>
+
+                                        <button type="button" class="btn-navbar4-c {{ order.step | stepCSS:4 }}"><span>4</span></button>
+
+                                    </div>
+
+                                    <div class="btn-group" role="group">
+                                        <h6 class="text-red1">交割</h6>
+
+                                        <button type="button" class="btn-navbar4-c {{ order.step | stepCSS:5 }}"><span>5</span></button>
+
+                                    </div>
+                                </div>
+                                <span class="btn-navbar4-right-line"></span>
+                            </div>
+                            <div class="bg-white col-xs-12">
+                                <h5>
+                                    <!--<span class="col-xs-5">捷运物流 <label class="label-v"><strong>v</strong></label></span>-->
+                                    <company-label-for-detail company-id="order.company_traffic_id"
+                                                              type="traffic"></company-label-for-detail>
+                                    <span class="col-xs-2 text-center"><span class="ion-android-arrow-forward"></span></span>
+                                    <!--<company-label-for-detail company-id="order.company_buy_id" type="trade"-->
+                                    <!--class="text-right"></company-label-for-detail>-->
+                                </h5>
+
+                                <div class="clearfix"></div>
+                                <div class="gap-10"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="list-group col-sm-6 col-md-6">
+
+                                <rsc-address order="order" address-id="order.location_depart" address-name="提货地点"
+                                             address-icon="ion-ios-location-outline text-pink"
+                                             text-class="pull-right"></rsc-address>
+
+                                <rsc-address order="order" address-id="order.location_arrival" address-name="交货地点"
+                                             address-icon="ion-ios-location-outline text-green1"
+                                             text-class="pull-right"></rsc-address>
+
+                            </div>
+                            <div class="list-group col-sm-6 col-md-6">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-black">
+                                        <span class="ion-android-alarm-clock" aria-hidden="true"></span>
+                                        &nbsp;&nbsp;提货时间：
+                                        <span class="pull-right">
+                                            {{order.time_depart | rsctime}}
+                                        </span>
+                                    </h5>
+                                </li>
+                            </div>
+                            <div class="list-group col-sm-6 col-md-6">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-black">
+                                        <span class="ion-android-alarm-clock" aria-hidden="true"></span>
+                                        &nbsp;&nbsp;到货时间：
+                                        <span class="pull-right">
+                                            {{order.time_arrival | rsctime}}
+                                        </span>
+                                    </h5>
+                                </li>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <!--<div ui-view="step-view">-->
+
+
+                            <!--</div>-->
+                            <div class="driver-submit gap-10">
+                                <div class="col-xs-9  ">
+                                    <div class="gap-10"></div>
+                                    <h5 class=" text-black"><span class="ion-record text-yellow6"></span>&nbsp;&nbsp;司机：{{driver.real_name}}
+                                        <span class="text-purple2">{{car.number}} </span>
+                                    </h5>
+                                    <h6 class="text-gray2">&nbsp;&nbsp;&nbsp; {{car |carDes }}</h6>
+                                    <h6 class="text-purple2">&nbsp;&nbsp;&nbsp; {{routes.first.agree|driverStatus}}...</h6>
+
+                                </div>
+                                <div class="col-xs-3  text-right">
+                                    <a href="tel:{{driver.phone}}">
+                                        <button type="button" class="btn  btn-square btn-square-gary "><h2
+                                                class="glyphicon glyphicon-earphone text-gray2" aria-hidden="true"></h2></button>
+                                    </a>
+                                </div>
+                            </div>
+                            <h5 class="text-center gap-30">
+                                <a
+                                        ui-sref="tab.driverRouterCarList({order_id:order._id,route_id:route._id})"
+                                        class="text-red2">其余物流车辆信息
+                                    ></a></h5>
+
+                            <a href="" class="list-item-border"></a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12" ng-if="order.type=='TWO'">
+                            <h5 class="text-center"><strong>收货信息<br/></strong></h5>
+                            <!--款到付货-->
+                            <div class="list-group col-sm-6 col-md-6">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-black">
+                                        发货人：
+                                        <span class="pull-right text-red1"><strong>{{order.send_name+send_phone}}</strong></span>
+                                    </h5>
+                                </li>
+
+                            </div>
+
+                            <div class="list-group col-sm-6 col-md-6">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-black">
+                                        收货人：
+                                                    <span class="pull-right text-red1"><strong>
+                                                        {{order.receive_name+receive_phone}} </strong></span>
+                                    </h5>
+                                </li>
+                            </div>
+
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="row-bootstrap bg-white">
+                            <pass-balance-detail data="order"></pass-balance-detail>
+                            <div class="col-xs-12" ng-if="route.fact && route.status=='driving'">
+                                <h5 class="text-center"><strong>提货/交货详情<br/></strong></h5>
+                                <div class="list-group col-sm-12 col-md-12">
+                                    <li class="list-group-item list-condensed list-group-item-no-border">
+                                        <h5 class="text-black">
+                                            提货量(吨)：
+                                                <span class="pull-right text-red1"><strong>{{route.fact}}
+                                                    吨 </strong></span>
+                                        </h5>
+                                    </li>
+
+                                </div>
+                                <div class="list-group col-sm-12 col-md-12" ng-if="route.last &&route.status=='ready_give'">
+                                    <li class="list-group-item list-condensed list-group-item-no-border">
+                                        <h5 class="text-black">
+                                            交货量(吨)：
+                                                <span class="pull-right text-red1"><strong>{{route.last}}
+                                                    吨 </strong></span>
+                                        </h5>
+                                    </li>
+
+                                </div>
+                            </div>
+                            <div class="gap-15"></div>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-3"></div>
+
+                            <div class="col-xs-12" ng-if="!route.agree">
+                                <div ng-if="route.count>0">
+                                    <div class="col-xs-6 text-center">
+                                        <button ng-disabled="route.argee" ng-click="confirm(order)"
+                                                class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                                data-modal="modal-3">
+                                            确认订单
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-6 text-center">
+                                        <button ng-disabled="route.argee" ng-click="reject(order)"
+                                                class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                                data-modal="modal-3">
+                                            拒绝订单
+                                        </button>
+                                    </div>
+                                </div>
+                                <div ng-if="route.count<=0">
+                                    <div class="col-xs-12 text-center">
+                                        <button ng-disabled="true"
+                                                class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                                data-modal="modal-3">
+                                            无可用运输次数
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="gap-15"></div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+
+                            <div class="list-group col-sm-12 col-md-12" ng-if="route.agree&&route.status=='not_arrival'&&order.type=='TWO'">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-red1">提货吨数(吨)：
+                                       <span class="pull-right">
+                                            <input type="number"
+                                                   min="0"
+                                                   required
+                                                   ng-model="route.fact" class="text-gray1 input-text"
+                                                   placeholder="请输入提货吨数">
+                                        </span>
+                                    </h5>
+                                </li>
+
+                            </div>
+                            <div class="list-group col-sm-12 col-md-12" ng-if="route.agree&&route.status=='driving'&&order.type=='TWO'">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-red1">交货吨数(吨)：
+                                       <span class="pull-right">
+                                            <input type="number"
+                                                   min="0"
+                                                   required
+                                                   ng-model="route.last" class="text-gray1 input-text"
+                                                   placeholder="请输入交货吨数">
+                                        </span>
+                                    </h5>
+                                </li>
+
+                            </div>
+                            <div class="gap-15"></div>
+                            <div class="clearfix"></div>
+
+                            <div class="col-xs-12" ng-if="route.agree && route.status=='not_arrival'">
+                                <div class="col-xs-12 text-center">
+                                    <button ng-disabled="route.argee" ng-click="pickUp()"
+                                            class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                            data-modal="modal-3">
+                                        提货
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="gap-15"></div>
+                            <div class="clearfix"></div>
+
+                            <div class="col-xs-12" ng-if="route.status=='ready_get'">
+                                <div class="col-xs-12 text-center">
+                                    <button ng-disabled="true"
+                                            class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                            data-modal="modal-3">
+                                        等待过磅
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-xs-12" ng-if="route.status=='driving'">
+                                <div class="col-xs-6 text-center">
+                                    <a ui-sref="tab.driverAddMessage({order_id:order._id,route_id:route._id})">
+                                        <button ng-disabled="route.argee" ng-click="logLocation()"
+                                                class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                                data-modal="modal-3">
+                                            备注
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <button ng-disabled="route.argee" ng-click="deliverGoods()"
+                                            class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                            data-modal="modal-3">
+                                        申请交货
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12" ng-if="route.status=='ready_give'">
+                                <div class="col-xs-6 text-center">
+                                    <a ui-sref="tab.driverAddMessage({order_id:order._id,route_id:route._id})">
+                                        <button ng-disabled="route.argee" ng-click="logLocation()"
+                                                class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                                data-modal="modal-3">
+                                            备注
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <button ng-disabled="true"
+                                            class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                            data-modal="modal-3">
+                                        等待收货
+                                    </button>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="gap-15"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div ng-if="order.step==4.5">
+                            <div class="list-group col-sm-6 col-md-6">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-red1">申请谅解金额(元)：
+                                       <span class="pull-right">
+                                            <input type="number"
+                                                   min="0"
+                                                   ng-model="offer.price" class="text-gray1 input-text"
+                                                   placeholder="请输入申请谅解金额">
+                                        </span>
+                                    </h5>
+                                </li>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="col-xs-6 text-center">
+                                    <button type="button"
+                                            ng-disabled="btnApply"
+                                            ng-click="applyUnderstanding(order)"
+                                            class="btn btn-yellow btn-lg btn-block bg-white-border text-yellow3 btn-noBorder">
+                                        申请谅解
+                                    </button>
+                                </div>
+                                <div class="col-xs-6 text-center">
+                                    <button ng-disabled="btnAccept"
+                                            class="btn btn-yellow btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder"
+                                            ng-click="accept(order)"
+                                            data-modal="modal-3">
+                                        接受检验结果
+                                    </button>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="gap-15"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3"></div>
+                        <div class="clearfix"></div>
+
+                        <!-- </div> -->
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <footer></footer>
+
+
+</div>
+</ion-content>
+</div>
+
+

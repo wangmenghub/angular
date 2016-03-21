@@ -1,0 +1,186 @@
+﻿<div ng-controller="tradeCarListPlanCtrl">
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='物流计划' ;navbar.navRightHref='';navbar.navRight=''; navbar.navRightIco='';  navbar.navLeftHref='tab.tradeCarListPlan-1({companyid:companyId})';navbar.navRightHref='tab.';">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <form name="myform">
+                        <div class="row-bootstrap bg-white">
+                            <div class="list">
+                                <a class="item item-icon-right item-border-top-no">
+                                    产品名称
+                                    <span class="item-note input-ionic">
+                                        <input type="text" class="text-right"
+                                                               name="type"
+                                                               placeholder="请输入"
+                                                               aria-describedby="sizing-addon1"
+                                                               ng-model="demand.type"
+                                                               required
+                                                               maxlength="20"
+                                                               ng-pattern="/^(?!^\d+$)[(\u4e00-\u9fa5)+1-9\dA-Za-z0-9]{2,40}[^`~!@$%^&()+=|\\\][\]\{\}:;'\,.<>?]$/"
+                                                                >
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                    <!--  -->
+                                    <div class="form-error"
+                                                         ng-messages="myform.type.$dirty&&myform.type.$error">
+                                        <div ng-message="required">不能为空</div>
+                                        <div ng-message="pattern">请输入3-40个字符</div>
+                                    </div>
+                                </a>
+
+                                <a class="item item-icon-right" ng-click="changeDate()">
+                                    计划时间
+                                    <span class="item-note input-ionic">
+                                       <span ng-if="!demand.month" > 选择近三个月</span>
+                                       <span ng-if="demand.month">{{demand.month |rsctime}}</span>
+
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+
+                                <a class="item item-icon-right" >
+                                    货物重量(吨)
+                                    <span class="item-note input-ionic">
+                                        <input type="text" name="amount" placeholder="请输入" class="text-right" min='1' ng-model="demand.amount" required ng-pattern="/^[1-9][0-9]{0,6}(\.\d{1,2})?$/">
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                    <!--  -->
+                                    <div class="form-error"
+                                                         ng-messages="myform.amount.$dirty&&myform.amount.$error">
+                                                        <div ng-message="required">不能为空</div>
+                                                        <div ng-message="pattern">请输入整数</div>
+                                                    </div>
+                                </a>
+                                <a class="item item-icon-right" >
+                                    运输单价(元/吨)
+                                    <span class="item-note input-ionic">
+                                        <input type="text" name="price" placeholder="请输入" class="text-right" min='1' ng-model="demand.price" required ng-pattern="/^[1-9][0-9]{0,6}(\.\d{1,2})?$/">
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                    <!--  -->
+                                    <div class="form-error"
+                                                         ng-messages="myform.price.$dirty&&myform.price.$error">
+                                        <div ng-message="required">不能为空</div>
+                                        <div ng-message="pattern">请输入整数</div>
+                                    </div>
+                                </a>
+                                <a class="item item-icon-right" ng-click="changeArr('start')">
+                                    所在地区(提货)
+                                    <span class="item-note input-ionic">
+                                       <span ng-if="!demand.startChn" > 选择提货地区</span>
+                                       <span ng-if="demand.startChn">{{demand.startChn}}</span>
+
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-right">
+                                    详细地址(提货)
+                                    <span class="item-note input-ionic">
+                                        <input type="text" class="text-right"
+                                                               name="start_addr"
+                                                               placeholder="请输入详细地址"
+                                                               aria-describedby="sizing-addon1"
+                                                               ng-model="demand.start_addr"
+                                                               required
+                                                               maxlength="20"
+                                                               ng-pattern="/^(?!^\d+$)[(\u4e00-\u9fa5)+1-9\dA-Za-z0-9]{3,40}[^`~!@$%^&()+=|\\\][\]\{\}:;'\,.<>?]$/"
+                                                                >
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                    <!--  -->
+                                    <div class="form-error"
+                                                         ng-messages="myform.start_addr.$dirty&&myform.start_addr.$error">
+                                                        <div ng-message="required">提货地址不能为空</div>
+                                                        <div ng-message="pattern">请输入4-40个字符</div>
+                                                    </div>
+                                </a>
+
+                                <a class="item item-icon-right" ng-click="changeArr('end')">
+                                    所在地区(交货)
+                                    <span class="item-note input-ionic">
+                                       <span ng-if="!demand.endChn" > 选择交货地区</span>
+                                       <span ng-if="demand.endChn">{{demand.endChn}}</span>
+
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-right item-border-bottom-no">
+                                    详细地址(交货)
+                                    <span class="item-note input-ionic">
+                                        <input type="text" class="text-right"
+                                                               name="end_addr"
+                                                               placeholder="请输入详细地址"
+                                                               aria-describedby="sizing-addon1"
+                                                               ng-model="demand.end_addr"
+                                                               required
+                                                               maxlength="20"
+                                                               ng-pattern="/^(?!^\d+$)[(\u4e00-\u9fa5)+1-9\dA-Za-z0-9]{3,40}[^`~!@$%^&()+=|\\\][\]\{\}:;'\,.<>?]$/"
+                                                                >
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                    <!--  -->
+                                    <div class="form-error"
+                                                         ng-messages="myform.end_addr.$dirty&&myform.end_addr.$error">
+                                                        <div ng-message="required">交货地址不能为空</div>
+                                                        <div ng-message="pattern">请输入4-40个字符</div>
+                                                    </div>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="row-bootstrap bg-white gap-10">
+                            <!-- 
+                            <div class="col-xs-3 minHeight"></div>
+                            <div class="col-xs-6 divider-black gap-20">
+                                继续创建物流计划
+                            </div>
+                            <div class="col-xs-3"></div>
+                            -->
+
+                            <div class="clearfix"></div>
+                            <div class="col-sm-3 minHeight"></div>
+                            <div class="col-sm-6 col-xs-12 gap-20">
+                                <button class="btn btn-block btn-yellow md-trigger md-setperspective" data-modal="modal-3" ng-disabled="myform.$invalid" ng-click="planAdd()">
+                                    发布物流计划
+                                </button>
+                                <div class="gap-5"></div>
+                            </div>
+                            <div class="col-sm-3"></div>
+                            <div class="clearfix"></div>
+
+                            <h6 class="col-xs-12 text-red5">提示：帮助你的朋友企业发布物流计划，可赚取物流差价哟~</h6>
+                            <!--<div class="col-xs-12 gap-15">-->
+                                <!--<button type="button" class="btn btn-spare text-black pull-left"><img src="/img/158/icon-1.jpg"> 邀请</button>-->
+                                <!---->
+                                <!--<button type="button" class="btn btn-spare text-gray2 pull-right"><img src="/img/158/icon-3.jpg"> 朋友圈</button>-->
+                                <!--<button type="button" class="btn btn-spare text-gray2 pull-right"><img src="/img/158/icon-2.jpg"> 微信</button>-->
+                            <!--</div>-->
+
+                            <div class="clearfix"></div>
+                            <div class="gap-15"></div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+
+    </div>
+
+    <footer></footer>
+
+
+        </div>
+    </ion-content>
+</div>
+
+

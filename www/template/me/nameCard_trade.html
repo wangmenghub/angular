@@ -1,0 +1,122 @@
+﻿<div>
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back';navbar.navLeft='返回'; navbar.title='名片' ;navbar.navRightHref='tab.';navbar.navRight='分享计划';navbar.navLeftHref='tab.';navbar.navLeftClick='MyRsc.goback()' ;navbar.navRightClick='share()' ;">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="pass='active'"></navpc>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="row-bootstrap text-center text-white home-tit1">
+                            <div class="gap-50">
+                                <h3>{{MyRsc.company_info.full_name}}</h3>
+                                <img class="img-circle face3" ng-src="{{MyRsc.portrait_url}}" class="gap-25">
+
+                                <h2 class="gap-20">
+                                    {{MyRsc.userinfo.real_name}}
+                                    <br/>
+                                    <label class="label-role-purple">
+                                    <!-- {{MyRsc.userinfo.role |rolefilter}} -->
+                                    {{MyRsc.userinfo.post}}
+                                    </label>
+                                </h2>
+                                <h5>{{MyRsc.company_info.sub_type |subType}}</h5>
+                                <h5 class="text-center">个性签名:{{MyRsc.userinfo.sign}}</h5>
+                                <div class="col-xs-3">&nbsp;</div>
+                                <div class="col-xs-6">
+                                    <h4 class="text-left gap-25" ng-if="MyRsc.userinfo.phone"><span class="ion-ios-telephone-outline"></span> {{MyRsc.userinfo.phone}}
+                                    </h4>
+                                    <h4 class="text-left" ng-if="MyRsc.userinfo.mail"><span class="ion-ios-filing-outline"></span> {{MyRsc.userinfo.mail}}</h4>
+                                    <h4 class="text-left" ng-if="MyRsc.userinfo.role!='TRAFFIC_DRIVER'"><span
+                                            class="ion-ios-location-outline"></span>
+                                        <span ng-if="MyRsc.company_info.province!=MyRsc.company_info.city">{{MyRsc.company_info.province}}{{MyRsc.company_info.city}}{{MyRsc.userinfo.district}}{{MyRsc.userinfo.addr}}</span>
+                                        <span ng-if="MyRsc.company_info.province==MyRsc.company_info.city">{{MyRsc.company_info.province}}{{MyRsc.userinfo.district}}{{MyRsc.userinfo.addr}}</span>
+                                        </h4>
+                                    <h4 class="text-left" ng-if="MyRsc.userinfo.role=='TRAFFIC_DRIVER'"><span
+                                            class="ion-ios-location-outline"></span>
+                                            <span ng-if="MyRsc.userinfo.province != MyRsc.userinfo.city">{{MyRsc.userinfo.province}}{{MyRsc.userinfo.city}}{{MyRsc.userinfo.district}}{{MyRsc.userinfo.addr}}</span>
+                                            <span ng-if="MyRsc.userinfo.province == MyRsc.userinfo.city">{{MyRsc.userinfo.province}}{{MyRsc.userinfo.district}}{{MyRsc.userinfo.addr}}</span>
+                                    </h4>
+                                </div>
+                                <div class="col-xs-3"></div>
+                                <div class="clearfix"></div>
+                                <div class="col-xs-1">&nbsp;</div>
+                                <div class="col-xs-10 gap-40 text-center" ng-if="MyRsc.userinfo.role!='TRAFFIC_DRIVER'">
+                                    <h5>{{MyRsc.company_info.des}}</h5>
+                                </div>
+                                <div class="col-xs-1"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="gap-120" ng-if="MyRsc.userinfo.role!='TRAFFIC_DRIVER'&&MyRsc.userinfo.role!='TRAFFIC_ADMIN'">
+                                <div class="col-xs-6 gap-5 text-center">
+                                    <a href="#/tab/companyProHome">
+                                        <button type="button" class="btn btn-yellow btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder">
+                                            企业主页
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="col-xs-6 gap-5 text-center">
+                                    <a href="#/tab/mySet">
+                                        <button class="btn btn-block btn-yellow bg-white btn-square-gary md-trigger md-setperspective"
+                                                data-modal="modal-3">
+                                            个人设置
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="gap-100"></div>
+                            </div>
+
+                            <div class="gap-120" ng-if="MyRsc.userinfo.role=='TRAFFIC_ADMIN'">
+                                <div class="col-xs-12 gap-5 text-center">
+                                    <a ui-sref="tab.companyProHome">
+                                        <button type="button" class="btn btn-yellow btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder">
+                                            主页
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="gap-100"></div>
+                            </div>
+
+                            <div class="gap-120" ng-if="MyRsc.userinfo.role=='TRAFFIC_DRIVER'">
+                                <div class="col-xs-6 gap-5 text-center">
+                                    <a href="tel:{{MyRsc.userinfo.phone}}">
+                                        <button type="button" class="btn btn-yellow btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder">
+                                            打电话
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="col-xs-6 gap-5 text-center">
+                                    <a ui-sref="tab.DriverHomeSelf({user_id:MyRsc.userinfo._id})" >
+                                        <button class="btn btn-block btn-yellow bg-white btn-square-gary md-trigger md-setperspective"
+                                                data-modal="modal-3">
+                                            主页
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="gap-100"></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <footer></footer>
+
+
+        </div>
+    </ion-content>
+</div>
+
+

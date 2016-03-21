@@ -1,0 +1,103 @@
+<div ng-controller="carReview" ng-init="init()">
+  <navbar
+    ng-init="navbar.navLeftIco='ion-ios-arrow-back';navbar.navLeft='返回'; navbar.title='车辆详情' ;navbar.navLeftHref='tab.MyCarListGroupByType';">
+  </navbar>
+  <ion-content>
+    <div class="transitions-content">
+      <div class="container gap-45">
+        <div class="row-bootstrap nav-pc-frameline">
+          <div class="col-sm-3 col-md-3">
+            <navpc ng-init="pass='active'"></navpc>
+          </div>
+
+          <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="row-bootstrap gap-20">
+              <form name="add_form" ng-submit="add()">
+                <div class="list bg-white">
+                  <a class="item item-icon-right">车辆类型
+                      <span class="pull-right">
+                          {{car.type | carType}}
+                      </span>
+                  </a>
+                  <a class="item item-icon-right">车牌号码
+                    <span class="pull-right">
+                        <input type="text" class="input-text" ng-model="car.number" disabled />
+                    </span>
+                  </a>
+                  <a class="item item-icon-right">可载重货
+                    <span class="pull-right">{{car.weight| carW}}</span>
+                  </a>
+                  <a class="item item-icon-right">司机姓名
+                    <span class="pull-right">
+                        {{driverInfo.real_name}}
+                        {{driverInfo.phone}}
+                      </span>
+                  </a>
+                </div>
+                <div class="clearfix"></div>
+                <div class="list-group bg-white">
+                  <a class="item item-icon-right">车辆长度
+                    <span class="pull-right">
+                      {{car.long|carLong}}
+                    </span>
+                  </a>
+                  <a class="item item-icon-right">
+                    <span class="pull-left gap-5">行驶证照片</span>
+                      <span class="pull-right">
+                          <img src="{{car.xing_shi_zheng_url | imgDefault}}" class="card2">
+                      </span>
+                  </a>
+                  <a class="item item-icon-right">
+                    <span class="pull-left gap-5">运营证照片</span>
+                      <span class="pull-right">
+                          <img src="{{car.yun_ying_zheng_url | imgDefault}}" class="card2">
+                      </span>
+                  </a>
+                  <a class="item item-icon-right">
+                    <span class="pull-left gap-5">车辆照片</span>
+                      <span class="pull-right">
+                          <img src="{{car.che_tou_zhao_url | imgDefault}}" class="card2">
+                      </span>
+                  </a>
+                </div>
+
+                <div ng-if="!CarappliCation" class="row-bootstrap gap-50">
+                  <div class="col-xs-12">
+                    <div class="col-xs-6 text-center">
+                        <button ng-click="appliCationDrive(true)" type="button" class="btn btn-yellow btn-lg btn-block bg-white-border text-yellow3 btn-noBorder">
+                          同意
+                        </button>
+                    </div>
+                    <div class="col-xs-6 text-center">
+                        <button ng-click="notAppliCationDrive(false)" type="button" class="btn btn-yellow btn-lg btn-block bg-white-border text-yellow3 btn-noBorder">
+                          拒绝
+                        </button>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="gap-15"></div>
+                  </div>
+                </div>
+
+                <div ng-if="CarappliCation" class="bg-white text-center">
+                  <div class="col-sm-3 minHeight"></div>
+                  <div class="col-sm-6 col-xs-12 text-center gap-30">
+                    <button  ng-click="notAppliCationDrive(false)" type="button" class="btn btn-yellow btn-lg btn-block bg-white-border text-yellow3 btn-noBorder">
+                      取消认证
+                    </button>
+
+                  </div>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer></footer>
+    </div>
+  </ion-content>
+</div>
+
+
+
+

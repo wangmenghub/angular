@@ -1,0 +1,640 @@
+<div>
+<navbar></navbar>
+
+<ion-content>
+
+
+            <div class="container gap-45">
+                <div class="row-bootstrap">
+                    <div class="nav-2 bg-white mobi-hide nav-pc-line2">
+                        <div class="col-lg-3 col-md-3 col-sm-3">
+                            <a href="#" style="color: #979797;" ng-click="text()">移动端 APP <span class="glyphicon glyphicon-qrcode"></span></a>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 text-center text-brown1">
+                            <span>值得信赖的大宗商品交易平台</span>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-3 text-right">
+                            <a ui-sref="tab.rushSearchAdv"><button class="btn navRight-btn navRight-btn-gray">搜索采购</button></a>
+                            <!-- <a ui-sref="tab.TranspSearchAdv"><button class="btn navRight-btn navRight-btn-gray">搜索货源</button></a>  -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <!-- transitions-content 是否保留 -->
+            <div class="transitions-content">
+             <div class="container">
+            <div class="row-bootstrap">
+               <div class="pc-width">
+                <div class="col-sm-2 col-md-2 mobi-hide nav-pc-frameline1">
+                    <ul class="nav nav-pills-pc nav-stacked text-left">
+                        <li ng-repeat="i in roles" ng-class="{{i.active}}">
+                            <a ng-href="#/tab/{{i.href}}"><h4>{{i.title}}</h4></a>
+                        </li>
+                    </ul>
+                    <!-- <navpc ng-init="iswelcome='active'"></navpc> -->
+                </div>
+              </div>
+
+
+                <!--主体内容-->
+                <div class="col-xs-12 col-sm-7 col-md-7">
+                    <div class="row-bootstrap gap-20">
+                        <!-- <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                <img src="./img/general/banner5.jpg" class="img-responsive">
+                                </div>
+
+                            </div>
+                            <div class="swiper-pagination"></div>
+
+                        </div> -->
+                        <ion-slide-box auto-play="true" does-continue="true" slide-interval=2000 show-pager="true">
+                          <ion-slide ng-repeat="i in [5,1,2,3,4]">
+                            <div class="box">
+                                <img ng-src="./img/general/banner{{i}}.jpg" class="img-responsive" />
+                            </div>
+                          </ion-slide>
+                        </ion-slide-box>
+                    </div>
+                    <div class="row-bootstrap pc-hide">
+                        <div class="btn-group btn-group-justified text-center gap-10" role="group" aria-label="...">
+                            <div class="col-xs-3" ng-repeat="i in shortcutRole">
+                                <a ui-sref='tab.{{i.href}}'>
+                                    <img ng-src="{{i.src}}"/>
+                                    <h6 class="text-gray1">{{i.title}}</h6>
+                                </a>
+                            </div>
+                        </div>
+
+                         <div class="btn-group btn-group-justified text-center gap-10 bg-all bg-all1 bg-6">
+                            <div class="btn-group" role="group" ng-repeat="i in [{id:2 ,txt:'行业分析',xor:66},{id:4 ,txt:'采购需求',xor:68},{id:8 ,txt:'价格行情',xor:72},{id:16 ,txt:'实时物流',xor:80}]">
+                                <a ng-click="getXor({{i.id}})">
+                                    <button type="button" class="btn btn-navbar2 " ng-class="xor=={{i.xor}} ? 'active':''">{{i.txt}}</button>
+                                </a>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="gap-20 text-left">
+                            <div ng-if="xor==66" class="bg-all bg-6 text-brown1">
+                                <h3><span class="pull-right text-gray2">{{companyS.total|number}}<small> 家企业</small></span>行业上下游</h3>
+                                <div class="col-xs-4">
+                                    <h5>交易型企业</h5>
+                                    <h3>{{companyS.trade|number}} <small class="text-brown1">家</small></h3>
+                                </div>
+                                <!-- <div class="col-xs-4">
+                                    <h5>煤焦企业</h5>
+                                    <h3>28,171 <small class="text-brown1">家</small></h3>
+                                </div> -->
+                                <div class="col-xs-4">
+                                    <h5>物流型企业</h5>
+                                    <h3>{{companyS.traffic|number}} <small class="text-brown1">家</small></h3>
+                                </div>
+                                <div>
+                                    <h5 class="pull-left">采购:销售企业比例</h5>
+                                    <h3 class="pull-right">2:3</h3>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div ng-if="xor==68" class="bg-all bg-7 text-brown1 gap-10">
+                                <h3>采购需求</h3>
+                                <h6 class="text-brown2"><span class="pull-right">共<strong> {{offerCountWeek|number}} </strong>笔抢单</span>本周新增<strong>+{{weightDemandDaily|fmoney}}</strong> 吨</h6>
+                                <div class="pull-left">
+                                    <h5>当前采购需求</h5>
+                                    <h3>{{weightAndOfferDemandValid.count_amount |fmoney}}<small class="text-brown1">吨({{weightAndOfferDemandValid.count_offer|number}}笔抢单)</small></h3>
+                                </div>
+                                <div class="pull-right text-right">
+                                    <h5>当前抢单企业</h5>
+                                    <h3>687<small class="text-brown1">家</small></h3>
+                                </div>
+                                <div class="clearfix"></div>
+                                <h5><span class="pull-right"><strong>{{weightDemandTotal |fmoney}}</strong>吨</span>采购总需求</h5>
+                                <div class="pull-left">
+                                    <h5>已报价总次数</h5>
+                                    <h3>2,198,562<small class="text-brown1">次</small></h3>
+                                </div>
+                                <div class="pull-right text-right">
+                                    <h5>平均每单报价</h5>
+                                    <h3>{{avgOfferPerDemand|number}}<small class="text-brown1">次</small></h3>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div ng-if="xor==72" class="bg-all bg-8 text-green4 gap-10">
+                                <h3><span class="pull-right">动力煤 <small class="ion-chevron-down text-green4"></small></span>价格行情</h3>
+                                <h6><span class="pull-right">今日成交价：<strong>￥{{priceDealStat.low|fmoney}} - ￥{{priceDealStat.high|fmoney}}</strong></span>今日报价：<strong>￥{{priceCallStat.low|fmoney}} - ￥{{priceCallStat.high|fmoney}}</strong></h6>
+                                <img src="./img/common/bg-8-img.png" class="img-responsive gap-20">
+                                <div class="clearfix gap-10"></div>
+                            </div>
+                            <div ng-if="xor==80" class="bg-all bg-9 text-white gap-10">
+                                <h3 class="pull-left">实时物流</h3>
+                                <div class="pull-right">
+                                    <h6 class="text-yellow9">本周新增车辆    <strong>+{{tLineS.week_truck |number}}</strong> 辆</h6>
+                                    <h6 class="text-yellow9">本周新增运货量    <strong>+{{passS.demand_week_amount |fmoney}}</strong> 吨</h6>
+                                    <h6 class="text-yellow9">本周新增线路    <strong>+{{tLineS.week_line |number}}</strong> 条</h6>
+                                </div>
+                                <div class="clearfix"></div>
+                                <h5><span class="pull-right"><strong>{{passS.demand_wait_amount |fmoney}}</strong>吨 ({{passS.offer_wait_count |fmoney}} 笔抢单)</span>待运输货源 </h5>
+                                <div class="clearfix"></div>
+                                <div class="pull-left">
+                                    <h5>共计车辆</h5>
+                                    <h3>{{tLineS.total_truck |number}} <small class="text-white">辆</small></h3>
+                                </div>
+                                <div class="pull-right text-right">
+                                    <h5>共计线路</h5>
+                                    <h3>{{tLineS.total_line |number}} <small class="text-white">条</small></h3>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="pull-left">
+                                    <h5>总运输货源</h5>
+                                    <h3>{{passS.demand_total_amount |fmoney}} <small class="text-white">吨</small></h3>
+                                </div>
+                                <div class="pull-right text-right">
+                                    <h5>平均每单报价</h5>
+                                    <h3>{{passS.average_price |fmoney}} <small class="text-white">次</small></h3>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <!--主体内容结束-->
+        <div class="col-sm-3 col-md-3 mobi-hide">
+            <div class="row2-bootstrap gap-20">
+                <button ng-if="$first" class="btn btn-yellow text-white" ng-repeat="i in shortcutRole"><a ui-sref="tab.{{i.href}}"><i class="icon ion-ios-copy-outline"></i> {{i.title}}</a></button>
+                <div class="btn-group text-center gap-10" >
+                    <div ng-if="!$first && $index<7" class="col-sm-4" ng-repeat="i in shortcutRole">
+                        <a ui-sref="tab.{{i.href}}">
+                            <img ng-src="{{i.src}}"/>
+                            <h6 class="text-gray1">{{i.title}}</h6>
+                        </a>
+                    </div>
+                </div>
+                <div class="gap-10"></div>
+            </div>
+        </div>
+
+
+<!-- web -->
+        <div class="col-sm-12 col-md-12 col-xs-12 gap-20 bg-earth-1">
+            <div class="row-bootstrap mobi-hide">
+                <div class="col-xs-2 bg-1 text-brown1">
+                    <h3>所有企业数</h3>
+                    <h6 class="text-gray2"><strong>{{companyS.total |number}}</strong>家企业</h6>
+                    <h5 class="gap-40">钢厂企业</h5>
+                    <h5><strong>0</strong> 家</h5>
+                    <h5 class="gap-30">煤焦企业</h5>
+                    <h5><strong>{{companyS.trade |number}}</strong> 家</h5>
+                    <h5 class="gap-30">物流公司</h5>
+                    <h5><strong>{{companyS.traffic |number}}</strong> 家</h5>
+                    <div class="pull-right gap-25">
+                        <h5>采购:销售企业比例</h5>
+                        <h3 class="text-right">2 : 3</h3>
+                    </div>
+                    <div class="clearfix"></div>
+                    <h6 class="text-red1 gap-15">
+                        <a href="" class="text-red1">企业影响力排行</a>    |
+                        <a href="" class="text-red1">最新注册</a>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        1 亚鑫集团 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        2 吕梁市鑫玉煤焦有限公司 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        3 东信钢材第二生产厂 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                </div>
+                <div class="col-xs-2 bg-2 text-brown1">
+                    <h3>采购需求</h3>
+                    <h6 class="text-gray2">本周新增&nbsp;&nbsp;&nbsp;&nbsp;<strong>+{{weightDemandDaily|fmoney}} 吨</strong></h6>
+                    <h6 class="text-gray2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;共<strong> {{offerCountWeek|number}} </strong>笔抢单</h6>
+                    <h5 class="gap-30">当前采购需求</h5>
+                    <h5><strong>{{weightAndOfferDemandValid.count_amount |fmoney}}</strong> 吨 ({{weightAndOfferDemandValid.count_offer|number}}笔抢单)</h5>
+                    <h5 class="gap-25">当前抢单企业</h5>
+                    <h5><strong>687</strong> 家</h5>
+                    <h5 class="gap-25">采购总需求</h5>
+                    <h5><strong>{{weightDemandTotal |fmoney}}</strong> 吨</h5>
+                    <h5 class="gap-25">已报价总次数</h5>
+                    <h5><strong>2,198,562</strong> 次</h5>
+                    <div class="pull-right gap-25">
+                        <h5>平均每单报价</h5>
+                        <h3 class="text-right">{{avgOfferPerDemand|number}}次</h3>
+                    </div>
+                    <div class="clearfix"></div>
+                    <h6 class="text-red1 gap-15">
+                        <a href="" class="text-red1">采购排行</a>    |
+                        <a href="" class="text-red1">销售排行</a>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        1 亚鑫集团 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        2 吕梁市鑫玉煤焦有限公司 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        3 东信钢材第二生产厂 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                </div>
+                <div class="col-xs-2 bg-3 text-green4">
+                    <h3>动力煤 <i class="ion-chevron-down"></i> 价格行情</h3>
+                    <h6>今日报价：<strong>￥{{priceCallStat.low|fmoney}} - ￥{{priceCallStat.high|fmoney}}</strong></h6>
+                    <h6>今日成交价：<strong>￥{{priceDealStat.low|fmoney}} - ￥{{priceDealStat.high|fmoney}}</strong></h6>
+                    <div class="clearfix"></div>
+                    <img src="./img/common/bg-3-img.png">
+
+                    <h6 class="text-red1 gap-50">
+                        <a href="" class="text-red1">最低成交价排行</a>    |
+                        <a href="" class="text-red1">节省排行</a>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        1 亚鑫集团 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        2 吕梁市鑫玉煤焦有限公司 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        3 东信钢材第二生产厂 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                </div>
+                <div class="col-xs-2 bg-4 text-white">
+                    <h3>实时物流</h3>
+                    <h6 class="text-yellow9">本周新增车辆 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>+{{tLineS.week_truck|number}}</strong> 辆</h6>
+                    <h6 class="text-yellow9">本周新增货源 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>+{{passS.demand_week_amount | fmoney}}</strong> 吨</h6>
+                    <h6 class="text-yellow9">本周新增线路 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>+{{tLineS.week_line|number}}</strong> 条</h6>
+                    <h5 class="gap-25">待运输货源</h5>
+                    <h5><strong>{{passS.demand_wait_amount |fmoney}}</strong> 吨 ({{passS.offer_wait_count}} 笔抢单)</h5>
+                    <h5 class="gap-25">当前抢单企业</h5>
+                    <h5>({{passS.offer_total_count}} 笔抢单)</h5>
+                    <h5 class="gap-25">共计车辆 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 共计线路</h5>
+                    <h5><strong>{{tLineS.total_truck|number}}</strong> 辆 &nbsp;&nbsp;&nbsp; <strong>{{tLineS.total_line|number}}</strong> 条</h5>
+                    <h5 class="gap-25">总运输货源</h5>
+                    <h5><strong>{{passS.demand_total_amount|fmoney}}</strong> 吨</h5>
+                    <div class="pull-right gap-25">
+                        <h5>平均每单报价</h5>
+                        <h3 class="text-right">{{passS.average_price|number}}次</h3>
+                    </div>
+                    <div class="clearfix"></div>
+                    <h6 class="text-red1 gap-15">
+                        <a href="" class="text-red1">运输最多</a>    |
+                        <a href="" class="text-red1">线路最多</a>    |
+                        <a href="" class="text-red1">车辆最多</a>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        1 亚鑫集团 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        2 吕梁市鑫玉煤焦有限公司 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        3 东信钢材第二生产厂 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                </div>
+                <div class="col-xs-2 bg-5 text-white">
+                    <h3>金融信用</h3>
+                    <h6 class="text-yellow9">本周授出 ￥<strong>{{creditS.give_week |fmoney}}</strong>元</h6>
+                    <h5 class="gap-40">总授出信用 (元)</h5>
+                    <h3><strong>￥{{creditS.give_total |fmoney}}</strong></h3>
+                    <h5 class="gap-30">流通中的信用 (元)</h5>
+                    <h3><strong>￥{{creditS.effective_total |fmoney}}</strong></h3>
+                    <h5 class="gap-30">总授信企业</h5>
+                    <h5><strong>{{creditS.credit_company_count|number}}</strong> 家</h5>
+                    <div class="clearfix"></div>
+                    <h6 class="text-red1 gap-90">
+                        <a href="" class="text-red1">授出最多</a>    |
+                        <a href="" class="text-red1">获得最多</a>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        1 亚鑫集团 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        2 吕梁市鑫玉煤焦有限公司 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                    <h6 class="text-black gap-10">
+                        3 东信钢材第二生产厂 <label class="label-v"><strong>v</strong></label>
+                    </h6>
+                </div>
+            </div>
+            <!-- 交易块  非物流可见-->
+            <div ng-controller="rushCtrl" ng-init="verification()">
+            <div class="row-bootstrap gap-20 text-center">
+                <h3>最新采购 &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-gray1">|</span> &nbsp;&nbsp;&nbsp;&nbsp;<small class="text-black">{{total_page}}笔抢单进行中</small></h3>
+                <h5><a href="">全部</a><a ng-href="#/tab/rushSearchAdv/{{i.chn}}" ng-repeat="i in category" >&nbsp;&nbsp; {{i.chn}}</a></h5>
+            </div>
+
+            <div class="row1-bootstrap" >
+                <div ng-if="$index<3" class="col-md-4 col-sm-4 gap-10" ng-repeat="i in lists">
+                    <a  ng-href="#/tab/rushDetail/{{i._id}}">
+                    <div class="gap-row bg-white">
+                        <div class="col-xs-12">
+                            <div class="pull-left">
+                                <h3 class=""><label class="label-supply-red">采购</label>&nbsp; {{i.category_chn}}
+                                    <span class="text-purple2">{{i.amount}}吨</span>
+                                </h3>
+                                <company-label company-id="i.company_id" type="trade"></company-label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12 bg-yellow3">
+                            <!-- <div class="col-xs-6 text-brown"  ng-repeat="y in i.att_product">
+                                <div ng-if=" $index < 2">
+                                <span class="h5 pull-left">{{i.desc[[y.name]][0]}}</span>
+                                <span class="h5 pull-right">{{y.value}}{{i.desc[[y.name]][1]}}</span>
+                                </div>
+                            </div> -->
+                            <my-attr-prod-info attr-product='i.att_product' order="order" attr-show='4' attr-category="i.category" status="true"></my-attr-prod-info>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="list-group gap-5">
+                            <li class="list-group-item list-condensed1 list-group-item-no-border mobi-hide">
+                                <h5 class="text-black"><span class="ion-android-alarm-clock text-black" aria-hidden="true"></span>
+                                    &nbsp;&nbsp;交货时间：{{i.time_traffic |rsctime}}
+                                </h5>
+                            </li>
+
+                            <li class="list-group-item list-condensed1 list-group-item-no-border mobi-hide">
+                                <h5 class="text-red"><span class="glyphicon glyphicon-jpy text-red" aria-hidden="true"></span>
+                                    &nbsp;&nbsp;{{i.payment_advance}}%预付款,{{i.payment_style|payment}},{{i.can_join|canjoin}}
+                                </h5>
+                            </li>
+
+                            <rsc-address order='i' address-id="i.location_storage" address-name="交货地点"
+                             address-icon="ion-ios-location-outline text-purple2"
+                             text-class=""></rsc-address>
+                             <li class="item  item-icon-right item-no-border item-condensed">
+                                <span class="item-note">
+                                    <small>已有 {{i.count}}家 企业报价</small>
+                                </span>
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>
+                            </li>
+                        </div>
+
+                        <div class="col-xs-2 minHeight"></div>
+                        <div class="col-xs-8 text-center mobi-hide">
+                           <button class="btn btn-yellow text-center">抢单</button>
+                        </div>
+                        <div class="col-xs-2"></div>
+                        <div class="clearfix"></div>
+                        </a>
+                    </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center gap-20">
+                        <a href="#/tab/rush" class="text-gray2">查看所有 >></a>
+                    </div>
+            </div>
+            </div>
+            <div class="clearfix"></div>
+
+            <!-- 物流块 -->
+                <div ng-controller="rushTranspCtrl" ng-init="init()">
+                    <div class="row-bootstrap gap-30 text-center">
+                        <h3>最新货源 &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-gray1">|</span> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <small class="text-black">{{passS.demand_total_count}}笔抢单进行中</small>
+                        </h3>
+                        <h5>
+                            <a ng-repeat="item in conditions.areas" ng-click="searchForMainPage(item)" class="{{item.default?'active':''}}">
+                                &nbsp;&nbsp;{{item.text}}</a>
+
+                            <!--<a href="">全国</a><a ng-if="$index<5" href="" ng-repeat="i in allProvinces">&nbsp;&nbsp;{{i.name}}</a>&lt;!&ndash; &nbsp;&nbsp; <a href="">宁夏</a>&nbsp;&nbsp; <a href="">新疆</a>-->
+                            <!--<a href="">广东省</a>&nbsp;&nbsp; <a href="">甘肃省</a>&nbsp;&nbsp; <a href="">浙江省</a>&nbsp;&nbsp;  -->
+                        </h5>
+                    </div>
+                    <div class="row1-bootstrap">
+                        <div ng-if="$index<3" class="col-md-4 col-sm-4 gap-10" ng-repeat="item in orders">
+                            <pass-rush-list data="item" show-count="false" go-detail="goDetail(item)">
+                            </pass-rush-list>
+                            <div class="gap-row bg-white mobi-hide" style="padding-bottom: 50px;padding-top: 0px;">
+                                <div class="col-xs-2 minHeight"></div>
+                                <div class="col-xs-8 text-center">
+                                    <button class="btn btn-yellow text-center" ng-click="goDetail(item)">抢单</button>
+                                </div>
+                                <div class="col-xs-2"></div>
+                            </div>
+                            <div class="clearfix"></div>
+
+
+                            <!-- </div>    -->
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="text-center gap-20">
+                            <a ui-sref="tab.rushTransp" class="text-gray2">查看所有 >></a>
+                        </div>
+
+                    </div>
+                </div>
+            <!-- 金融块 -->
+            <div class="row1-bootstrap gap-20 pc-hide gap-row">
+                <h3 class="text-center">金融信用</h3>
+                <div class="col-xs-6 bg-white border-right-line-gray">
+                    <h5 class="text-red1 text-center">影响力企业排行</h5>
+                    <img src="./img/ebank/e-logo-1.png" class="pull-left gap-5" />
+                    <h4 class="pull-left">
+                         &nbsp;亚鑫集团
+                         <label class="label-v"><strong>v</strong></label>
+                         <br/>&nbsp;<span class="text-green1"><small class="text-green1">合作伙伴</small> 478 <small class="text-green1">家</small></span>
+                    </h4>
+                    <div class="clearfix"></div>
+                    <img src="./img/ebank/e-logo-3.png" class="pull-left gap-5" />
+                    <h4 class="pull-left">
+                         &nbsp;晋城钢铁
+                         <label class="label-v"><strong>v</strong></label>
+                         <br/>&nbsp;<span class="text-green1"><small class="text-green1">合作伙伴</small> 478 <small class="text-green1">家</small></span>
+                    </h4>
+                    <div class="clearfix"></div>
+                    <img src="./img/ebank/e-logo-4.png" class="pull-left gap-5" />
+                    <h4 class="pull-left">
+                         &nbsp;亚强在线能源
+                         <label class="label-v"><strong>v</strong></label>
+                         <br/>&nbsp;<span class="text-green1"><small class="text-green1">合作伙伴</small> 478 <small class="text-green1">家</small></span>
+                    </h4>
+                </div>
+                <div class="col-xs-6 bg-white text-left">
+                    <h5 class="text-red1 text-center">诚信企业排行</h5>
+                    <img src="./img/ebank/e-logo-5.png" class="pull-left gap-5" />
+                    <h4 class="pull-left">
+                         &nbsp;东星能源
+                         <label class="label-v"><strong>v</strong></label>
+                         <br/>&nbsp;<span class="text-green1"><small class="text-green1">获得额度 </small> 20,000<small class="text-green1">家</small></span>
+                    </h4>
+                    <div class="clearfix"></div>
+                    <img src="./img/ebank/e-logo-2.png" class="pull-left gap-5" />
+                    <h4 class="pull-left">
+                         &nbsp;亚强在线能源
+                         <label class="label-v"><strong>v</strong></label>
+                         <br/>&nbsp;<span class="text-green1"><small class="text-green1">获得额度 </small> 20,000<small class="text-green1">家</small></span>
+                    </h4>
+                    <div class="clearfix"></div>
+                    <img src="./img/ebank/e-logo-6.png" class="pull-left gap-5" />
+                    <h4 class="pull-left">
+                         &nbsp;晋城钢铁
+                         <label class="label-v"><strong>v</strong></label>
+                         <br/>&nbsp;<span class="text-green1"><small class="text-green1">获得额度 </small> 20,000<small class="text-green1">家</small></span>
+                    </h4>
+                </div>
+            </div>
+
+
+            <div class="row-bootstrap gap-20 mobi-hide">
+                <div class="col-sm-5 col-md-5 bg-white gap-row gap-15">
+                    <h3 class="text-center text-red1">影响力企业</h3>
+                    <div class="list-group col-sm-6">
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-1.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">合作伙伴</small> 18,478<small class="text-green1">家</small></span>
+                           </h4>
+                        </li>
+                        <div class="clearfix"></div>
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-2.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">合作伙伴</small> 18,478<small class="text-green1">家</small>
+                           </h4>
+                        </li>
+                        <div class="clearfix"></div>
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-4.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">合作伙伴</small> 18,478<small class="text-green1">家</small>
+                           </h4>
+                        </li>
+                    </div>
+                    <div class="list-group col-sm-6">
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-3.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">合作伙伴</small> 18,478<small class="text-green1">家</small>
+                           </h4>
+                        </li>
+                        <div class="clearfix"></div>
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-5.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">合作伙伴</small> 18,478<small class="text-green1">家</small></span>
+                           </h4>
+                        </li>
+                        <div class="clearfix"></div>
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-5.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">合作伙伴</small> 18,478<small class="text-green1">家</small></span>
+                           </h4>
+                        </li>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-md-2 bg-ebank1 text-center gap-10">
+                    <h6 class="text-red5 gap-20">邀请合作伙伴</h6>
+                    <h4 class="text-red5">获得企业红包</h4>
+                    <img src="./img/common/star1.png" class="gap-40">
+                    <h4 class="text-white">优质合作伙伴</h4>
+                    <h4 class="text-yellow8">获得信用额度</h4>
+                    <h4 class="text-yellow8">￥1,000,000</h4>
+                    <button class="btn-apply">立即申请</button>
+                </div>
+                <div class="col-sm-5 col-md-5 bg-white gap-row gap-15">
+                     <h3 class="text-center text-red1">诚信企业</h3>
+                     <div class="list-group col-sm-6">
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-6.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">获得额度</small>  20,000</span>
+                           </h4>
+                        </li>
+                        <div class="clearfix"></div>
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-3.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">获得额度</small>  20,000</span>
+                           </h4>
+                        </li>
+                        <div class="clearfix"></div>
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-4.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">获得额度</small>   20,000</span>
+                           </h4>
+                        </li>
+                    </div>
+                    <div class="list-group col-sm-6">
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-5.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">获得额度</small>   20,000</span>
+                           </h4>
+                        </li>
+                        <div class="clearfix"></div>
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-2.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">获得额度</small>   20,000</span>
+                           </h4>
+                        </li>
+                        <div class="clearfix"></div>
+                        <li class="list-group-item list-group-item-no-border">
+                          <img src="./img/ebank/e-logo-1.png" class="pull-left gap-5" />
+                          <h4 class="pull-left">
+                             &nbsp;晋城钢铁
+                             <label class="label-v"><strong>v</strong></label>
+                             <br/>&nbsp;<span class="text-green1"><small class="text-green1">获得额度</small>   20,000</span>
+                           </h4>
+                        </li>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <footer></footer>
+    </div>
+
+</ion-content>
+<!-- <navapp></navapp> -->
+</div>

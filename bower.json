@@ -1,0 +1,19 @@
+{
+  "name": "HelloIonic",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.1.1"
+  },
+  "dependencies": {
+    "restangular": "~1.5.1",
+    "angular-messages": "~1.4.8",
+    "angular-ui-validate": "~1.2.2",
+    "moment": "~2.10.6",
+    "angular-linq ": "~1.0.2",
+    "ng-file-upload-shim": "~10.1.9",
+    "underscore": "~1.8.3",
+    "zeroclipboard": "~2.2.0",
+    "ng-clip": "~0.2.6",
+    "ngCordova": "~0.1.24-alpha"
+  }
+}

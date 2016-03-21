@@ -1,0 +1,145 @@
+﻿
+<div>
+     <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='发起物流抢单' ;navbar.navRightHref='tab.';navbar.navRight='';navbar.navLeftHref='tab.rush';">
+    </navbar>
+    <ion-content>
+
+    <div class="transitions-content">
+
+
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <navpc ng-init="istrade='active'"></navpc>
+                </div>
+
+
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <div class="row-bootstrap bg-white gap-25 row3">
+                        <div class="col-xs-12">
+                            <div class="gap-row">
+                                <h3 class=""><label class="label-supply-purple">货源</label>&nbsp;山西  ->  江苏，炼焦煤
+                                    <span class="text-purple2">200吨</span>
+                                </h3>
+                                <h5 class="text-black">钱帝物流
+                                    &nbsp;&nbsp;<a title="企业已认证"><label class="label-v"><strong>v</strong></label></a>
+
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="list bg-white">
+                            <div class="col-sm-6 col-md-6">
+                                <a class="item item-icon-left item-icon-right">
+                                    <i class="icon ion-ios-location-outline text-pink"></i>
+                                    <span class="text-purple2">交货地点：山西省晋中市晋中以南</span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <a class="item item-icon-left item-icon-right">
+                                    <i class="icon ion-ios-location-outline text-green1"></i>
+                                    <span class="text-purple2">提货地点：江苏省无锡市中信江阴码头</span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <a class="item item-icon-left">
+                                    <i class="icon ion-android-alarm-clock"></i>
+                                    提货时间：2015年7月10日(50天内)
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <a class="item item-icon-left item-icon-right">
+                                    <i class="icon ion-social-yen text-red1"></i>
+                                    <span class="text-red1">0%预付款，现金或信用支付</span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-md-6">
+                                <a class="item item-icon-left item-icon-right">
+                                    <span class="text-red1">可接受的报价方式</span>
+                                    <span class="item-note">
+                                        一口价或可撮合
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                            <!--<div class="col-sm-6 col-md-6">-->
+                                <!--<a class="item item-icon-right">                          -->
+                                    <!--发布有效期-->
+                                    <!--<span class="item-note input-ionic">-->
+                                       <!--<span ng-if="msg.time_validity" class="pull-left text-red"> !{{msg.time_validity}} </span>-->
+                                       <!--<input type="date" name="time_traffic" placeholder="输入时间" class="text-right" ng-model="demand.time_traffic" required>-->
+                                    <!--</span>-->
+                                    <!--&lt;!&ndash; <i class="icon ion-ios-arrow-right text-gray1"></i> &ndash;&gt;-->
+                                <!--</a>-->
+                            <!--</div>-->
+                            <div class="">
+                                <li class="item item-toggle">
+                                   是否凑单<small class="text-gray1">(可选择多家物流进行配送)</small>
+                                   <label class="toggle toggle-balanced">
+                                     <input type="checkbox" checked="">
+                                     <div class="track">
+                                       <div class="handle"></div>
+                                     </div>
+                                   </label>
+                                </li>
+                            </div>
+                        </div>
+                        <a href="">
+                            <div class="col-xs-12 gap-15">
+                                <blockquote class="rules-pink text-red">
+                                    <h6>物流结算细则： </h6>
+                                    <h6>1、运输到目的地，+-0.5吨为正常耗损，不涉及违约。</h6>
+                                    <h6>2、如超过0.5吨，每减少1吨，扣500元。</h6>
+                                    <h6>3、延期运送到目的地，每延期1天扣100元。</h6>
+                                </blockquote>
+                            </div>
+                        </a>
+                        <a href="">
+                            <div class="col-xs-12">
+                                <blockquote class="rules-gray text-gray2">
+                                    <h6 class="pull-left">
+                                        违约责任，纠纷解决方式
+                                        <br/>
+                                        谅解协议
+                                    </h6>
+
+                                    <span class="glyphicon glyphicon-menu-right pull-right gap-20 text-gray2"></span>
+
+                                    <div class="clearfix"></div>
+                                </blockquote>
+                            </div>
+                        </a>
+                        <div class="col-sm-3 minHeight"></div>
+                        <a sref="tab.rushTransp">
+                        <div class="col-sm-6 col-xs-12">
+                            <button class="btn btn-block btn-yellow md-trigger md-setperspective" data-modal="modal-3">
+                                发起物流抢单
+                            </button>
+                            <div class="gap-20"></div>
+                        </div>
+                        </a>
+                        <div class="col-sm-3"></div>
+                        <div class="clearfix"></div>
+                </div>
+
+
+
+            </div>
+
+
+
+    </div>
+    </div>
+   <footer></footer>
+
+
+
+</div>
+
+
+</ion-content>
+</div>

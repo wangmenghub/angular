@@ -1,0 +1,153 @@
+<div>
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back';navbar.navLeft='返回'; navbar.title='采购管理' ;navbar.navRightHref='tab.';navbar.navRight='';navbar.navLeftHref='tab.myRsc';">
+    </navbar>
+    <ion-content>
+        <div class="transitions-content">
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="trade='active'"></navpc>
+                    </div>
+                    
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                        <div class="row-bootstrap">
+                            <div ng-if="MyDemand.role == 'TRADE_ADMIN'" class="btn-group btn-group-justified" role="group" aria-label="...">
+                              <div class="btn-group">
+                                  <a ng-click="MyDemand.adminShowL()">
+                                      <button type="button" class="btn btn-navbar2" ng-class="MyDemand.adminShowA">采购单</button>
+                                  </a>
+                              </div>
+                              <div class="btn-group">
+                                  <a ng-click="MyDemand.adminShowR()">
+                                      <button type="button" class="btn btn-navbar2" ng-class="MyDemand.adminShowB">销售单</button>
+                                  </a>
+                              </div>
+                            </div>
+                            <div ng-if="MyDemand.is_admin" class="btn-group btn-group-justified" role="group" aria-label="...">
+                              <div class="btn-group">
+                                  <a ng-click="MyDemand.leftClick()">
+                                      <button type="button" class="btn btn-navbar2" ng-class="MyDemand.left_active">进行中</button>
+                                  </a>
+                              </div>
+                              <div class="btn-group">
+                                  <a ng-click="MyDemand.rightClick()">
+                                      <button type="button" class="btn btn-navbar2" ng-class="MyDemand.right_active">已过期</button>
+                                  </a>
+                              </div>
+                            </div>
+                            
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- 需求单 -->
+                        <div ng-if="MyDemand.role == 'TRADE_PURCHASE'||MyDemand.role == 'TRADE_ADMIN' && MyDemand.is_admin" class="row1-bootstrap">
+                    
+                            <div class="gap-10">
+                                <div ng-if="MyDemand.DemandLists.length == 0">
+                                    <no-data-hint></no-data-hint>
+                                </div>
+                                <div ng-if="MyDemand.DemandLists.length > 0" ng-repeat="i in MyDemand.DemandLists" class="col-sm-6 col-md-6 gap-10">
+                                <a ng-href='#/tab/rushDetail/{{i._id}}'>
+                                    <div class="gap-row bg-white">
+                                        <div class="col-xs-12">
+                                            <div class=" pull-left">
+                                                <h3 class=""><label class="label-supply-red">采购</label>&nbsp;{{i.category_chn}}
+                                                    <span class="text-purple2">{{i.amount}}吨</span>
+                                                </h3>
+                                                <company-label company-id="i.company_id" type="trade"></company-label>
+                                            </div>
+                                            <div class="pull-right gap-5">
+                                                <div class="signage1 signage-red2">有效期<br>
+                                                    <span>{{i.time_validity |formvalidity}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-xs-12 bg-yellow3" >
+                                            <my-attr-prod-info attr-product='i.att_product' attr-show='4' attr-category="i.category" status="true"></my-attr-prod-info>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+                                        <div class="list-group  ">
+                                            <li class="list-group-item list-condensed1 list-group-item-no-border">
+                                                <h5 class="text-black"><span class="glyphicon glyphicon-time text-black" aria-hidden="true"></span>
+                                                    &nbsp;&nbsp;提货时间：{{i.time_traffic | rsctime}}
+                                                </h5>
+                                            </li>
+                                            <rsc-address order="i" address-id="i.location_storage" address-name="交货地点"
+                                             address-icon="ion-ios-location-outline text-purple2"
+                                             text-class=""></rsc-address>
+
+                                            <li class="list-group-item list-condensed1 list-group-item-no-border">
+                                                <h6 class="text-gray2 pull-right ">已有 {{i.count}}家 企业报价<span
+                                                        class="glyphicon glyphicon-menu-right text-gray1"></span></h6>
+                                            </li>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                    
+                        </div>
+                        <!-- 销售的抢单 -->
+                        <div ng-if="MyDemand.role == 'TRADE_SALE'||MyDemand.role == 'TRADE_ADMIN' && !MyDemand.is_admin" class="row1-bootstrap">
+                            <div class="row1-bootstrap gap-10">
+                                    <div ng-if="MyDemand.OfferLists.length == 0">
+                                        <no-data-hint></no-data-hint>
+                                    </div>
+                                    <div ng-if="MyDemand.OfferLists.length > 0" ng-repeat="i in MyDemand.OfferLists" class="col-sm-6 col-md-6 gap-10">
+                                        <div class="gap-row bg-white">
+                                            <div class="col-xs-12">
+                                                <div class=" pull-left">
+                                                    <h3><label class="label-supply-red">销售</label>&nbsp;{{i.category_chn}}
+                                                        <span class="text-purple2">{{i.amount}}吨</span>
+                                                    </h3>
+                                                     <company-label company-id="i.demand_company_id" type="trade"></company-label>
+                                                </div>
+                                                <div class="pull-right gap-5">
+                                                    <a class="signage1 signage-red2" ng-if="i.change_remain!=0 && !i.has_generated" ng-href='#/tab/rushImmediately/{{i.demand_id}}/{{i._id}}'>修改<br>
+                                                    </a>
+                                                    <span class="signage1 signage-red2" ng-if="i.has_generated">已成交</span>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="list">                                
+                                                <li class="item item-no-border item-condensed">
+                                                    到岸价:
+                                                    <span class="item-note text-red1">
+                                                        <strong>￥{{i.price}} </strong>元/吨
+                                                    </span>                                
+                                                </li>
+                                                <li class="item item-no-border item-condensed">
+                                                    交货时间:
+                                                    <span class="item-note">
+                                                        <strong>{{i.time_arrival |rsctime}}</strong>
+                                                    </span>                                
+                                                </li>
+                                                <li class="item item-no-border item-condensed">
+                                                    支付方式:
+                                                    <span class="item-note">
+                                                        <payment-method order="i"></payment-method>
+                                                    </span>                                
+                                                </li>                                 
+                                            </div>
+                                            <rsc-address order="i" address-id="i.location_storage" address-name="提货地点"
+                                             address-icon="ion-ios-location-outline text-purple2"
+                                             text-class=""></rsc-address>
+                                            
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <footer></footer>
+            </div>
+        
+    </ion-content>
+
+</div>
+    

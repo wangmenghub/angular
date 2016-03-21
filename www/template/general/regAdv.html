@@ -1,0 +1,131 @@
+<div ng-controller="regAdvController">
+    <navbar></navbar>
+    <ion-content>
+        <div class="transitions-content">
+            <div class="bg-yellow4">
+                <div class="bg-earth">
+                    <div class="container">
+                        <div class="row-bootstrap">
+
+                            <div class="col-sm-3 col-md-3 well-left-con mobi-hide">
+                                <h4>1、选择注册类型</h4>
+                                <h4>2、基本信息</h4>
+                                <h4>3、验证手机号</h4>
+                                <h4>4、完善信息</h4>
+                                <h4>5、注册成功</h4>
+                            </div>
+                            <form name="myform" novalidate>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+
+                                <div class="row-bootstrap gap-65 bg-white gap-row">
+                                    <div class="text-center">
+                                        <!--<h1 class="text-purple2">{{companyInfo.full_name}}</h1>-->
+
+                                        <h3 class="text-purple2">请{{userInfo.user.real_name}}设置认证信息</h3>
+                                    </div>
+                                    <a href="" class="list-item-border"></a>
+
+                                    <div class="well-infor-log">
+                                        <div class=" well-infor-con-log">
+                                                <div class="form-group">
+                                                    <h5 class="text-center text-gary2">企业信息</h5>
+                                                </div>
+                                                <a href="" class="list-item-border"></a>   
+
+
+                                        <!--         <a class="item item-icon-right" ng-click="fileUpload('xing_shi_zheng')">
+                                        <span class="pull-left gap-5">行驶证照片</span>
+                                        <span class="pull-right">
+                                            <img ng-if="car.xing_shi_zheng_url" src="{{car.xing_shi_zheng_url}}" class="card2">
+                                        </span>
+                                        <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                    </a> -->
+
+                                                <div class="list" ng-click="popup()">
+                                                    <a class="item item-icon-right item-border-top-no">
+                                                    
+                                                    <span class="pull-left gap-20"><i class="glyphicon glyphicon-certificate"></i>上传企业执照</span>
+                                                    
+                                                    <span class="pull-right">
+                                                        <span ng-if="msg.img" class="text-red">{{msg.img}}</span>
+                                                        <!-- <img ng-if="!companyInfo.licenseURL" class="card2"  src="./img/general/license.png"> -->
+                                                        <img ng-if="companyInfo.licenseURL" class="card2" ng-src="{{companyInfo.licenseURL}}" />
+                                                    </span>   
+                                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                                </a>
+                                                </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row-bootstrap gap-20 bg-white gap-row">
+
+                                    <div class="well-infor-log">
+                                        <div class=" well-infor-con-log">
+                                            
+
+                                                <div class="input-group">
+                                                    <div class="input-group-addon input-group-addon-well">
+                                    <span class="glyphicon glyphicon-top glyphicon-user"
+                                          aria-hidden="true"></span>
+                                                    </div>
+                                                    <input type="text" class="" ng-model="companyInfo.nick_name" placeholder="&nbsp;设置企业简称" name="nick_name" required>
+
+                                                </div>
+
+                                                <h5 class="text-gray2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;必须是含有注册名的关键字，并且是唯一的，</h5>
+                                                <h5 class="text-gray2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;通过认证后不能修改。</h5>
+
+                                                <div class="input-group">
+                                                    <div class="input-group-addon input-group-addon-well">
+                                        <span class="glyphicon glyphicon-top glyphicon-yen"
+                                              aria-hidden="true"></span>
+                                                    </div>
+                                                    <input type="text" class="" ng-model="companyInfo._currency" placeholder="&nbsp;企业注册资金(元)" name="currency"  required ng-pattern="/(^[1-9][0-9]{0,10}$)/">
+                                                </div>
+                                                
+                                                <!-- {{myform.currency |json}} -->
+                                                <div class="form-error" ng-messages="myform.currency.$dirty&&myform.currency.$error">
+                                                <div ng-message="required">金额不能为空</div>
+                                                <div ng-message="pattern">请输入输入1-11位数字</div>
+                                                <span>{{companyInfo._currency|upDigit}}</span>
+
+                                            </div>
+
+                                                <div class="gap-20">
+                                                    <button type="button"
+                                                            class="btn btn-lg btn-block btn-purple"
+                                                            ng-click="submit(true)"
+                                                            id='complete' ng-disabled="myform.$invalid">确认认证
+                                                    </button>
+                                                </div>
+                                                <div class="gap-10">
+                                                    <a ng-click="submit(false)" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">
+                                                        <button type="button" class="btn btn-lg btn-block btn-purple-next navRight-btn-gray"
+
+                                                                id='complete2'>暂不认证，直接进入
+                                                        </button>
+                                                    </a>
+                                                </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="gap-10"></div>
+                                </div>
+                            </div>
+                            </form>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="gap-100"></div>
+                    </div>
+                </div>
+           
+            <footer></footer>
+             </div>
+        </div>
+    </ion-content>
+</div>
+
+

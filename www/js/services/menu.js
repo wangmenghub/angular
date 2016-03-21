@@ -1,0 +1,1 @@
+/** * Created by ID on 15/12/31. * Author:zhoudd * email:zhoudd@stark.tm */angular.module('rsc.config')    .value('menu',{    })

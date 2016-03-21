@@ -1,0 +1,33 @@
+<div ng-if="user[0] == 'TRADE'" ng-controller="eBankIncome_lCtrl">
+<div class="row-bootstrap bg-white gap-10" >
+  <div class="btn-group btn-group-justified" role="group" aria-label="...">
+      <div class="btn-group">
+      <!-- ui-sref="tab.eBankIncome.left.tsupply"  -->
+          <a ng-click="z_gotoOrder('trade')">
+              <button type="button" class="btn btn-navbar2" ng-class="z_left_active">交易订单</button>
+          </a>
+      </div>
+      <div class="btn-group">
+      <!-- ui-sref="tab.eBankIncome.left.psupply"  -->
+          <a ng-click="z_gotoOrder('pass')">
+              <button type="button" class="btn btn-navbar2" ng-class="z_right_active">物流订单</button>
+          </a>
+      </div>
+  </div>
+</div>
+
+<!-- <div ui-view="grandson-view"></div> -->
+    <!-- 交易 -->
+    <div ng-if=" z_left_active=='active' ">
+      <div ng-include="'./template/ebank/tradeOrder.html'"></div>
+    </div>
+    <div ng-if=" z_right_active=='active' "  ng-controller="trafficOrderCtrl">
+      <div ng-include="'./template/ebank/trafficOrder.html'"></div>
+    </div>
+    <!-- 物流 -->
+
+</div>
+<!-- 如果是物流则为下列 -->
+<div ng-if="user[0] != 'TRADE'" ng-controller="trafficOrderCtrl">
+    <div ng-include="'./template/ebank/trafficOrder.html'"></div>
+</div>

@@ -1,0 +1,34 @@
+<div class="gap-row bg-white">
+    <div class="col-xs-12">
+        <div class="pull-left">
+
+            <pass-title order="order">
+            </pass-title>
+            <h6 class="text-gray1">物流单号：{{order.index}}</h6>
+            <company-label company-id="order.company_sell_id"></company-label>
+            <!--<h5 class="text-black">华润煤业 <label class="label-v"><strong>v</strong></label>-->
+            <!--<label class="label-insurance">货险</label>-->
+            <!--</h5>-->
+        </div>
+        <div class="pull-right">
+            <!--<div class="signage1 signage-red2">{{order | stepText }}</div>-->
+            <div ng-if="over" class="signage1 signage-red2">运输完成</div>
+            <button ng-if="grab" class="btn btn-yellow" ng-click="gain({id:order._id})">抢单</button>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="list-group">
+
+        <rsc-address order="order" address-id="order.location_arrival" address-name="交货地点"
+                     address-icon="ion-ios-location-outline text-pink"></rsc-address>
+        <rsc-address order="order" address-id="order.location_depart" address-name="提货地点"
+                     address-icon="ion-ios-location-outline text-green1"></rsc-address>
+        <li class="list-group-item list-condensed list-group-item-no-border bg-pink">
+            <h5 class="text-red1">
+                <span class="ion-android-calendar"></span>&nbsp;&nbsp;运输次数：
+                <span class="pull-right"> <strong>{{count}} </strong> 次</span>
+            </h5>
+        </li>
+        <div class="clearfix"></div>
+    </div>
+</div>

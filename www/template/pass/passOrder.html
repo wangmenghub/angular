@@ -1,0 +1,781 @@
+<div ng-controller="PassOrderCtrl" ng-init="init()">
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='订单详情' ;navbar.navRightHref='tab.';navbar.navRight='';navbar.navLeftHref='tab.eBankIncome';">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content">
+
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="isorder='active'"></navpc>
+                    </div>
+                    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+
+
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                        <div class="row-bootstrap bg-white gap-20 gap-row">
+                            <div class="col-xs-12">
+                                <div class="pull-left">
+                                    <pass-title order="order"></pass-title>
+                                    <!-- <h6 class="text-gray1">物流单号：{{order.index}}</h6> -->
+                                    <h6 class="input-ionic3">物流单号：<input type="text" class="" disabled ng-model="order.index"
+                                                                         placeholder="{{order.index}}"></h6>
+                                </div>
+                                <span class="pull-right"><button clip-copy='order.index' clip-click-fallback="fallback(copy)"
+                                                                 clip-click="showMessage()" ng-click="copyIndex()" class="btn-copy">复制
+                                </button></span>
+                                <!--<span class="pull-right ion-chevron-right gap-15 text-gray1"></span>-->
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="bg-pink1 navbar4-fixed">
+                                <div class=" btn-group btn-group-justified text-center" role="group" aria-label="...">
+                                    <div class="btn-group" role="group">
+                                        <h6 class="text-red1">确认订单</h6>
+
+                                        <button type="button" class="btn-navbar4 {{ order.step | stepCSS:1 }}"><span>1</span></button>
+
+                                    </div>
+
+                                    <div class="btn-group" role="group">
+                                        <h6 class="text-red1">预付款</h6>
+
+                                        <button type="button" class="btn-navbar4-c btn-navbar4-active-custom {{ order.step | stepCSS:2 }}">
+                                            <span>2</span></button>
+
+                                    </div>
+
+                                    <div class="btn-group" role="group">
+                                        <h6 class="text-red1">物流</h6>
+
+                                        <button type="button" class="btn-navbar4-c {{ order.step | stepCSS:3 }}"><span>3</span></button>
+
+                                    </div>
+
+                                    <div class="btn-group" role="group">
+                                        <h6 class="text-red">检验</h6>
+
+                                        <button type="button" class="btn-navbar4-c {{ order.step | stepCSS:4 }}"><span>4</span></button>
+
+                                    </div>
+
+                                    <div class="btn-group" role="group">
+                                        <h6 class="text-red1">交割</h6>
+
+                                        <button type="button" class="btn-navbar4-c {{ order.step | stepCSS:5 }}"><span>5</span></button>
+
+                                    </div>
+                                </div>
+                                <span class="btn-navbar4-right-line"></span>
+                            </div>
+                            <div class="col-xs-12 bg-white">
+                                <h5>
+                                    <!-- <span class="col-xs-5">捷运物流 <label class="label-v"><strong>v</strong></label></span> -->
+                                    <company-label-for-detail company-id="order.company_traffic_id"
+                                                              type="traffic"></company-label-for-detail>
+                                    <span class="col-xs-2 text-center"><span class="ion-android-arrow-forward"></span></span>
+                                    <company-label-for-detail company-id="order.company_buy_id" type="trade"
+                                                              class="text-right"></company-label-for-detail>
+                                    <!-- <company-label company-id="order.company_buy_id"></company-label> -->
+                                    <!--<span class="col-xs-5 text-right">华润煤业 <label class="label-v"><strong>v</strong></label></span>-->
+                                </h5>
+
+                                <div class="clearfix"></div>
+                                <div class="list-group gap-5">
+                                    <li class="list-group-item list-condensed list-group-item-no-border">
+                                        <h5 class="text-black">
+                                            物流单价：
+                                            <span class="pull-right">
+                                                <strong class="text-red1">￥{{order.price_unit}}
+                                                </strong> 元/吨
+                                            </span>
+                                        </h5>
+                                    </li>
+                                    <!--<li class="list-group-item list-condensed list-group-item-no-border">-->
+                                    <!--<h5 class="text-black">-->
+                                    <!--大货车(载45吨)：-->
+                                    <!--<span class="pull-right text-purple2"> <strong>5</strong> 辆</span>-->
+                                    <!--</h5>-->
+                                    <!--</li>-->
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="list-group col-sm-6 col-md-6">
+
+                                <rsc-address order="order" address-id="order.location_depart" address-name="提货地点"
+                                             address-icon="ion-ios-location-outline text-pink"
+                                             text-class="pull-right"></rsc-address>
+
+                                <rsc-address order="order" address-id="order.location_arrival" address-name="交货地点"
+                                             address-icon="ion-ios-location-outline text-green1"
+                                             text-class="pull-right"></rsc-address>
+
+                            </div>
+                            <div class="list-group col-sm-6 col-md-6">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-black">
+                                        <span class="ion-android-alarm-clock" aria-hidden="true"></span>
+                                        &nbsp;&nbsp;提货时间：
+                                        <span class="pull-right">
+                                            {{order.time_depart | rsctime}}
+                                        </span>
+                                    </h5>
+                                </li>
+                            </div>
+                            <div class="list-group col-sm-6 col-md-6">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-black">
+                                        <span class="ion-android-alarm-clock" aria-hidden="true"></span>
+                                        &nbsp;&nbsp;到货时间：
+                                        <span class="pull-right">
+                                            {{order.time_arrival | rsctime}}
+                                        </span>
+                                    </h5>
+                                </li>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div ui-view="step-view">
+
+
+                            </div>
+                            <a href="" class="list-item-border"></a>
+
+                            <h5 class="text-center"><strong>付款方式</strong></h5>
+                            <div class="list-group col-sm-6 col-md-6">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-black">
+                                        物流运费：
+                                        <span class="pull-right text-red1"><strong>￥ {{order.price_theory | number:2}}</strong> 元</span>
+                                    </h5>
+                                </li>
+                            </div>
+                            <div class="list-group col-sm-6 col-md-6" ng-if="order.payment_method=='partition'">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-black">
+                                        预付款：
+                                            <span class="pull-right text-red1"><strong>￥{{order.price_advanced
+                                                |number:2}} </strong> 元</span>
+                                    </h5>
+                                </li>
+                            </div>
+
+                            <div class="list-group col-sm-6 col-md-6">
+                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                    <h5 class="text-black">
+                                        物流付款方式：
+                                        <span class="pull-right">
+                                            <label>{{order | payTypeDes:'advanced_payment'}}</label>
+                                        </span>
+                                        <!--<span class="pull-right"><strong>{{order.payment_advance}}%</strong> 预付款</span>-->
+                                    </h5>
+                                </li>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="row-bootstrap">
+                            <div class="bg-white" ng-if="order.status!='cancelled'">
+
+                                <!--<div class="list-group col-sm-6 col-md-6">-->
+                                <!--<li class="list-group-item list-condensed list-group-item-no-border">-->
+                                <!--<h5 class="text-black">-->
+                                <!--物流费共计：-->
+                                <!--<span class="pull-right text-red1"><strong>￥ {{order.payment_advance * order.amount |-->
+                                <!--number}}</strong> 元</span>-->
+                                <!--</h5>-->
+                                <!--</li>-->
+                                <!--</div>-->
+                                <div ng-if="order.step>=2">
+                                    <div class="list-group col-sm-12 col-md-12" ng-if="order.payment_method=='partition'">
+                                        <li class="list-group-item list-condensed list-group-item-no-border">
+                                            <h5 class="text-black">
+                                                <!--TODO 根据支付方式的不同组织语言-->
+                                                预付款：
+                                                <span class="pull-right text-red1"><strong>￥{{order.price_advanced
+                                                    |number:2}} </strong> 元</span>
+                                            </h5>
+                                        </li>
+                                    </div>
+
+                                    <!--<div ng-if="order.step==2.6&&order.choice_advanced_payment=='url'"-->
+                                    <div ng-if="order.url_advanced_payment"
+                                         class="col-xs-12 text-center text-yellow2">
+                                        <h5>线下银行转账</h5>
+
+                                        <div class="clearfix"></div>
+                                        <!--<img src="./img/158/paytext.png" class="img-responsive text-center" style="display:inline-block;">-->
+                                        <img src="{{order.url_advanced_payment}}" class="img-responsive text-center"
+                                             style="display:inline-block;">
+
+                                        <div class="gap-15"></div>
+                                    </div>
+                                    <!--<div ng-if="order.step==2.6&&order.choice_advanced_payment=='credit'"-->
+                                    <div ng-if="order.payment_method=='credit'"
+                                         class="col-xs-12 text-center text-yellow2">
+                                        <h5>信用额支付</h5>
+
+                                        <div class="clearfix"></div>
+                                        ￥{{order.price_theory |number:2}}
+                                        <!--<img src="./img/158/paytext.png" class="img-responsive text-center" style="display:inline-block;">-->
+                                        <!--<img src="order.url_advanced_payment" class="img-responsive text-center" style="display:inline-block;">-->
+
+                                        <div class="gap-15"></div>
+                                    </div>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--分期付款 中期 图片-->
+                                <div ng-if="order.step>=4.5 && order.payment_method=='partition'">
+                                    <div class="list-group col-sm-12 col-md-12">
+                                        <li class="list-group-item list-condensed list-group-item-no-border">
+                                            <h5 class="text-black">
+                                                <!--TODO 根据支付方式的不同组织语言-->
+                                                中期：
+                                                <span class="pull-right text-red1"><strong>￥{{order.price_remain
+                                                    |number:2}} </strong> 元</span>
+                                            </h5>
+                                        </li>
+                                    </div>
+
+                                    <!--<div ng-if="order.step==2.6&&order.choice_advanced_payment=='url'"-->
+                                    <div ng-if="order.url_remain_payment"
+                                         class="col-xs-12 text-center text-yellow2">
+                                        <h5>线下银行转账</h5>
+
+                                        <div class="clearfix"></div>
+                                        <!--<img src="./img/158/paytext.png" class="img-responsive text-center" style="display:inline-block;">-->
+                                        <img src="{{order.url_remain_payment}}" class="img-responsive text-center"
+                                             style="display:inline-block;">
+
+                                        <div class="gap-15"></div>
+                                    </div>
+                                    <!--<div ng-if="order.step==2.6&&order.choice_advanced_payment=='credit'"-->
+                                    <div ng-if="order.choice_advanced_payment=='credit'"
+                                         class="col-xs-12 text-center text-yellow2">
+                                        <h5>预付款信用额支付</h5>
+
+                                        <div class="clearfix"></div>
+                                        ￥{{order.price_advanced |number:2}}
+                                        <!--<img src="./img/158/paytext.png" class="img-responsive text-center" style="display:inline-block;">-->
+                                        <!--<img src="order.url_advanced_payment" class="img-responsive text-center" style="display:inline-block;">-->
+
+                                        <div class="gap-15"></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div ng-if="order.step>=5.5">
+                                    <div class="list-group col-sm-6 col-md-6">
+                                        <li class="list-group-item list-condensed list-group-item-no-border">
+                                            <h5 class="text-black">
+                                                <!--TODO 根据支付方式的不同组织语言-->
+                                                尾款：
+                                                <span class="pull-right text-red1"><strong>￥{{order.price_total
+                                                    |number:2}} </strong> 元</span>
+                                            </h5>
+                                        </li>
+                                    </div>
+
+                                    <!--<div ng-if="order.step==2.6&&order.choice_advanced_payment=='url'"-->
+                                    <div ng-if="order.url_final_payment"
+                                         class="col-xs-12 text-center text-yellow2">
+                                        <h5>线下银行转账</h5>
+
+                                        <div class="clearfix"></div>
+                                        <!--<img src="./img/158/paytext.png" class="img-responsive text-center" style="display:inline-block;">-->
+                                        <img src="{{order.url_final_payment}}" class="img-responsive text-center"
+                                             style="display:inline-block;">
+
+                                        <div class="gap-15"></div>
+                                    </div>
+                                    <!--<div ng-if="order.step==2.6&&order.choice_advanced_payment=='credit'"-->
+                                    <div ng-if="order.payment_method=='credit'"
+                                         class="col-xs-12 text-center text-yellow2">
+                                        <h5>信用额支付</h5>
+
+                                        <div class="clearfix"></div>
+                                        ￥{{order.price_total |number:2}}
+                                        <!--<img src="./img/158/paytext.png" class="img-responsive text-center" style="display:inline-block;">-->
+                                        <!--<img src="order.url_advanced_payment" class="img-responsive text-center" style="display:inline-block;">-->
+
+                                        <div class="gap-15"></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="clearfix"></div>
+
+
+                                <!--<div class="col-xs-12">-->
+                                <!--<blockquote class="rules-gray text-gray2">-->
+                                <!--<h6 class="pull-left">-->
+                                <!--违约责任-->
+                                <!--<br/>-->
+                                <!--纠纷解决方式-->
+                                <!--</h6>-->
+
+                                <!--<a href="" class="glyphicon glyphicon-menu-right pull-right gap-20 text-gray2"></a>-->
+
+                                <!--<div class="clearfix"></div>-->
+                                <!--</blockquote>-->
+                                <!--</div>-->
+                                <div class="clearfix"></div>
+                                <div>
+                                  <div class="" ng-if="order.step>=2.4">
+                                    <h5 class="text-center"><strong>发车时间<br/></strong></h5>
+                                    <div class="list-group col-sm-12 col-md-12">
+                                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                                <h5 class="text-black">
+                                                    物流方申请：
+                                                    <!--<span class="pull-right text-red1"><strong>{{order.price_advanced}} </strong></span>-->
+                                                    <span class="pull-right text-red1"><strong>{{order.time_add_traffic | rsctime}}发车
+                                                    </strong></span>
+                                                </h5>
+                                            </li>
+                                        </div>
+                                    </div>
+
+                                  <div class="" ng-if="order.step>=4">
+                                    <h5 class="text-center"><strong>扣款明细<br/></strong></h5>
+                                    <div class="list-group col-sm-6 col-md-6">
+                                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                                <h5 class="text-black">
+                                                    共缺少吨数：
+                                                <span class="pull-right text-red1"><strong>{{order.route_weigh_dec_amount}}
+                                                    吨 </strong></span>
+                                                </h5>
+                                            </li>
+
+                                        </div>
+                                        <div class="list-group col-sm-6 col-md-6">
+                                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                                <h5 class="text-black">
+                                                    延期天数：
+                                                    <span class="pull-right text-red1"><strong>{{order.route_late_day}} 天</strong></span>
+                                                </h5>
+                                            </li>
+                                        </div>
+                                        <div class="list-group col-sm-6 col-md-12">
+                                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                                <h5 class="text-black">
+                                                    物流差异扣款：
+                                                    <span class="pull-right text-red1"><strong>￥ {{order.price_dec|number:2}}
+                                                        元</strong></span>
+                                                </h5>
+                                            </li>
+                                        </div>
+                                    </div>
+
+                                    <div class="" ng-if="order.step>=4">
+                                        <h5 class="text-center"><strong>结算明细<br/></strong></h5>
+                                        <!--款到付货-->
+                                        <div class="list-group col-sm-6 col-md-6"
+                                             ng-if="order.payment_method=='all_cash'||order.payment_method=='all_goods'||order.payment_method=='credit'">
+                                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                                <h5 class="text-black">
+                                                    物流运费：
+                                                    <span class="pull-right text-red1"><strong>￥ {{order.price_theory |number:2}}
+                                                        元</strong></span>
+                                                </h5>
+                                            </li>
+
+                                        </div>
+                                        <div ng-if="order.payment_method=='partition'">
+                                            <div class="list-group col-sm-6 col-md-6">
+                                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                                    <h5 class="text-black">
+                                                        {{order.payment_advance}}%物流运费(预付款)：
+                                                        <!--<span class="pull-right text-red1"><strong>{{order.price_advanced}} </strong></span>-->
+                                                    <span class="pull-right text-red1"><strong>￥ {{order.price_advanced |number:2}}
+                                                        元</strong></span>
+                                                    </h5>
+                                                </li>
+
+                                            </div>
+                                            <!--<div class="list-group col-sm-6 col-md-6" ng-if="order.percentage_remain">-->
+                                                <!--<li class="list-group-item list-condensed list-group-item-no-border">-->
+                                                    <!--<h5 class="text-black">-->
+                                                        <!--{{order.percentage_remain}}%物流运费(质保款)：-->
+                                                    <!--<span class="pull-right text-red1"><strong>￥ {{order.price_remain|number:2}}-->
+                                                        <!--元</strong></span>-->
+                                                    <!--</h5>-->
+                                                <!--</li>-->
+                                            <!--</div>-->
+                                            <div class="list-group col-sm-6 col-md-6" ng-if="order.percentage_remain">
+                                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                                    <h5 class="text-black">
+                                                        {{100-order.percentage_remain-order.payment_advance}}%物流运费(尾款)：
+                                                    <span class="pull-right text-red1"><strong>￥ {{order.price_total|number:2}}
+                                                        元</strong></span>
+                                                    </h5>
+                                                </li>
+                                            </div>
+                                            <div class="list-group col-sm-6 col-md-6" ng-if="!order.percentage_remain">
+                                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                                    <h5 class="text-black">
+                                                        {{100-order.payment_advance}}%物流运费(尾款)：
+                                                    <span class="pull-right text-red1"><strong>￥ {{order.price_total|number:2}}
+                                                        元</strong></span>
+                                                    </h5>
+                                                </li>
+                                            </div>
+
+                                            <div class="list-group col-sm-6 col-md-6" ng-if="!order.percentage_remain">
+                                                <li class="list-group-item list-condensed list-group-item-no-border">
+                                                    <h5 class="text-black">
+                                                        {{100-order.payment_advance}}%物流运费(尾款)：
+                                                    <span class="pull-right text-red1"><strong>￥ {{order.price_total|number:2}}
+                                                        元</strong></span>
+                                                    </h5>
+                                                </li>
+                                            </div>
+
+                                        </div>
+                                        <div class="list-group col-sm-6 col-md-6" ng-if="order.att_forgiven">
+                                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                                <h5 class="text-black">
+                                                    申请谅解：
+                                                    <span class="pull-right text-red1"><strong>物流方已申请谅解</strong></span>
+                                                    <!--<span class="pull-right text-red1"><strong>￥ {{order.att_forgiven|number:2}} 元</strong></span>-->
+                                                </h5>
+                                            </li>
+                                        </div>
+
+                                        <div class="list-group col-sm-6 col-md-6" ng-if="!order.att_forgiven">
+                                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                                <h5 class="text-black">
+                                                    物流差异扣款：
+                                                    <span class="pull-right text-red1"><strong>￥ {{order.price_dec|number:2}}
+                                                        元</strong></span>
+                                                </h5>
+                                            </li>
+                                        </div>
+                                        <div class="list-group col-sm-6 col-md-6">
+                                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                                <h5 class="text-black">
+                                                    尾款总金额：
+
+                                                    <span class="pull-right text-red1"><strong>￥ {{order.price_total |number:2}} 元</strong> </span>
+                                                </h5>
+                                            </li>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="col-xs-12" ng-if="order.type=='TWO'">
+                                        <h5 class="text-center"><strong>收货信息<br/></strong></h5>
+                                        <!--款到付货-->
+                                        <div class="list-group col-sm-6 col-md-6">
+                                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                                <h5 class="text-black">
+                                                    发货人：
+                                                    <span class="pull-right text-red1"><strong>{{order.send_name+send_phone}}</strong></span>
+                                                </h5>
+                                            </li>
+
+                                        </div>
+
+                                        <div class="list-group col-sm-6 col-md-6">
+                                            <li class="list-group-item list-condensed list-group-item-no-border">
+                                                <h5 class="text-black">
+                                                    收货人：
+                                                    <span class="pull-right text-red1"><strong>
+                                                        {{order.receive_name+receive_phone}} </strong></span>
+                                                </h5>
+                                            </li>
+                                        </div>
+
+
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="list-group col-sm-12 col-md-12" ng-if="order.step==2.3&&type=='TRAFFIC'">
+                                        <a class="item item-icon-right" ng-click="changeDate('time_arrival')">
+                                            发车时间：
+                                            <span class="item-note input-ionic">
+                                                <!--  <input type="date" name="time_traffic" placeholder="输入时间" class="text-right" ng-model="demand.time_traffic" required> -->
+                                               <span ng-if="!order.dispatchTruckTime"> 请选择</span>
+                                               <span ng-if="order.dispatchTruckTime">{{order.dispatchTruckTime |rsctime}}</span>
+
+                                            </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                        </a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-xs-12" ng-if="order.appendix">
+                                        <blockquote class="rules-pink text-red">
+                                            <h6>备注:</h6>
+                                            <h6>{{order.appendix}}</h6>
+                                        </blockquote>
+                                    </div>
+                                    <pass-balance-detail data="order"></pass-balance-detail>
+                                    <div class="col-xs-12"
+                                         ng-if="(order.step>4.5 && type=='TRAFFIC')||(order.step>=4&&type=='TRADE')">
+                                        <div class="bg-yellow-radius">
+                                            <h5>{{type=='TRADE'?'订单总支出':'订单总收入'}}</h5>
+
+                                            <h2>￥ {{order.price_order | fmoney}} 元</h2>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="gap-15"></div>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <div ng-if="order.step==3 && type=='TRAFFIC' && order.type=='TWO'">
+
+                                    <div class="list-group col-sm-12 col-md-12">
+                                        <a class="item item-icon-right">
+                                            应交货(吨)：
+                                            <span class="item-note input-ionic">
+                                                <!--  <input type="date" name="time_traffic" placeholder="输入时间" class="text-right" ng-model="demand.time_traffic" required> -->
+                                               <span ng-if="!order.amount"> 请选择</span>
+                                               <span ng-if="order.amount">{{order.amount}}吨</span>
+
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="list-group col-sm-12 col-md-12">
+                                        <a class="item item-icon-right">
+                                            实际交货(吨)：
+                                            <span class="item-note input-ionic">
+                                                  <input type="number" placeholder="输入时间交货吨数" class="text-right"
+                                                         ng-model="order.amount_confirm" required>
+
+                                            </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                <div ng-if="order.step==4 && type=='TRADE' && order.type=='TWO'">
+
+                                    <div class="list-group col-sm-12 col-md-12">
+                                        <a class="item item-icon-right">
+                                            物流交货(吨)：
+                                            <span class="item-note input-ionic">
+                                                <!--  <input type="date" name="time_traffic" placeholder="输入时间" class="text-right" ng-model="demand.time_traffic" required> -->
+                                               <span ng-if="!order.amount"> 请选择</span>
+                                               <span ng-if="order.amount">{{order.get_amount}}吨</span>
+
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="list-group col-sm-12 col-md-12">
+                                        <a class="item item-icon-right">
+                                            实际交货(吨)：
+                                            <span class="item-note input-ionic">
+                                                  <input type="number" placeholder="输入时间交货吨数" class="text-right"
+                                                         ng-model="order.give_amount" required>
+
+                                            </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-3 minHeight"></div>
+                                <div class="col-xs-12 gap-20">
+                                    <div class="col-sm-6 col-xs-6" ng-if="order.step<=2">
+                                        <button ng-disabled="(order.step|stepButton)" ng-click="confirm(order)"
+                                                class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                                data-modal="modal-3">
+                                            <!--{{order.step}}-->
+
+                                            <div>{{order | stepText}}</div>
+                                        </button>
+                                        <div class="gap-20"></div>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6" ng-if="order.step<=2">
+                                        <button class="btn btn-block btn-yellow md-trigger md-setperspective" ng-click="cancelOrder()">
+                                            <div>取消订单</div>
+                                        </button>
+                                        <div class="gap-20"></div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-sm-3 minHeight"></div>
+                                <div class="col-sm-6 col-xs-12" ng-if="order.step!=4.5 && order.step!=2.4&& order.step>2">
+                                    <button ng-disabled="(order.step|stepButton)" ng-click="confirm(order)"
+                                            class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                            data-modal="modal-3">
+                                        <!--{{order.step}}-->
+
+                                        <div>{{order | stepText}}</div>
+                                    </button>
+                                    <div class="gap-20"></div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12" ng-if="order.step==4.5 && type=='TRADE'">
+                                    <button ng-disabled="(order.step|stepButton)" ng-click="confirm(order)"
+                                            class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                            data-modal="modal-3">
+                                        <!--{{order.step}}-->
+
+                                        <div>{{order | stepText}}</div>
+                                    </button>
+                                    <div class="gap-20"></div>
+                                </div>
+                                <div class="col-sm-6 col-xs-12" ng-if="order.step==2.4 && type=='TRAFFIC'">
+                                    <button ng-disabled="(order.step|stepButton)" ng-click="confirm(order)"
+                                            class="btn btn-block btn-yellow md-trigger md-setperspective"
+                                            data-modal="modal-3">
+                                        <!--{{order.step}}-->
+
+                                        <div>{{order | stepText}}</div>
+                                    </button>
+                                    <div class="gap-20"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--发车时间-->
+
+                                <div ng-if="order.step==2.4 && type=='TRADE'">
+                                    <div class="list-group col-sm-12 col-md-12" ng-if="order.step==2.4">
+                                        <a class="item item-icon-right" ng-click="changeDate('customDispatchTruckTime')">
+                                            发车时间：
+                                            <span class="item-note input-ionic">
+                                                <!--  <input type="date" name="time_traffic" placeholder="输入时间" class="text-right" ng-model="demand.time_traffic" required> -->
+                                               <span ng-if="!order.customDispatchTruckTime"> 请选择</span>
+                                               <span ng-if="order.customDispatchTruckTime">{{order.customDispatchTruckTime |rsctime}}</span>
+
+                                            </span>
+                                            <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-12 gap-20">
+                                        <div class="col-xs-6 text-center">
+                                            <button type="button"
+                                                    ng-click="confirmDate(false)"
+                                                    class="btn btn-yellow btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder">
+                                                指定时间
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-6 text-center">
+                                            <button type="button"
+                                                    class="btn btn-yellow btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder"
+                                                    ng-click="confirmDate(true)">
+                                                同意
+                                            </button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="gap-15"></div>
+                                    </div>
+                                </div>
+                                <div ng-if="order.step==4 && type=='TRADE' &&order.payment_method=='partition' &&order.percentage_remain">
+                                    <div class="col-sm-6 col-xs-12">
+                                        <button type="button"
+                                                ng-click="confirm(order)"
+                                                class="btn btn-yellow btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder">
+                                            支付中期款
+                                        </button>
+                                        <div class="gap-20"></div>
+                                    </div>
+                                </div>
+                                <div ng-if="order.step==4.6 && type=='TRADE'">
+                                    <div class="list-group col-sm-12 col-md-12">
+                                        <li class="list-group-item list-condensed list-group-item-no-border">
+                                            <h5 class="text-red1">申请谅解：
+                                       <span class="pull-right">
+                                            <!--<input type="number"-->
+                                                   <!--ng-disabled="true"-->
+                                                   <!--min="0"-->
+                                                   <!--ng-model="order.att_forgiven" class="text-gray1 input-text"-->
+                                                   <!--placeholder="请输入申请谅解金额">-->
+                                           物流方申请谅解
+                                        </span>
+                                            </h5>
+                                        </li>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6 text-center">
+                                            <button type="button"
+                                                    ng-click="agreeOrReject(false)"
+                                                    class="btn btn-yellow btn-lg btn-block bg-white-border text-yellow3 btn-noBorder">
+                                                拒绝
+                                            </button>
+                                        </div>
+                                        <div class="col-xs-6 text-center">
+                                            <button
+                                                    class="btn btn-yellow btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder"
+                                                    ng-click="agreeOrReject(true)"
+                                                    data-modal="modal-3">
+                                                同意
+                                            </button>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="gap-15"></div>
+                                    </div>
+                                </div>
+
+                                <div ng-if="order.step==4.5 && type=='TRAFFIC'">
+                                    <!--<div class="list-group col-sm-12 col-md-12">-->
+                                    <!--<li class="list-group-item list-condensed list-group-item-no-border">-->
+                                    <!--<h5 class="text-red1">申请谅解金额(元)：-->
+                                    <!--<span class="pull-right">-->
+                                    <!--<input type="number"-->
+                                    <!--min="0"-->
+                                    <!--required-->
+                                    <!--ng-model="offer.price" class="text-gray1 input-text"-->
+                                    <!--placeholder="请输入申请谅解金额">-->
+                                    <!--</span>-->
+                                    <!--</h5>-->
+                                    <!--</li>-->
+                                    <!--</div>-->
+
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-6 text-center">
+                                            <button type="button"
+                                                    ng-click="applyUnderstanding(order)"
+                                                    class="btn btn-yellow btn-lg btn-block bg-white-border text-yellow3 btn-noBorder">
+                                                申请谅解
+                                            </button>
+                                            <!--ng-disabled="btnApply"-->
+                                        </div>
+                                        <div class="col-xs-6 text-center">
+                                            <button class="btn btn-yellow btn-lg btn-block bg-white-border text-yellow3 btn-noBorder"
+                                                    ng-click="accept(order)">
+                                                接受检验结果
+                                            </button>
+                                            <!--ng-disabled="btnAccept"-->
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="gap-15"></div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-xs-3"></div>
+                                <div class="clearfix"></div>
+
+                            </div>
+                            <div class="bg-white gap-20" ng-if="order.status=='cancelled'">
+                                <div class="col-sm-3 minHeight"></div>
+                                <div class="col-sm-6 col-xs-12">
+                                    <button ng-disabled="true"
+                                            class="btn btn-block btn-yellow md-trigger md-setperspective">
+                                        <div>订单已取消</div>
+                                    </button>
+                                    <div class="gap-20"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <footer></footer>
+
+
+        </div>
+
+    </ion-content>
+</div>
+
+

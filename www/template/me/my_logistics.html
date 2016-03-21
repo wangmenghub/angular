@@ -1,0 +1,69 @@
+﻿
+<div name="myLogistics"  ng-controller="myLogistics" ng-init="init()">
+    <navbar ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回' ;navbar.navRightHref='tab.';"></navbar>
+    <ion-content>
+    <div class="transitions-content">
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <navpc ng-init="me='active'"></navpc>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row-bootstrap">
+                        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                            <div class="btn-group" role="group">
+                                <a ng-click="getUseLogistics()">
+                                    <button type="button" class="btn btn-navbar2 {{a?'active':''}}">已认证({{count.use}})
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <a ng-click="getUsedLogistics()">
+                                    <button type="button" class="btn btn-navbar2 {{b?'active':''}}">认证中({{count.used}})
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="btn-group" role="group">
+                              <a ng-click="getNotUsedLogistics()">
+                                <button type="button" class="btn btn-navbar2 {{c?'active':''}}">未认证({{count.notUsed}})
+                                </button>
+                              </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row-bootstrap bg-white gap-15">
+                      <div class="list-group">
+                        <div ng-repeat="Logistic in LogisticsList">
+                          <li class="list-group-item list-group-item-no-border" ng-click="">
+                            <h4 class="pull-left">
+                              <img class="face4 img-fixed img-circle"
+                                   src="{{Logistic.url_logo ? Logistic.url_logo : './img/me/face_13.png'}}" alt=""/>
+                              &nbsp; <i ng-if="Logistic.verify_phase == 'SUCCESS'">{{Logistic.nick_name ? Logistic.nick_name : Logistic.full_name}}</i>
+                              &nbsp; <i ng-if="Logistic.verify_phase !== 'SUCCESS'">{{Logistic.full_name ? Logistic.full_name : Logistic.nick_name}}</i>
+                              <label ng-if="Logistic.verify_phase == 'SUCCESS'" class="label-v">
+                                <strong title="已认证企业">v</strong>
+                              </label>
+                            </h4>
+                            <button ng-if="c" ng-click="appliCation(Logistic)" class="btn btn-partner btn-partner-yellow pull-right gap-15">
+                              申请认证
+                            </button>
+                            <button ng-if="b" ng-click="remind(item)" class="btn btn-partner btn-partner-yellow pull-right gap-15">
+                              提醒认证
+                            </button>
+                          </li>
+                          <div class="clearfix"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row-bootstrap bg-white gap-10">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-md-3"></div>
+        </div>
+        <footer></footer>
+    </div>
+    </ion-content>
+</div>

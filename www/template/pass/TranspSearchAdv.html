@@ -1,0 +1,237 @@
+﻿<div ng-controller="TranspSearchAdvController" ng-init="init()">
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='搜索货源' ;navbar.navRightHref='tab.';navbar.navLeftHref='tab.rushTransp';navbar.navRight=''">
+    </navbar>
+    <ion-content>
+        <div class="transitions-content">
+
+
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+
+                    <ion-refresher pulling-text="下拉刷新" on-refresh="doRefresh()"></ion-refresher>
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+
+
+                        <!-- <div class="row-bootstrap gap-10">
+                            <div class="text-center">
+                                <h4><a href="" class="text-black" ui-sref='tab.rushSearchAdv'>
+                                    <span class="ion-search"></span> 现有货源 62,683 吨</a></h4>
+                            </div>
+                        </div> -->
+
+                        <div class="row-bootstrap bg-white row3 gap-20">
+                            <div class="list">
+                                <!--<a class="item item-icon-left item-icon-right item-border-top-no">-->
+                                <!--<i class="icon ion-android-globe"></i>-->
+                                <!--城市搜索：-->
+                                <!--<span class="item-note text-black">-->
+                                <!--山西-->
+                                <!--</span>-->
+                                <!--<i class="icon ion-ios-arrow-right text-gray1"></i>-->
+                                <!--</a>-->
+                                <a class="item item-icon-left item-icon-right item-border-top-no">
+                                    <i class="icon ion-ios-copy"></i>                         
+                                    订单编号：
+                                    <span class="item-note input-ionic">
+                                        <input type="text" class="text-right">
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i> 
+                                </a>     
+                                <a class="item item-icon-left item-icon-right" ng-click="selectAmount()">
+                                    <i class="icon ion-ios-pie"></i>
+                                    货物重量：
+                                        <span class="item-note text-black">
+                                            {{conditions.amoutText}}
+                                        </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-left item-icon-right" ng-click="selectArea('start')">
+                                    <i class="icon ion-android-globe"></i>
+                                    出发地：
+                                        <span class="item-note text-black">
+                                            {{area.start.text}}
+                                        </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-left item-icon-right" ng-click="selectArea('end')">
+                                    <i class="icon ion-android-globe"></i>
+                                    到达地：
+                                        <span class="item-note text-black">
+                                            {{area.end.text}}
+                                        </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <!--<li class="item item-icon-left item-border-bottom-no">-->
+                                <!--<i class="icon ion-network"></i>                          -->
+                                <!--线路搜索：-->
+                                <!--<span class="item-note text-black">-->
+                                <!--出发地-->
+                                <!--<select>-->
+                                <!--<option>请选择  省&#45;&#45;市</option>                              -->
+                                <!--</select>-->
+                                <!--</span>                        -->
+                                <!--</li>-->
+                                <!-- -->
+                                <!--<li class="item item-no-border item-condensed">                       -->
+                                <!--<span class="item-note text-black">-->
+                                <!--到达地-->
+                                <!--<select>-->
+                                <!--<option>请选择  省&#45;&#45;市</option>                              -->
+                                <!--</select>-->
+                                <!--</span>                        -->
+                                <!--</li> -->
+                                <!-- <div class="item item-icon-left item-input item-select">
+                                    <div class="input-label">
+                                      线路搜索：
+                                    </div>
+                                    <select>
+                                      <option>Blue</option>
+                                      <option selected="">Green</option>
+                                      <option>Red</option>
+                                    </select>
+                                </div> -->
+                            </div>
+
+                            <!-- <div class="list-group gap-10">
+                                <li class="list-group-item list-group-item-no-border">
+                                    <h5 class="text-black">选择产品种类：
+                                        <span class="pull-right text-green1">动力煤
+                                        <span class="ion-chevron-right text-gray1"></span></span>
+                                    </h5>
+                                </li>
+                                <a href="" class="list-item-border"></a>
+                                <li class="list-group-item list-group-item-no-border">
+                                    <h5 class="text-purple2">交货地点：
+                                        <span class="pull-right text-black">(山西) 中储宝山库
+                                        <span class="ion-chevron-right text-gray1"></span></span>
+                                    </h5>
+                                </li>
+                                <a href="" class="list-item-border"></a>
+                                <li class="list-group-item list-group-item-no-border">
+                                    <h5 class="text-black">采购需求量：
+                                        <span class="pull-right">30吨 以上
+                                        <span class="ion-chevron-right text-gray1"></span></span>
+                                    </h5>
+                                </li>
+                            </div> -->
+                            <div class="col-xs-6 gap-10 text-center">
+                                <a ng-click="search()">
+                                    <button type="button" class="btn btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder">
+                                        立即搜索
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="col-xs-6 gap-10 text-center">
+                                <a ng-click="searchMap()">
+                                    <button type="button" class="btn btn-lg btn-block bg-white-border text-yellow3 btn-noBorder">
+                                        地图模式查找
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="gap-20"></div>
+                        </div>
+
+                        <div class="row-bootstrap gap-10 mobi-hide bg-gray2">
+                            <ul class="nav nav-tabs-pc1 col-xs-4">
+                                <li>
+                                    <a ng-click="orderByTime()" class="{{!selectd.sort?'':(query.direction?'ion-arrow-up-b':'ion-arrow-down-b')}} {{selectd.sort?'active':''}}">时间</a>
+                                </li>
+                                <li>
+                                    <a ng-click="orderByAmount()" class="{{selectd.sort?'':(query.direction?'ion-arrow-up-b':'ion-arrow-down-b')}} {{!selectd.sort?'active':''}}">需求量 </a>
+                                </li>
+                                <!--<li>-->
+                                <!--<a href="">信用 </a>-->
+                                <!--</li>-->
+                                <!--<li>-->
+                                <!--<a href="">价格 <i class="ion-arrow-down-b text-gray1"></i></a>-->
+                                <!--</li>-->
+
+                            </ul>
+                            <!---->
+                            <!--<div class="col-xs-2 nav-tabs-pc1 text-rig<div class="col-xs-6 nav-tabs-pc1 text-right">-->
+                            <!--<h5>货源需求 <strong>88</strong> 万吨-->
+                            <!--<small>&nbsp;已成交 <span class="text-red">5294万吨</span></small>-->
+                            <!--</h5>-->
+                            <!--</div>ht">-->
+                            <!--<a href=""><i class="ion-arrow-left-b text-gray1"></i></a>-->
+                            <!--<a href="" class="text-red1">1</a>/<a href="">100</a>-->
+                            <!--<a href=""><i class="ion-arrow-right-b"></i></a>-->
+                            <!--</div>-->
+                        </div>
+                        <div class="row-bootstrap bg-white gap-10 pc-hide">
+                            <div class="btn-group btn-group-justified col-xs-6" role="group" aria-label="...">
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <button type="button" ng-click="orderByTime()"
+                                                class="btn btn-navbar3 btn-navbar3-active {{selectd.sort?'active':''}}">最新
+                                            <span ng-if="selectd.sort"
+                                                  class="ion {{query.direction?'ion-android-arrow-dropup':'ion-android-arrow-dropdown'}}"></span>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a>
+                                        <!--<button type="button" ng-click="orderByAmount()" class="btn btn-navbar3">需求量 <span-->
+                                        <!--class="ion ion-android-arrow-dropup"></span>-->
+                                        <!--</button>-->
+                                        <button type="button" ng-click="orderByAmount()"
+                                                class="btn btn-navbar3 {{!selectd.sort?'active':''}}">需求量
+                                            <span ng-if="!selectd.sort"
+                                                  class="ion {{query.direction?'ion-android-arrow-dropup':'ion-android-arrow-dropdown'}} "></span>
+                                        </button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group" ng-if="false">
+                                    <a href="">
+                                        <button type="button" class="btn btn-navbar3">距离</button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <button type="button" class="btn btn-navbar3"></button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a href="">
+                                        <button type="button" class="btn btn-navbar3"></button>
+                                    </a>
+                                </div>
+                                <div class="btn-group" role="group" ng-if="false">
+                                    <a href="">
+                                        <button type="button" class="btn btn-navbar3">已关注</button>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="row1-bootstrap gap-10">
+                            <!--<div infinite-scroll="loadMore()" infinite-scroll-distance='0'>-->
+                            <ion-list>
+                                <div ng-repeat="item in orders" class="col-sm-6 gap-10">
+                                    <!--<h1>{{$index}}</h1>-->
+                                    <pass-rush-list data="item" hide-count-down="false" show-count="false" go-detail="goDetail(item)">
+                                    </pass-rush-list>
+                                </div>
+                            </ion-list>
+                            <!--</div>-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <footer></footer>
+
+
+        </div>
+        <ion-infinite-scroll ng-if="hasMore" icon="ion-loading-c" on-infinite="loadMore()" distance="1%">
+        </ion-infinite-scroll>
+    </ion-content>
+</div>
+
+

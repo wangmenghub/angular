@@ -1,0 +1,151 @@
+﻿<div name="contact2"  ng-controller="contact2Ctrl">
+
+    <navbar></navbar>
+    <ion-content>
+    <div class="transitions-content">
+       
+
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <!-- {{>navPc me='active'}} -->
+                    <navpc ng-init="me='active'"></navpc>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 ">
+                                     
+                    <div class="row-bootstrap gap-20">
+                        <div class="list-group">
+                            <div ng-repeat="i in [1,2,3,4,5,6]">
+                            <li class="list-unstyled list-condensed bg-white-hover2">
+                                <h5 class="text-brown1">
+                                    <a href="/myHomeOpen" data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">
+                                        <img class="face4 img-fixed img-circle" src="./img/general/face/5.jpg">
+                                        夏隆宇<label class="label-role-purple1 text-white">生产中心主任</label>
+                                        <small class="text-purple1">航道物流</small>
+
+                                        <a href="tel:18521300639" class="pull-right gap-6">
+                                            <!-- <i class="fa fa-comments text-blue"></i> -->
+                                            <!-- <span class="glyphicon glyphicon-earphone  text-blue gap-10"></span> -->
+                                            <h2 class="glyphicon glyphicon-earphone text-gray2"></h2>
+                                        </a>
+                                    </a>
+                                </h5>
+                            </li>
+                            <div class="clearfix"></div>
+                            </div>
+                            <!--
+                            <li class="list-unstyled list-condensed bg-white-hover2">
+                                <h5 class="text-brown1">
+                                    <a href="#">
+                                        <img class="face4 img-fixed img-circle" src="./img/general/face/8.jpg">
+                                    </a>
+                                    胡德军 <label class="label-role-purple1 text-white">生产中心主任</label>
+                                    <small class="text-purple1">亚鑫集团</small>
+                                    <a href="" class="pull-right">
+                                        <i class="fa fa-comments text-blue"></i>
+                                        <span class="glyphicon glyphicon-earphone  text-blue gap-10"></span></a>
+                                </h5>
+                            </li>
+                            <div class="clearfix"></div>
+
+                            <li class="list-unstyled list-condensed bg-white-hover2">
+                                <h5 class="text-brown1">
+                                    <a href="#">
+                                        <img class="face4 img-fixed img-circle" src="./img/general/face/9.jpg">
+                                    </a>
+                                    张旭 <label class="label-role-purple1 text-white">物流中心主任</label>
+                                    <small class="text-purple1">顺发公司</small>
+                                    <a href="" class="pull-right">
+                                        <i class="fa fa-comments text-blue"></i>
+                                        <span class="glyphicon glyphicon-earphone  text-blue gap-10"></span></a>
+                                </h5>
+                            </li>
+                            <div class="clearfix"></div>
+
+                            <li class="list-unstyled list-condensed bg-white-hover2">
+                                <h5 class="text-brown1">
+                                    <a href="#">
+                                        <img class="face4 img-fixed img-circle" src="./img/general/face/12.jpg">
+                                    </a>
+                                    崔哥
+                                    <small class="text-purple1">航道物流</small>
+                                    <a href="" class="pull-right">
+                                        <i class="fa fa-comments text-blue"></i>
+                                        <span class="glyphicon glyphicon-earphone  text-blue gap-10"></span></a>
+                                </h5>
+                            </li>
+                            <li class="list-unstyled list-condensed bg-white-hover2">
+                                <h5 class="text-brown1">
+                                    <a href="#">
+                                        <img class="face4 img-fixed img-circle" src="./img/general/face/8.jpg">
+                                    </a>
+                                    胡德军 <label class="label-role-purple1 text-white">生产中心主任</label>
+                                    <small class="text-purple1">亚鑫集团</small>
+                                    <a href="" class="pull-right">
+                                        <i class="fa fa-comments text-blue"></i>
+                                        <span class="glyphicon glyphicon-earphone  text-blue gap-10"></span></a>
+                                </h5>
+                            </li>
+                            <div class="clearfix"></div>
+
+                            <li class="list-unstyled list-condensed bg-white-hover2">
+                                <h5 class="text-brown1">
+                                    <a href="#">
+                                        <img class="face4 img-fixed img-circle" src="./img/general/face/9.jpg">
+                                    </a>
+                                    张旭 <label class="label-role-purple1 text-white">物流中心主任</label>
+                                    <small class="text-purple1">顺发公司</small>
+                                    <a href="" class="pull-right">
+                                        <i class="fa fa-comments text-blue"></i>
+                                        <span class="glyphicon glyphicon-earphone  text-blue gap-10"></span></a>
+                                </h5>
+                            </li>
+                            <li class="list-unstyled list-condensed bg-white-hover2">
+                                <h5 class="text-brown1">
+                                    <a href="#">
+                                        <img class="face4 img-fixed img-circle" src="./img/general/face/8.jpg">
+                                    </a>
+                                    胡德军 <label class="label-role-purple1 text-white">生产中心主任</label>
+                                    <small class="text-purple1">亚鑫集团</small>
+                                    <a href="" class="pull-right">
+                                        <i class="fa fa-comments text-blue"></i>
+                                        <span class="glyphicon glyphicon-earphone  text-blue gap-10"></span></a>
+                                </h5>
+                            </li>
+                            <li class="list-unstyled list-condensed bg-white-hover2">
+                            <h5 class="text-brown1">
+                                <a href="#">
+                                    <img class="face4 img-fixed img-circle" src="./img/general/face/19.jpg">
+                                </a>
+                                张旭 <label class="label-role-purple1 text-white">物流中心主任</label>
+                                <small class="text-purple1">顺发公司</small>
+                                <a href="" class="pull-right">
+                                    <i class="fa fa-comments text-blue"></i>
+                                    <span class="glyphicon glyphicon-earphone  text-blue gap-10"></span></a>
+                            </h5>
+                        </li>
+                         -->
+                        </div>
+                    </div>
+                    
+                    
+
+
+                </div>
+                
+            </div>
+
+            <div class="col-sm-3 col-md-3"></div>
+
+        </div>
+
+
+
+        <!-- {{>footer}} -->
+        <footer></footer>
+    </div>
+</ion-content>
+</div>
+
+

@@ -1,0 +1,161 @@
+﻿<div name="myRsc">
+    <navbar
+            ng-init="navbar.navLeftIco=''; navbar.navLeft=''; navbar.title='我' ;navbar.navRightHref='tab.';navbar.navRight='' ;navbar.navLeftHref='tab.'">
+    </navbar>
+    <ion-content>
+        <div class="container gap-45">
+            <div class="row-bootstrap">
+                <div class="nav-2 bg-white mobi-hide nav-pc-line2">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <a href="#" style="color: #979797;">移动端 APP <span class="glyphicon glyphicon-qrcode"></span></a>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 text-center text-brown1">
+                        <span>值得信赖的大宗商品交易平台</span>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <label class="nav-search">
+                            <input type="text" placeholder="搜索">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="transitions-content" ng-init="start()">
+            <div class="container">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="isme='active'"></navpc>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="row-bootstrap gap-15 bg-white">
+                            <!-- <div class="list">
+                                <a class="item item-avatar item-icon-right" href="#/tab/nameCard_trade/{{MyRsc.userinfo._id}}">
+                                  <img class="img-circle face3" src="{{MyRsc.portrait_url}}">
+                                  <h2>
+                                    {{MyRsc.userinfo.real_name}}
+                                    <label class="label-role-purple text-white">{{MyRsc.role|rolefilter}}</label>
+                                  </h2>
+                                  <p>手机：{{MyRsc.userinfo.phone}}</p>
+                                  <i class="icon ion-ios-arrow-right"></i>
+                                </a>
+                            </div> -->
+                            <a href="#/tab/nameCard_trade/{{MyRsc.userinfo._id}}">
+                                <div class="col-xs-12">
+                                    <div class="pull-left text-black">
+                                        <img class="img-circle face3 pull-left gap-15" src="{{MyRsc.portrait_url}}">
+                                        <div class="pull-left gap-10">
+                                            <h4>
+                                                &nbsp;&nbsp;{{MyRsc.userinfo.real_name}}
+                                                <label class="label-role-purple text-white">{{MyRsc.role|rolefilter}}</label>
+                                            </h4>
+                                            <h5>&nbsp;&nbsp;手机：{{MyRsc.userinfo.phone}}</h5></div>
+                                    </div>
+                                    <span class="pull-right gap-35 text-gray1">个人名片&nbsp;<span class="ion-ios-arrow-right"
+                                                                                               style="font-size:16px;"></span></span>
+                                    <div class="clearfix"></div>
+                                    <div class="gap-10"></div>
+                                </div>
+                            </a>
+                            <div class="clearfix"></div>
+                            <a class="list-item-border"></a>
+
+
+                            <!--<div class="list bg-white">-->
+                                <!--<a class="item item-icon-left item-icon-right item-border-top-no" href="#tab/contact1">-->
+                                    <!--<i class="icon fa fa-users text-brown" style="font-size:14px;"></i>-->
+                                    <!--我的同事 ({{MyRsc.count_colleagues}})-->
+                                    <!--<i class="icon ion-ios-arrow-right text-gray1"></i>-->
+                                <!--</a>-->
+                            <!--</div>-->
+
+                            <div class="btn-group btn-group-justified gap-10" role="group" aria-label="...">
+                                <div class="btn-group" role="group">
+                                    <a href="#tab/contact1">
+                                        <button type="button" class="btn btn-navbar3">
+                                            <i class="fa fa-users"></i>
+                                            我的同事({{MyRsc.count_colleagues}})
+                                        </button>
+                                    </a>
+                                </div>
+                                <div ng-if="MyRsc.role == 'TRAFFIC_DRIVER_PRIVATE'" class="btn-group">
+                                    <a ui-sref="tab.driverAttention">
+                                        <button type="button" class="btn btn-navbar3">物流公司列表</button>
+                                    </a>
+                                </div>
+                                <div ng-if="MyRsc.role !== 'TRAFFIC_DRIVER_PRIVATE' && MyRsc.role !== 'TRAFFIC_DRIVER_PUBLISH' && MyRsc.role !== 'TRADE_STORAGE'" class="btn-group">
+                                    <a ui-sref="tab.my_company_certification">
+                                        <button type="button" class="btn btn-navbar3">认证企业({{MyRsc.count_clients}})</button>
+                                    </a>
+                                </div>
+
+                            </div>
+                            <a class="list-item-border gap-10"></a>
+                            <div class="clearfix"></div>
+
+                        </div>
+
+                        <div class="row-bootstrap bg-white gap-15">
+                            <div class="list bg-white">
+                                <a class="item item-icon-left item-icon-right" href="#tab/inforSysterm">
+                                    <i class="icon ion-android-notifications-none text-gray1"></i>
+                                    消息 ({{MyRsc.count_msg}})
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a class="item item-icon-left item-icon-right" href="#tab/companyProHome">
+                                    <i class="icon ion-android-home text-blue"></i>
+                                    {{MyRsc.company_info.full_name}} <span title="企业已认证"><label
+                                        ng-if="MyRsc.company_info.verify_phase=='SUCCESS'" class="label-v"><strong>v</strong></label></span>
+                                    <span class="item-note">
+                                        企业主页
+                                    </span>
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                                <a ng-if="MyRsc.role == 'TRAFFIC_DRIVER_PRIVATE'" class="item item-icon-left item-icon-right" ui-sref="tab.my_logistics">
+                                  <i class="icon ion-android-home text-blue"></i>
+                                  我的物流公司
+                                      <span class="item-note"></span>
+                                  <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row-bootstrap" ng-if="MyRsc.role!='TRADE_FINANCE' && MyRsc.role!='TRAFFIC_DRIVER_PUBLISH'">
+                            <h6 class="text-center">企业管理</h6>
+                        </div>
+                        <div class="row-bootstrap bg-white">
+                            <div class="btn-group text-center col-xs-4 gap-10" role="group" ng-repeat="i in MyRsc.compansetlist.menuObj">
+                                <a ui-sref='{{i.href}}' data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">
+                                    <img class="ico-110" ng-src="{{i.src}}"/>
+                                    <h5>{{i.title}}</h5>
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="row-bootstrap bg-white gap-15">
+                            <div class="list bg-white">
+                                <a class="item item-icon-left item-icon-right" href="#/tab/mySet">
+                                    <i class="icon ion-gear-a text-blue"></i>
+                                    个人设置
+                                    <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col-sm-3 col-md-3"></div>
+
+            </div>
+            <footer></footer>
+
+
+        </div>
+    </ion-content>
+    <!-- <navapp ng-init="isme='active'"></navapp> -->
+</div>
+
+

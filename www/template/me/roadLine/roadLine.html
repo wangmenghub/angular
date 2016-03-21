@@ -1,0 +1,37 @@
+﻿<div ng-controller="passRoadLineCtrl" ng-init="init()">
+    <navbar
+            ng-init="navbar.navLeft='返回';navbar.navLeftIco='glyphicon glyphicon-chevron-left';navbar.navLeftHref='tab.myRsc';navbar.title='线路管理' ;navbar.navRightHref='tab.AddLine';navbar.navRight='+ 添加线路'">
+    </navbar>
+    <ion-content>
+
+        <div class="transitions-content" >
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="ispass='active'"></navpc>
+                    </div>
+                    <div class="col-sm-9 col-md-9">
+                        <div class="row1-bootstrap">
+                            <div ng-if="lines.length == 0">
+                                <no-data-hint></no-data-hint>
+                            </div>
+                            <div ng-if="lines.length > 0" ng-repeat="line in lines" ng-switch on="$odd">
+                                <div ng-switch-when="true">
+                                    <pass-traffic-line go-detail="goDetail(line)" line='line'></pass-traffic-line>
+                                </div>
+                                <div ng-switch-when="false" class="">
+                                    <pass-traffic-line go-detail="goDetail(line)" line='line'></pass-traffic-line>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                </div>
+                <footer></footer>
+            
+        </div>
+    </ion-content>
+</div>
+
+

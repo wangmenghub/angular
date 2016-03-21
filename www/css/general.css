@@ -1,0 +1,188 @@
+/*通用页面公共样式*/
+
+
+/*//////////页面背景/////////*/
+
+
+.bg-earth {
+    background: url("/img/general/trans.png") no-repeat center 0px,
+    url("/img/general/earth.png") no-repeat center 30px;
+    background-size: 80%;
+    min-height: 900px;
+}
+@media (max-width: 1000px) {
+  .bg-earth {
+    background: url("/img/general/trans.png") no-repeat center 0px,
+    url("/img/general/earth.png") no-repeat center 200px;
+    background-size: 100%;
+    min-height: 900px;
+}
+}
+
+
+/*////////////左侧////////////*/
+.well-left-con1 {
+    margin-top: 100px;
+    color: #444444;
+}
+
+.well-left-con {
+    margin-top: 200px;
+    color: #444444;
+}
+
+.well-left-con h4 {
+    line-height: 28px;
+}
+
+/*//////////登录////////////*/
+.img-logo-HTTX {
+    width: 111px;
+}
+
+/*//////////注册///////////*/
+.logo-rsc {
+    width: 262px;
+}
+
+/*注册基本信息*/
+.checkbox-arrge {
+    color: #868686;
+    text-decoration: underline;
+    font-size: 14px;
+    padding: 8px 0;
+}
+
+.input-radio li {
+    list-style: none;
+    float: left;
+    width: 33.333333%;
+    margin-top: -10px;
+    font-size: 14px;
+    color: #bdbdbd;
+    padding: 8px 0;
+}
+
+.input-radio li label {
+    font-weight: normal;
+}
+.input-tel {
+    border: 1px solid transparent;
+}
+/*注册完善信息*/
+.fixed {
+    width: 83px;
+    height: 50px;
+    display: inline;
+    margin-right: 10px;
+    position: absolute;
+    left: 63%;
+    top: 0;
+}
+/* webkit专用 */
+.infor-title::-webkit-input-placeholder {
+    color: #8000FF;
+    /*padding-left: 32%;*/
+    font-size: 22px;
+    text-align: center;
+}
+
+.infor-title::-moz-placeholder {
+    color: #8000FF;
+    padding-left: 32%;
+    font-size: 26px;
+}
+
+/*响应式布局*/
+@media (min-width: 768px) {
+    .pc-hide {
+        display: none;
+    }
+
+    .well-infor-con {
+        margin: 10px 90px 10px 90px;
+    }
+
+    .well-infor-con-log {
+        margin-left: 20%;
+        margin-right: 20%;
+        border-radius: 10px;
+        background-color: #FFFFFF;
+        padding: 5px 10px;
+
+    }
+
+    .well-infor-con-btn {
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+
+    .margin-20 {
+        margin-right: 20%;
+        margin-left: 20%;
+    }
+}
+
+@media (max-width: 768px) {
+    .mobi-hide {
+        display: none;
+    }
+
+    .well-infor-con {
+        margin: 10px 15px;
+    }
+
+    .well-infor-con-log {
+        margin-left: 15px;
+        margin-right: 15px;
+        border-radius: 10px;
+        background-color: #FFFFFF;
+        padding: 0;
+
+    }
+
+    .well-infor-con-btn {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .well-infor {
+        margin-left: -15px;
+        margin-right: -15px;
+        padding-left: 15px;
+        padding-right: 15px;
+
+    }
+
+    .margin-20 {
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+/*footer*/
+.form-inline .form-group {
+    display: block;
+}
+
+/*首页 热门交易*/
+.hot-trade{
+    border-left: 4px solid #F8C9BB;
+    border-bottom: 2px solid #eee;
+    border-top: 1px solid #eee;
+    padding: 15px 10px 0 0;
+    height: 140px;
+}
+.hot-trade .pull-left{
+    padding-left: 15px;
+}
+.hot-trade-green {
+    border-left: 4px solid #C0E2B8;
+    border-top: none;
+}
+.hot-trade-blue {
+    border-left: 4px solid #9DCBFA;
+    border-top: none;
+    border-bottom: none;
+}
+

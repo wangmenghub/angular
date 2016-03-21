@@ -1,0 +1,30 @@
+<!-- 添加仓库地址 -->
+<ion-modal-view>
+    <ion-header-bar class="bg-yellow">
+        <h1 class="title">添加仓库</h1>
+    </ion-header-bar>
+    <ion-content ng-controller="AddStoreCtrl">
+        <div class="list">
+        <label class="item item-input">
+            <span class="input-label">仓库名称</span>
+            <input type="text" class="text-right" ng-model="store.name" placeholder="例:日升昌1号仓库" name="stroeName" >
+            <i class="icon ion-ios-arrow-right text-gray1"></i>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">所在地区</span>
+            <input type="text" class="text-right" placeholder="请选择" value="{{storeText}}" ng-click="select()" readOnly="true">
+            <i class="icon ion-ios-arrow-right text-gray1"></i>
+        </label>
+        <label class="item item-input">
+            <span class="input-label">详细地址</span>
+            <input type="text" class="text-right" ng-model="store.addr" placeholder="请填写仓库地址">
+            <i class="icon ion-ios-arrow-right text-gray1"></i>
+        </label>
+        </div>
+        <div class="col-sm-3"> &nbsp;</div>
+        <div class="col-xs-12 col-sm-6">
+        <button class="btn btn-yellow btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder" ng-click="add('158')">确认</button>
+        </div>
+        <div class="col-sm-3"></div> 
+    </ion-content>
+</ion-modal-view>

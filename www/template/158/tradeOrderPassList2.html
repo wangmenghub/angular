@@ -1,0 +1,57 @@
+<div>
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back';navbar.navLeft='返回';navbar.navLeftHref='tab.'; navbar.title='运输车辆信息' ;navbar.navRightHref='tab.';navbar.navRight='';navbar.navLeftHref='tab.tradeOrder({id:$stateParams.id})'">
+    </navbar>
+    <ion-content>
+        <div class="transitions-content">
+            <div class="container gap-45">
+                <div class="row-bootstrap nav-pc-frameline">
+                    <div class="col-sm-3 col-md-3">
+                        <navpc ng-init="isorder='active'"></navpc>
+                    </div>
+                    <div class="col-xs-12 col-sm-9 col-md-9">
+                        <div class="row-bootstrap gap-20 bg-white">
+                            <div class="col-xs-12 gap-5">
+                                <div class="divider">
+                                    <h6 class="text-center bg-white">以下为所有运输车辆的信息(共{{passinfo.route_info.length}}辆)</h6>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div  ng-repeat="i in passinfo.route_info">
+                                <div class="col-xs-9  ">
+                                    <div class="gap-10"></div>
+                                    <h5 class=" text-black"><span class="ion-record text-yellow6"></span>&nbsp;&nbsp;{{i.user_info.real_name}}
+                                        &nbsp;&nbsp;<span class="text-purple2">{{i.truck_info.number}} </span>
+                                    </h5>
+                                    <h6 class="text-gray2">&nbsp;&nbsp;&nbsp;  {{i.truck_info.type |carType}}(载{{i.truck_info.weight |carWeight}}吨)</h6>
+                                    <h6 class="text-purple2">&nbsp;&nbsp;&nbsp;  到货{{i.last}} 吨</h6>
+
+                                </div>
+                                <div class="col-xs-3  text-right">
+                                    <button type="button" class="btn  btn-square btn-square-gary "><a class="glyphicon glyphicon-earphone text-gray2" aria-hidden="true" href="tel:{{i.user_info.phone}}"></a></button>
+                                </div>
+                            </div>
+                            <div class="gap-15"></div>
+                        </div>
+
+                        <div class="col-sm-3 minHeight"></div>
+                        <div class="col-xs-12 col-sm-6 gap-5">
+
+                            <button ng-click="goback()" class="btn btn-yellow btn-lg btn-block bg-yellow2 text-yellow3 btn-noBorder"
+                                    data-modal="modal-3">
+                                返回
+                            </button>
+                        </div>
+                        <div class="col-sm-3"></div>
+
+                    </div>
+
+                </div>
+                </div>
+                <footer></footer>
+            
+        </div>
+    </ion-content>
+</div>
+
+

@@ -1,0 +1,75 @@
+<div>
+    <!-- <div class="row-bootstrap bg-gray2">
+        <div class="col-xs-12">
+            <h6 class="text-black">{{item.start_province}} {{item.start_city}} -> {{item.end_province}} {{item.end_city}}</h6>
+        </div>
+        <div class="clearfix"></div>
+        <a href="" class="list-item-border"></a>
+    </div> -->
+
+    <div>
+        <div class="row-bootstrap bg-white">
+            <div class="col-xs-12 gap-2 list">
+                <div class="row-bootstrap pull-left" ng-click="goDriverDetail(user)">
+                    <a class="item item-avatar item-no-border">
+                        <img class="img-circle" src="{{user.photo_url | imgDefault:'header'}}">
+                        <!--label-supply-bg-brwon-->
+                        <!--label-role-green-->
+                        <h3 class="text-brown1">{{user.real_name}}
+                            <label ng-init="state(user)" class="{{(user | driverRoles).css}} text-white">{{(user | driverRoles).text}}</label>
+                        </h3>
+
+                        <p>已运输货物 <span class="text-yellow2" ng-init="get(user)">{{user.orderCount}}</span> 单</p>
+
+                        <!--{{i=(user.truck | carGroupByType)}}-->
+
+                        <car-type-total truck="user.truck"></car-type-total>
+
+                        <!--<div ng-repeat="i in (user.truck | carGroupByType)">-->
+                        <!--<h6 class="text-gray2">-->
+                        <!--<span class="fa fa-truck text-black"></span>-->
+                        <!--&nbsp;&nbsp;{{i | carType}}（载45吨、长15米、20米^3）-->
+                        <!--<span class="text-purple2">{{i.total}}辆</span>-->
+                        <!--</h6>-->
+                        <!--</div>-->
+
+                        <!--<h6 class="text-gray2">-->
+                        <!--<span class="fa fa-truck text-black"></span>-->
+                        <!--&nbsp;&nbsp;大货车（载45吨、长15米、20米^3）-->
+                        <!--<span class="text-purple2">1辆</span>-->
+                        <!--</h6>-->
+                        <!--<h6 class="text-gray2">-->
+                        <!--&nbsp;&nbsp;&nbsp;&nbsp; 中型车（载45吨、长15米、20米^3）-->
+                        <!--<span class="text-purple2">2辆</span>-->
+                        <!--</h6>-->
+                        <!--<h6 class="text-gray2">&nbsp;&nbsp;&nbsp;&nbsp; 小货车（载20吨、长8米、10米^3） &nbsp;<span-->
+                        <!--class="text-purple2">3辆</span></h6>-->
+                    </a>
+                </div>
+
+                <div ng-if="user.role =='TRAFFIC_DRIVER_PUBLISH'" class="pull-right gap-20 text-right">
+                  <a ui-sref="tab.DriverSelectCar({user_id:user._id,type:1})">
+                    <button class="btn-dirver btn-dirver-white" >分配车辆</button>
+                  </a>
+                </div>
+
+                <!--<div class="pull-right gap-35">-->
+                    <!--<a href="tel:{{user.phone}}"><h1 class="glyphicon glyphicon-earphone text-purple2"></h1></a>-->
+                <!--</div>-->
+
+              <div ng-if="!user.verify">
+                <div ng-if="button" class="pull-right gap-20 text-right">
+                  <button ng-click="applyDrive({userid:user._id,agree:false})" class="btn-dirver btn-dirver-yellow">拒绝</button>
+                </div>
+                <div ng-if="button" class="pull-right gap-20 text-right">
+                  <button ng-click="applyDrive({userid:user._id,agree:true})" class="btn-dirver btn-dirver-purple">同意</button>
+                </div>
+              </div>
+
+            </div>
+        </div>
+        <div class="row-bootstrap bg-gray2">
+            <a class="list-item-border"></a>
+        </div>
+    </div>
+</div>

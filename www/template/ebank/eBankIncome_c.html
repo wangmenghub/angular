@@ -1,0 +1,84 @@
+<div ng-controller="eBankIncomeCtrl">
+  <div class="row-bootstrap bg-white gap-10">    
+      <h5 class="col-xs-12 text-black" ng-click="popupcurrent()"> 设置可授出的信用总额：
+          <span class="pull-right text-green2">
+              ￥{{credit.current_total | fmoney}} 元
+              <span class="ion-chevron-right text-gray2" ></span>
+          </span>
+      </h5>
+      <!-- <h5 ng-click="draw_finance()">获取列表 </h5> -->
+      <div class="gap-20">
+          <div class="clearfix"></div>
+         <a href="" class="list-item-border"></a>
+         <div ng-click="leftclick()" ng-class="gain_active" class="col-xs-4 bg-white text-green1 text-center bg-white-hover3 " >
+              <h6>获得的信用额度</h6>
+              <h4>￥{{credit.gain |fmoney}}元</h4>
+         </div>
+         <div ng-click="rightclick()" ng-class="give_active" class="col-xs-4 bg-white text-yellow7 text-center bg-white-hover3 " >
+              <h6>授出的信用额度</h6>
+              <h4>￥{{credit.give |fmoney}}元</h4>
+         </div>
+         <div class="col-xs-4 text-red1 text-center bg-white bg-white-hover3" ui-sref="tab.eBankIncomeApprove">
+              <h6>等待审批订单</h6>
+              <h4>{{approve_count}} 笔</h4>
+              <!-- <a ui-sref="tab.eBankIncomeApprove"><h6>&nbsp;&nbsp;</h6>
+              <h4>待审批</h4><span class="pc-info-num info-num">{{approve_count}}</span> -->
+         </div>
+         <div class="clearfix"></div>
+         <a href="" class="list-item-border"></a>
+      </div>          
+  </div>
+
+  <div class="row-bootstrap bg-white gap-10">
+      <!-- 授出 20160120 对调 获得 20160121 对调 授出-->
+      <div ng-hide="show" class="list-group" >
+          <span ng-if="credit_from_lists.length==0">
+          <no-data-hint></no-data-hint>
+          </span>
+          <a ng-if="credit_from_lists.length>0" class="list-group-item list-group-item-border-top" ng-repeat="i in credit_from_lists" ng-href="#/tab/eBankIncome-1/{{i.to}}/{{i.company_type}}">
+           
+             
+             <h4 class="pull-left">
+                <img src="./img/ebank/ebank-icon-yellow.png" /> &nbsp;
+                <img ng-if="!i.company.url_logo" style="width:35px" src="./img/me/face_8.png" />
+                <img ng-if="i.company.url_logo" style="width:35px" ng-src="{{i.company.url_logo}}" />
+               &nbsp;{{i.company.full_name}}
+               <label ng-if="i.company.verify_phase=='SUCCESS'" class="label-v"><strong title="企业已认证">v</strong></label>
+             </h4>
+
+             <div class="pull-right gap-15">
+                <h6 class="text-yellow7">授出&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <strong>{{i.price | fmoney}}元</strong>&nbsp;
+                <span class="pull-right glyphicon glyphicon-menu-right text-gray1"></span></h6>
+             </div>
+             <div class="clearfix"></div>
+
+          </a>
+      </div>
+      <!-- 获得 20160120 对调 授出 20160121 对调 获得-->
+      <div ng-show="show" class="list-group" >
+        <span ng-if="credit_to_lists.length==0" >
+       <no-data-hint></no-data-hint>
+        </span>
+          <a ng-if="credit_to_lists.length>0" class="list-group-item list-group-item-border-top" ng-repeat="i in credit_to_lists" ng-href="#/tab/eBankIncome-1/{{i.from}}/{{i.company_type}}">
+            
+             
+             <h4 class="pull-left">
+               <img src="./img/ebank/ebank-icon.png" /> &nbsp;
+               <img ng-if="!i.company.url_logo" style="width:35px" src="./img/me/face_8.png" />
+               <img ng-if="i.company.url_logo" style="width:35px" ng-src="{{i.company.url_logo}}" /> 
+               &nbsp;{{i.company.full_name}}
+               <label ng-if="i.company.verify_phase=='SUCCESS'" class="label-v"><strong title="企业已认证">v</strong></label>
+             </h4>
+
+             <div class="pull-right gap-15 ">
+               <h6 class="text-green1">获得&nbsp;&nbsp;&nbsp;  <strong>{{i.price|fmoney}}元</strong>&nbsp;  
+               <span class="pull-right glyphicon glyphicon-menu-right text-gray1"></span> </h6>                            
+             </div>
+             
+             <div class="clearfix"></div>
+
+          </a>
+      </div>
+
+  </div>
+</div>

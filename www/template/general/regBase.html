@@ -1,0 +1,227 @@
+<div>
+    <navbar
+            ng-init="navbar.navLeftIco='glyphicon glyphicon-chevron-left';navbar.navLeft='返回';navbar.navLeftClick='goBack()';navbar.title='注册' ;navbar.navRightHref='tab.';navbar.navRight=''">
+    </navbar>
+    <ion-content>
+        <div class="transitions-content">
+            <div class="bg-yellow4">
+                <div class="bg-earth">
+                    <div class="container">
+                        <div class="row-bootstrap">
+
+                            <div class="col-sm-3 col-md-3 well-left-con mobi-hide">
+                                <h4>1、选择注册类型</h4>
+                                <h4>2、基本信息</h4>
+                                <h4>3、验证手机号</h4>
+                                <h4>4、完善信息</h4>
+                                <h4>5、注册成功</h4>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+
+                                <div class="row-bootstrap">
+                                    <form name="register_form" novalidate ng-controller="RegisterCtrl">
+                                        <div class="gap-65 bg-white gap-row">
+                                            
+
+                                            <div class="well-infor-log">
+
+
+                                                <!--<a href="" class="list-item-border"></a>-->
+
+                                                <div class="well-infor-con">
+                                                    <!-- 企业名称 begin-->
+                                                    <div class="input-group">
+                                  <span class="input-group-addon glyphicon glyphicon-top glyphicon-home"
+                                        id="basic-addon1"></span>
+                                                        <input type="text"
+                                                               id="companyname"
+                                                               name="companyname"
+                                                               placeholder="请输入企业名称"
+                                                               aria-describedby="sizing-addon1"
+                                                               ng-model="user.full_name"
+                                                               required
+                                                               maxlength="20"
+                                                               ng-pattern="/^(?!^\d+$)[(\u4e00-\u9fa5)+1-9\dA-Za-z]{3,20}[^`~!@$%^&()+=|\\\][\]\{\}:;'\,.<>?]$/"
+                                                                >
+                                                        <!--^[^`~!@#$%^&*()+=|\\\][\]\{\}:;'\,.<>/?]{1}[^`~!@$%^&()+=|\\\][\]\{\}:;'\,.<>?][1-9\d\u4e00-\u9fa50-9A-Za-z]{4,20}$-->
+
+
+                                                    </div>
+                                                    <div class="form-error"
+                                                         ng-messages="register_form.companyname.$dirty&&register_form.companyname.$error">
+                                                        <div ng-message="required">公司名称不能为空</div>
+                                                        <div ng-message="pattern">格式错误(4-20个中英文字符)</div>
+                                                    </div>
+                                                    <!-- 企业名称 end-->
+                                                    <!-- 负责人姓名 begin-->
+                                                    <div class="input-group">
+                                        <span class="input-group-addon glyphicon glyphicon-top glyphicon-user"
+                                              id="basic-addon1"></span>
+                                                        <input
+                                                                type="text"
+                                                                name="nickname"
+                                                                ng-model="user.real_name"
+                                                                placeholder="请输入你的真实姓名"
+                                                                aria-describedby="basic-addon1"
+                                                                required
+                                                                maxlength="10"
+                                                                ng-pattern="/^(?!^\d+$)[(\u4e00-\u9fa5)+1-9\dA-Za-z]{1,10}[^`~!@$%^&()+=|\\\][\]\{\}:;'\,.<>?]$/"
+                                                                >
+                                                        <!--ng-pattern="/^[a-zA-Z\u4e00-\u9fa5\s]{2,10}$/"-->
+
+                                                    </div>
+                                                    <div class="form-error"
+                                                         ng-messages="register_form.nickname.$dirty&&register_form.nickname.$error">
+                                                        <div ng-message="required">负责人姓名不能为空</div>
+                                                        <div ng-message="pattern">格式错误(2-10个中英文字符)</div>
+                                                    </div>
+                                                    <!-- 负责人姓名 end-->
+
+                                                    <!-- 企业类型 begin-->
+                                                    <!-- <div class="input-group input-radio gap-5">
+                                                        <li ng-repeat="item in companyTypes">
+                                                            <input type="radio"
+                                                                   id="{{item.value}}"
+                                                                   ng-click="typeChange(item)"
+                                                                   value="item.value"
+                                                                   name="flat-radio"
+                                                                   ng-checked="item.checked"
+                                                                    >
+                                                            <span for="{{item.value}}" class="text-gray2">{{item.text}}</span>
+                                                        </li>
+
+                                                    </div> -->
+
+                                                    <div class="input-group1 input-radio gap-5">
+                                                        <li ng-repeat="item in companyTypes">
+                                                            <label>
+                                                                <input type="radio" ng-model="user.type" value="{{item.value}}" ng-disabled="item.disabled" > </input>
+                                                                <span class="text-gray2">{{item.text}}</span>
+                                                            </label>
+                                                        </li>
+                                                    </div>
+                                                    <!-- {{user | json}} -->
+                                                    <!-- 企业类型 end-->
+
+                                                    <!-- 手机号 begin-->
+                                                    <div class="input-group1">
+                                                        <span class="input-group-addon glyphicon glyphicon-top glyphicon-phone"
+                                                              id="basic-addon1"></span>
+                                            
+                                            <span>
+                                                <input type="text" id="phoneNum" class="input-tel pull-left"
+                                                       placeholder="输入手机号"
+                                                       aria-describedby="basic-addon1"
+                                                       ng-model="user.phone"
+                                                       name="phone"
+                                                       required
+                                                       c-unique
+                                                       maxlength="11"
+                                                       ng-pattern="/(^13[0-9]{9}$)|(^15[0-9]{9}$)|(^17[0-9]{9}$)|(^18[012356789][0-9]{8}$)/"
+
+                                                        >
+                                                <button id="getCode" class="pull-right btn btn-purple active"
+                                                        ng-click="getCode()"
+                                                        ng-disabled="!user.phone||!register_form.phone.$valid||timeDown"
+                                                        >
+                                                    {{getCodeText}}
+                                                </button>
+                                            </span>
+                                                    </div>
+                                                    <div class="form-error "
+                                                         ng-messages="register_form.phone.$dirty&&register_form.phone.$error"
+                                                         ng-messages-multiple>
+                                                        <div ng-message="required">手机号不能为空</div>
+                                                        <div ng-message="pattern">手机号格式错误</div>
+                                                        <div ng-message="valueUnique">手机号码已注册</div>
+                                                        <div ng-message="too_frequent">验证码获取次数过多，请三分钟之后再试</div>
+                                                        <!--<div ng-message="invalid_format">手机号码格式错误</div>-->
+                                                    </div>
+                                                    <!-- 手机号 end-->
+
+                                                    <!-- 验证码 begin-->
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon glyphicon  glyphicon-top glyphicon-barcode"></span>
+
+                                                        <input type="text" id="verification_code"
+                                                               name="verify_code"
+                                                               placeholder="获取验证码"
+                                                               aria-describedby="basic-addon1"
+                                                               ng-model="user.verify_code"
+                                                               required
+                                                               maxlength="6"
+                                                               ng-pattern="/^[0-9]{6}$/"
+                                                                >
+                                                    </div>
+                                                    <div class="form-error "
+                                                         ng-messages="register_form.verify_code.$dirty&&register_form.verify_code.$error">
+                                                        <div ng-message="required">验证码不能为空</div>
+                                                        <div ng-message="pattern">验证码格式错误(6位数字)</div>
+                                                    </div>
+                                                    <!-- 验证码 end-->
+
+                                                    <!-- 密码 begin-->
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon glyphicon glyphicon-top glyphicon-lock"
+                                                              id="basic-addon1"></span>
+
+                                                        <input type="password" id="pwd"
+                                                               placeholder="设置密码"
+                                                               aria-describedby="basic-addon1"
+                                                               name="password"
+                                                               required
+                                                               maxlength="16"
+                                                               ng-model="user.password"
+                                                               ng-pattern="/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/"
+                                                                >
+
+                                                    </div>
+                                                    <div class="form-error "
+                                                         ng-messages="register_form.password.$dirty&&register_form.password.$error">
+                                                        <div ng-message="required">密码不能为空</div>
+                                                        <div ng-message="pattern">密码必须是6-16个字母和数字组合</div>
+
+                                                    </div>
+                                                    <!-- 密码 end-->
+
+                                                    <label class="checkbox-arrge">
+                                                        <input id="chkAgree" type="checkbox" ng-model="ischecked" ng-init="ischecked=true">
+                                                    </label>
+                                                    <!-- ui-sref="tab.regAgreement" -->
+                                                    <a class="checkbox-arrge" ng-click="share()">同意注册协议</a>
+
+
+                                                    <div class="btn-group btn-group-justified gap-15" role="group" aria-label="...">
+                                                        <div class="btn-group" role="group">
+                                                            <a id="btnRegister"
+                                                               data-transition-out="slideLeftOut" data-transition-in="slideLeftIn">
+                                                                <button type="button" class="pull-right btn btn-purple active"
+                                                                        ng-click="register()"
+                                                                        ng-disabled="(!ischecked || register_form.$invalid)"
+                                                                        id='login'>下一步
+                                                                </button>
+                                                            </a>
+                                                            <!--<a href="#/tab/regAdv">下一页</a>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="gap-30"></div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <footer></footer>
+            </div>
+        </div>
+    </ion-content>
+</div>

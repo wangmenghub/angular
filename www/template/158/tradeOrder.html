@@ -1,0 +1,109 @@
+<div>
+    <navbar
+            ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='订单详情' ;navbar.navRightHref='tab.';navbar.navRight='';navbar.navLeftHref='tab.eBankIncome';">
+    </navbar>
+    <ion-content>
+
+    <div class="transitions-content">
+
+
+        <div class="container gap-45">
+            <div class="row-bootstrap nav-pc-frameline">
+                <div class="col-sm-3 col-md-3">
+                    <navpc ng-init="isorder='active'"></navpc>
+                </div>
+                <div class="col-xs-12 col-sm-9 col-md-9">
+                    <form name="myform" novalidate>
+                    <div class="row-bootstrap bg-white gap-20 gap-row">
+                        <div class="col-xs-12">
+                            <div class="pull-left">
+                                <h3><label class="label-supply-red">
+                                <span ng-if="isCompany==order.company_demand_id">采购</span>
+                                <span ng-if="isCompany!=order.company_demand_id">供应</span>
+                                </label>&nbsp;{{order.category_chn}} </h3>
+                                <h6 class="text-gray1">订单号：{{order.index}}</h6>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="bg-pink1 navbar4-fixed">
+                            <div class=" btn-group btn-group-justified text-center" role="group" aria-label="...">
+                                <div class="btn-group" role="group">
+                                    <h6 class="text-red1">下订单</h6>
+                                    <a>
+                                       <button type="button" class="btn-navbar4" ng-class="order.step | stepCSS:1"><span>1</span></button>
+                                    </a>
+                                </div>
+
+                                <div class="btn-group" role="group">
+                                    <h6 class="text-red1">预付款</h6>
+                                       <button type="button" class=" btn-navbar4" ng-class="order.step | stepCSS:2"><span>2</span></button>
+                                </div>
+
+                                <div class="btn-group" role="group">
+                                    <h6 class="text-red1">物流</h6>
+                                       <button type="button" class=" btn-navbar4" ng-class="order.step | stepCSS:3"><span>3</span></button>
+                                </div>
+
+                                <div class="btn-group" role="group">
+                                    <h6 class="text-red">检验</h6>
+                                       <button type="button" class=" btn-navbar4" ng-class="order.step | stepCSS:4"><span>4</span></button>
+                                </div>
+
+                                <div class="btn-group" role="group">
+                                    <h6 class="text-red1">交割</h6>
+                                       <button type="button" class=" btn-navbar4" ng-class="order.step | stepCSS:5"><span>5</span></button>
+                                </div>
+                            </div>
+                            <span class="btn-navbar4-right-line"></span>
+                        </div>
+
+                    </div>
+                     <!-- 物流信息 -->
+                    <trade-order-pass ng-if="order.step>=3 && order.step<4 && order.traffic_orders.length>0" driveinfo="driveinfo" order="order" passinfo="passinfo"></trade-order-pass>
+                    <!-- 商品物信息 -->
+                    <trade-order-shop order='order' user-info='userInfo'></trade-order-shop>
+                    <!-- 物流信息 -->
+                   <!--  <trade-order-pass ng-if="order.step>=4 && order.traffic_orders.length>0" passinfo="passinfo" order="order"></trade-order-pass>-->
+                    <trade-order-pact ng-if="order.step>=4" order="order"></trade-order-pact>
+
+                    <!-- 支付信息 -->
+                    <trade-order-payment ng-if="order.step<3 || order.step>=5 || order.exist_payment_middle" order="order" is-company="isCompany"></trade-order-payment>
+                    <!-- 协议信息 -->
+                    <trade-order-pact ng-if="order.step<3" order="order"></trade-order-pact>
+                    <!-- 第三步收货确认信息 -->
+                    <div ng-if="order.step=='3.5' && isCompany==order.company_demand_id " class="row-bootstrap bg-white">
+                        <div class="col-sm-6 col-md-6">
+                            <a class="item item-icon-right"  ng-click="changeDate()" style="padding-left: 8px;">
+                                最终到货时间：
+                                <span class="item-note input-ionic">
+                                   <span ng-if="!demand.time_traffic" > 请选择到货时间</span>
+                                   <span ng-if="demand.time_traffic">{{demand.time_traffic |rsctime}}</span>
+                                </span>
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>
+                            </a>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            <a class="item item-icon-right" style="padding-left: 8px;">
+                                最终到货吨数：
+                                <span class="item-note input-ionic">
+                                    <input type="text" name="amount" placeholder="请输入" class="text-right" min='1' ng-model="demand.amount" required ng-pattern="/^[1-9][0-9]*(\.\d{1,2})?$/">
+                                </span>
+                                <i class="icon ion-ios-arrow-right text-gray1"></i>
+                                <span class="text-red pull-left" ng-messages="myform.amount.$dirty && myform.amount.$error">
+                                     <span ng-message="required">不能为空</span>
+                                    <span ng-message="pattern">整数或小数</span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 步骤 -->
+                    <trade-order-step order="order" is-company="isCompany" demand-step="demandStep" supply-step='supplyStep'></trade-order-step>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <footer></footer>
+    </div>
+    </ion-content>
+</div>
