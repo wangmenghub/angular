@@ -87,9 +87,7 @@
 
 物流企业
 
-15500111221
-
-15500111331
+15500111221 15500111331
 
 
  /**
@@ -100,19 +98,15 @@
  18900000011 小煤厂仓管
  18515062013 测试司机三 
  
- 
  18000000001 交易型企业
  18000000002 测试销售企业仓库管理
    
  18000000011 物流型企业
  18000000012 物流企业司机
  
- 
     <navbar
-                        ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='订单详情' ;navbar.navRightHref='tab.';navbar.navRight='';navbar.navLeftHref='tab.eBankIncome';">
-
+               ng-init="navbar.navLeftIco='ion-ios-arrow-back'; navbar.navLeft='返回'; navbar.title='订单详情' ;navbar.navRightHref='tab.';navbar.navRight='';navbar.navLeftHref='tab.eBankIncome';">
     </navbar>
-    
     
     <div class="col-xs-12 gap-20">
                                 <div class="col-xs-6 text-center">
